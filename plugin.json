@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SteamClientHomebrew/Millennium/main/src/sys/plugin-schema.json",
+  "name": "greenvapor",
+  "common_name": "GreenVapor",
+  "description": "GreenVapor - Gerenciador de scripts Lua para jogos Steam",
+  "version": "1.0.0",
+  "backendType": "lua",
+  "include": [
+    "public"
+  ]
+}

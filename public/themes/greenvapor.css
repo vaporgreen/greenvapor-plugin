@@ -1,0 +1,49 @@
+:root {
+    --lt-bg-primary: #1a2416;
+    --lt-bg-secondary: #243320;
+    --lt-bg-tertiary: rgba(26, 36, 22, 0.95);
+    --lt-bg-hover: rgba(42, 68, 34, 0.95);
+    --lt-bg-container: rgba(20, 30, 16, 0.6);
+    --lt-bg-container-gradient: rgba(15, 25, 12, 0.85), #111a0e;
+    --lt-accent: #4caf50;
+    --lt-accent-light: #81c784;
+    --lt-accent-dark: #388e3c;
+    --lt-border: rgba(76, 175, 80, 0.3);
+    --lt-border-hover: rgba(76, 175, 80, 0.8);
+    --lt-text: #e8f5e9;
+    --lt-text-secondary: #a5d6a7;
+    --lt-gradient: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
+    --lt-gradient-light: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+    --lt-shadow: rgba(76, 175, 80, 0.35);
+    --lt-shadow-hover: rgba(76, 175, 80, 0.55);
+    --lt-shadow-rgba: rgba(76, 175, 80, 0.25);
+    --lt-rgb: 76, 175, 80;
+}
+
+select {
+    background-color: rgba(36, 51, 32, 0.95) !important;
+    color: #e8f5e9 !important;
+    border: 1px solid rgba(76, 175, 80, 0.35) !important;
+    border-radius: 3px;
+}
+
+select option {
+    background-color: #1a2416;
+    color: #e8f5e9;
+}
+
+select option:checked {
+    background: linear-gradient(#4caf50, #4caf50);
+    background-color: #4caf50 !important;
+    color: #1a2416 !important;
+}
+
+select:hover {
+    border-color: rgba(76, 175, 80, 0.7) !important;
+}
+
+select:focus {
+    outline: none;
+    border-color: #4caf50 !important;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.25);
+}
