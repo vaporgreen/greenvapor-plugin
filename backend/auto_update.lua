@@ -107,18 +107,45 @@ function auto_update.check_for_updates_now()
 end
 
 function auto_update.restart_steam()
-    local is_windows = m_utils.getenv("OS") == "Windows_NT"
+    local is_windows = (m_utils.getenv("OS") or ""):find("Windows") ~= nil
     if is_windows then
-        local script_path = paths.backend_path("restart_steam.cmd")
-        if fs.exists(script_path) then
-            m_utils.exec('start /b cmd /C "' .. script_path .. '"')
-            return true
+        local steam_path = steam_utils.detect_steam_install_path()
+        local steam_exe  = ""
+        if steam_path and steam_path ~= "" then
+            steam_exe = fs.join(steam_path, "steam.exe")
+            steam_exe = steam_exe:gsub("/", "\\")
         end
+
+        -- Write a runner PS1 so quoting/paths are trivial; it must survive Steam dying,
+        -- so it's launched via start /B (independent background process)
+        local runner_path = paths.backend_path("restart_steam_runner.ps1")
+        local lines = {
+            "Stop-Process -Name steam -Force -ErrorAction SilentlyContinue",
+            "Start-Sleep -Seconds 2",
+        }
+        if steam_exe ~= "" then
+            table.insert(lines, string.format('Start-Process -FilePath "%s"', steam_exe))
+        else
+            table.insert(lines, 'Start-Process "steam"')
+        end
+        m_utils.write_file(runner_path, table.concat(lines, "\r\n"))
+
+        -- wscript.exe is a graphical host — Windows Terminal cannot intercept it,
+        -- so the PowerShell that restarts Steam runs completely hidden.
+        local runner_win = runner_path:gsub("/", "\\")
+        local vbs_path   = paths.backend_path("restart_steam_runner.vbs")
+        local vbs_content = string.format(
+            'Set oShell = CreateObject("Wscript.Shell")\r\n' ..
+            'oShell.Run "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File ""%s""", 0, False\r\n',
+            runner_win
+        )
+        m_utils.write_file(vbs_path, vbs_content)
+        m_utils.exec('wscript.exe "' .. vbs_path:gsub("/", "\\") .. '"')
+        return true
     else
-        m_utils.exec("killall steam && steam &")
+        m_utils.exec("killall steam; sleep 2; steam &")
         return true
     end
-    return false
 end
 
 function auto_update.apply_pending_update_if_any()

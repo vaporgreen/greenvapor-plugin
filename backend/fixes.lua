@@ -209,7 +209,9 @@ function fixes.apply_game_fix(appid, download_url, install_path, fix_type, game_
     PENDING_FIX_INFO[appid] = {
         installPath = install_path or "",
         fixType     = fix_type or "generic",
-        gameName    = game_name or ("Unknown Game (" .. tostring(appid) .. ")")
+        gameName    = game_name or ("Unknown Game (" .. tostring(appid) .. ")"),
+        runnerPath  = "",
+        vbsPath     = ""
     }
 
     local dest_root = utils.ensure_temp_download_dir()
@@ -222,11 +224,35 @@ function fixes.apply_game_fix(appid, download_url, install_path, fix_type, game_
     local is_win = (m_utils.getenv("OS") or ""):find("Windows") ~= nil
     if is_win then
         local ps1 = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.ps1")
-        local cmd = string.format(
-            'powershell -WindowStyle Hidden -Command "Start-Process -FilePath powershell -WindowStyle Hidden -ArgumentList \'-ExecutionPolicy Bypass -File \\"%s\\" -Url \\"%s\\" -DestPath \\"%s\\" -ExtractDir \\"%s\\" -StateFile \\"%s\\"\'"',
-            ps1, download_url, dest_zip, install_path, state_file
+
+        -- Use backslashes for all paths so PowerShell and wscript.exe accept them unambiguously
+        local function to_win(p) return (p or ""):gsub("/", "\\") end
+        local ps1_win      = to_win(ps1)
+        local dest_zip_win = to_win(dest_zip)
+        local state_win    = to_win(state_file)
+        local install_win  = to_win(install_path)
+
+        local runner_path = dest_root .. "\\fix_runner_" .. tostring(appid) .. ".ps1"
+        local runner_content = string.format(
+            '& "%s" -Url "%s" -DestPath "%s" -ExtractDir "%s" -StateFile "%s"',
+            ps1_win, download_url, dest_zip_win, install_win, state_win
         )
-        m_utils.exec(cmd)
+        m_utils.write_file(runner_path, runner_content)
+        PENDING_FIX_INFO[appid].runnerPath = runner_path
+
+        -- Launch via wscript.exe (graphical host) so Windows Terminal cannot intercept it.
+        -- oShell.Run with window-style 0 produces a truly hidden process on all Windows versions.
+        local runner_win = to_win(runner_path)
+        local vbs_path   = dest_root .. "\\fix_runner_" .. tostring(appid) .. ".vbs"
+        local vbs_content = string.format(
+            'Set oShell = CreateObject("Wscript.Shell")\r\n' ..
+            'oShell.Run "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File ""%s""", 0, False\r\n',
+            runner_win
+        )
+        m_utils.write_file(vbs_path, vbs_content)
+        PENDING_FIX_INFO[appid].vbsPath = vbs_path
+
+        m_utils.exec('wscript.exe "' .. to_win(vbs_path) .. '"')
     else
         local sh = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.sh")
         m_utils.exec('chmod +x "' .. sh .. '"')
@@ -254,6 +280,8 @@ function fixes.get_apply_status(appid)
     if not (content and content ~= "") then
         return { success = true, state = { status = "downloading" } }
     end
+    -- Strip UTF-8 BOM written by .NET Framework's System.Text.Encoding.UTF8
+    if content:sub(1, 3) == "\xEF\xBB\xBF" then content = content:sub(4) end
 
     local ok, data = pcall(cjson.decode, content)
     if not (ok and type(data) == "table" and data.status) then
@@ -268,12 +296,34 @@ function fixes.get_apply_status(appid)
         data.status = "done"
         pcall(fs.remove, state_file)
         pcall(fs.remove, dest_zip)
+        if pending.runnerPath and pending.runnerPath ~= "" then pcall(fs.remove, pending.runnerPath) end
+        if pending.vbsPath    and pending.vbsPath    ~= "" then pcall(fs.remove, pending.vbsPath)    end
     elseif data.status == "failed" then
         PENDING_FIX_INFO[appid] = nil
         pcall(fs.remove, state_file)
+    elseif data.status == "cancelled" then
+        PENDING_FIX_INFO[appid] = nil
+        pcall(fs.remove, state_file)
+        pcall(fs.remove, dest_zip)
     end
 
     return { success = true, state = data }
+end
+
+function fixes.cancel_apply_fix(appid)
+    appid = tonumber(appid)
+    local dest_root  = utils.ensure_temp_download_dir()
+    local state_file = fs.join(dest_root, "fix_" .. tostring(appid) .. "_state.json")
+
+    -- Clear pending info so the background download (if it completes) doesn't get recorded
+    PENDING_FIX_INFO[appid] = nil
+
+    if fs.exists(state_file) then
+        m_utils.write_file(state_file, '{"status":"cancelled","error":"Cancelled by user"}')
+    end
+
+    logger.log("GreenVapor: CancelApplyFix appid=" .. tostring(appid))
+    return { success = true }
 end
 
 function fixes.get_installed_fixes()
