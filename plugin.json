@@ -3,7 +3,7 @@
   "name": "greenvapor",
   "common_name": "GreenVapor",
   "description": "GreenVapor - Gerenciador de scripts Lua para jogos Steam",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "backendType": "lua",
   "include": [
     "public"
