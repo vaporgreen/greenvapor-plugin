@@ -95,11 +95,15 @@ end
 
 function steam_utils.open_game_folder(path)
     if not path or path == "" or not fs.exists(path) then return false end
-    
-    -- In Windows, explorer accepts backslashes
+
     path = path:gsub("/", "\\")
-    local cmd = 'explorer "' .. path .. '"'
-    m_utils.exec(cmd)
+    local is_win = (m_utils.getenv("OS") or ""):find("Windows") ~= nil
+    if is_win then
+        -- start "" brings the Explorer window to foreground (same pattern as OpenExternalUrl)
+        m_utils.exec('start "" "' .. path .. '"')
+    else
+        m_utils.exec('xdg-open "' .. path .. '"')
+    end
     return true
 end
 

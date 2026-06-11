@@ -1302,9 +1302,9 @@
       return { wrap, input };
     }
 
-    const nameField = createInputGroup("API Name", "My Custom API");
+    const nameField = createInputGroup(lt("API Name"), lt("My Custom API"));
     const urlField = createInputGroup(
-      "API URL",
+      lt("API URL"),
       "https://example.com/download?id=<appid>&key=<apikey>",
     );
 
@@ -1326,7 +1326,7 @@
     toggleWrap.appendChild(checkbox);
     toggleWrap.appendChild(toggleLabel);
 
-    const apiKeyField = createInputGroup("API Key", "Enter your API key here");
+    const apiKeyField = createInputGroup(lt("API Key"), lt("Enter your API key here"));
     apiKeyField.wrap.style.display = "none";
 
     toggleWrap.onclick = function (e) {
@@ -1682,6 +1682,14 @@
         );
         cardGrid.appendChild(fetchApisBtn);
 
+        const libraryBtn = createCardButton(
+          "lt-settings-library",
+          "menu.library",
+          "Library",
+          "fa-gamepad",
+        );
+        cardGrid.appendChild(libraryBtn);
+
         container.appendChild(cardGrid);
 
         body.appendChild(container);
@@ -1768,6 +1776,14 @@
                 } catch (_) {}
               });
             } catch (_) {}
+          });
+        }
+
+        if (libraryBtn) {
+          libraryBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            try { overlay.remove(); } catch (_) {}
+            showLibraryModal();
           });
         }
 
@@ -1894,7 +1910,7 @@
                   const doDelete = function () {
                     try {
                       Millennium.callServerMethod(
-                        "GreenVapor",
+                        "greenvapor",
                         "DeleteLuaToolsForApp",
                         {
                           appid,
@@ -3120,6 +3136,8 @@
 
   // Poll fix download and extraction progress
   function pollFixProgress(appid, fixType) {
+    var lastKnownBytes = 0;
+    var lastKnownTotal = 0;
     const poll = function () {
       try {
         const overlayEl = document.querySelector(".luatools-overlay");
@@ -3136,15 +3154,27 @@
               const msgEl = document.getElementById("lt-fix-progress-msg");
 
               if (state.status === "downloading") {
-                const pct =
-                  state.totalBytes > 0
-                    ? Math.floor((state.bytesRead / state.totalBytes) * 100)
-                    : 0;
-                if (msgEl) {
-                  msgEl.textContent = lt("Downloading: {percent}%").replace(
+                // Fall back to last known values when file is mid-write (transiently empty)
+                const bytesRead = (state.bytesRead > 0) ? state.bytesRead : lastKnownBytes;
+                const totalBytes = (state.totalBytes > 0) ? state.totalBytes : lastKnownTotal;
+                if (state.bytesRead > 0) lastKnownBytes = state.bytesRead;
+                if (state.totalBytes > 0) lastKnownTotal = state.totalBytes;
+
+                let progressText;
+                if (totalBytes > 0) {
+                  const pct = Math.floor((bytesRead / totalBytes) * 100);
+                  progressText = lt("Downloading: {percent}%").replace(
                     "{percent}",
                     pct,
                   );
+                } else if (bytesRead > 0) {
+                  const mb = (bytesRead / (1024 * 1024)).toFixed(1);
+                  progressText = lt("Downloading...") + " " + mb + " MB";
+                } else {
+                  progressText = lt("Initializing download...");
+                }
+                if (msgEl) {
+                  msgEl.textContent = progressText;
                   msgEl.dataset.last = msgEl.textContent;
                 }
                 setTimeout(poll, 500);
@@ -6220,18 +6250,16 @@
       style.id = "luatools-spacing-styles";
       style.textContent = `
                 .luatools-restart-button { margin-left: 6px !important; margin-right: 6px !important; }
-                .luatools-button { margin-right: 0 !important; position: relative !important; }
+                .luatools-button { margin-right: 0 !important; }
                 .luatools-pills-container {
-                    position: absolute !important;
-                    top: -25px !important;
-                    left: 50% !important;
-                    transform: translateX(-50%) !important;
                     display: inline-flex;
                     gap: 4px;
                     align-items: center;
+                    margin-left: 6px;
+                    vertical-align: middle;
                     pointer-events: none;
-                    z-index: 10;
                     white-space: nowrap;
+                    flex-shrink: 0;
                 }
                 .luatools-pill {
                     padding: 2px 6px;
@@ -6386,6 +6414,7 @@
 
     if (targetContainer) {
       const steamdbContainer = targetContainer;
+      ensureStyles();
 
       // Insert a Restart Steam button between Community Hub and our LuaTools button
       try {
@@ -6393,7 +6422,6 @@
           !document.querySelector(".luatools-restart-button") &&
           !window.__LuaToolsRestartInserted
         ) {
-          ensureStyles();
           // In Big Picture mode, use queue button as reference; otherwise use first link in container
           const referenceBtn = isBigPicture
             ? document.querySelector("#queueBtnFollow")
@@ -6624,36 +6652,28 @@
           : window.__LuaToolsCurrentAppId || NaN;
 
         if (!isNaN(appid)) {
-          const pillBtn = steamdbContainer.querySelector(".luatools-button");
-          if (pillBtn) {
-            // Skip if pills already built for this appid
-            var existingPills = pillBtn.querySelector(
-              ".luatools-pills-container",
-            );
-            if (
-              !(
-                existingPills &&
-                existingPills.dataset.appid === String(appid) &&
-                existingPills.dataset.content
-              )
-            ) {
-              fetchGamesDatabase().then(function (db) {
-                const btn = steamdbContainer.querySelector(".luatools-button");
-                if (!btn) return;
-
-                let pillsContainer = btn.querySelector(
+            // Always enter the fetch path — badges are independent of the GreenVapor button.
+            // The inner cacheKey guard prevents redundant DOM updates.
+            fetchGamesDatabase().then(function (db) {
+                let pillsContainer = steamdbContainer.querySelector(
                   ".luatools-pills-container",
                 );
 
                 if (!pillsContainer) {
                   pillsContainer = document.createElement("div");
                   pillsContainer.className = "luatools-pills-container";
-                  btn.appendChild(pillsContainer);
+                  // Try to insert after GreenVapor button, fallback to appending to container
+                  const gvBtn = steamdbContainer.querySelector(".luatools-button");
+                  if (gvBtn) {
+                    gvBtn.after(pillsContainer);
+                  } else {
+                    steamdbContainer.appendChild(pillsContainer);
+                  }
                 }
                 pillsContainer.dataset.appid = String(appid);
 
                 const key = String(appid);
-                const gameData = db && db[key] ? db[key] : null;
+                const gameData = db && db.apps && db.apps[key] ? db.apps[key] : null;
 
                 // check denuvo
                 const drmNotice = document.querySelector(".DRM_notice");
@@ -6734,8 +6754,6 @@
                   }
                 });
               });
-            }
-          }
         }
       } catch (e) {
         /* ignore */
@@ -7064,7 +7082,7 @@
                 }
 
                 Millennium.callServerMethod(
-                  "GreenVapor",
+                  "greenvapor",
                   "StartAddViaLuaToolsFromUrl",
                   {
                     appid,
@@ -7334,6 +7352,8 @@
     let done = false;
     let lastCheckedApi = null;
     let successfulApi = null; // Track which API successfully found the file
+    let lastKnownBytes = 0;
+    let lastKnownTotal = 0;
     const timer = setInterval(() => {
       if (done) {
         clearInterval(timer);
@@ -7554,8 +7574,11 @@
                 progressInfo.style.justifyContent = "space-between";
               }
 
-              const total = st.totalBytes || 0;
-              const read = st.bytesRead || 0;
+              // Use last known values when file is mid-write (transiently empty)
+              const read = (st.bytesRead > 0) ? st.bytesRead : lastKnownBytes;
+              const total = (st.totalBytes > 0) ? st.totalBytes : lastKnownTotal;
+              if (st.bytesRead > 0) lastKnownBytes = st.bytesRead;
+              if (st.totalBytes > 0) lastKnownTotal = st.totalBytes;
               let pct =
                 total > 0 ? Math.floor((read / total) * 100) : read ? 1 : 0;
               if (pct > 100) pct = 100;
@@ -7686,8 +7709,7 @@
                           e.preventDefault();
                           try {
                             Millennium.callServerMethod(
-                              "GreenVapor",
-                              "OpenExternalUrl",
+                              "greenvapor", "OpenExternalUrl",
                               {
                                 url:
                                   "https://steamdb.info/app/" +
@@ -7923,6 +7945,170 @@
       childList: true,
       subtree: true,
     });
+  }
+
+  function showLibraryModal() {
+    ensureFontAwesome();
+    ensureLuaToolsStyles();
+
+    const overlay = document.createElement("div");
+    overlay.className = "luatools-loadedapps-overlay";
+    overlay.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);z-index:99999;display:flex;align-items:center;justify-content:center;";
+
+    const colors = getThemeColors();
+    const modal = document.createElement("div");
+    modal.style.cssText = `background:${colors.modalBg};color:${colors.text};border:2px solid ${colors.border};border-radius:3px;width:620px;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.8);animation:slideUp 0.1s ease-out;`;
+
+    // Header
+    const header = document.createElement("div");
+    header.style.cssText = `display:flex;align-items:center;justify-content:space-between;padding:20px 24px 14px;border-bottom:1px solid ${colors.border};flex-shrink:0;`;
+    const titleEl = document.createElement("div");
+    titleEl.style.cssText = `font-size:18px;font-weight:700;color:${colors.text};display:flex;align-items:center;gap:10px;`;
+    titleEl.innerHTML = `<i class="fa-solid fa-gamepad" style="color:${colors.accent};"></i><span>${t("menu.library", "Library")}</span>`;
+    const closeBtn = document.createElement("a");
+    closeBtn.href = "#";
+    closeBtn.style.cssText = `color:${colors.textSecondary};font-size:18px;text-decoration:none;line-height:1;`;
+    closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    closeBtn.onclick = function(e) { e.preventDefault(); overlay.remove(); };
+    header.appendChild(titleEl);
+    header.appendChild(closeBtn);
+    modal.appendChild(header);
+
+    // Content
+    const content = document.createElement("div");
+    content.style.cssText = "flex:1;overflow-y:auto;padding:16px 24px;";
+
+    const loading = document.createElement("div");
+    loading.style.cssText = `text-align:center;padding:32px;color:${colors.textSecondary};font-size:13px;`;
+    loading.innerHTML = `<i class="fa-solid fa-spinner" style="animation:spin 1.5s linear infinite;margin-right:8px;"></i>${t("menu.library.loading", "Loading library...")}`;
+    content.appendChild(loading);
+    modal.appendChild(content);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener("click", function(e) {
+      if (e.target === overlay) overlay.remove();
+    });
+
+    Millennium.callServerMethod("greenvapor", "GetInstalledLuaScripts", { contentScriptQuery: "" })
+      .then(function(res) {
+        try {
+          const payload = typeof res === "string" ? JSON.parse(res) : res;
+          const apps = (payload && Array.isArray(payload.scripts)) ? payload.scripts : [];
+          content.innerHTML = "";
+
+          if (apps.length === 0) {
+            const empty = document.createElement("div");
+            empty.style.cssText = `text-align:center;padding:32px;color:${colors.textSecondary};font-size:13px;`;
+            empty.innerHTML = `<i class="fa-solid fa-gamepad" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>${t("menu.library.empty", "No games with scripts installed.")}`;
+            content.appendChild(empty);
+            return;
+          }
+
+          const grid = document.createElement("div");
+          grid.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;";
+
+          const namePromises = [];
+
+          apps.forEach(function(item) {
+            const appid = item.appid || item;
+            const name  = item.gameName && !item.gameName.startsWith("Unknown") ? item.gameName : ("App " + appid);
+            const card  = document.createElement("div");
+            card.style.cssText = `background:${colors.bgContainer};border:1px solid ${colors.border};border-radius:3px;overflow:hidden;transition:border-color 0.15s;cursor:default;`;
+            card.onmouseover = function() { card.style.borderColor = colors.accent; };
+            card.onmouseout  = function() { card.style.borderColor = colors.border; };
+
+            // Game image — try multiple Steam CDN formats in sequence
+            const imgWrap = document.createElement("div");
+            imgWrap.style.cssText = "position:relative;width:100%;aspect-ratio:460/215;background:#111;";
+            const img = document.createElement("img");
+            img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;";
+            const imgUrls = [
+              "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/header.jpg",
+              "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_616x353.jpg",
+              "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_231x87.jpg",
+            ];
+            let imgUrlIdx = 0;
+            img.src = imgUrls[imgUrlIdx];
+            img.onerror = function() {
+              imgUrlIdx++;
+              if (imgUrlIdx < imgUrls.length) {
+                img.src = imgUrls[imgUrlIdx];
+                return;
+              }
+              imgWrap.style.cssText += "display:flex;align-items:center;justify-content:center;";
+              img.remove();
+              const ico = document.createElement("i");
+              ico.className = "fa-solid fa-gamepad";
+              ico.style.cssText = `font-size:28px;color:${colors.textSecondary};opacity:0.4;`;
+              imgWrap.appendChild(ico);
+            };
+            imgWrap.appendChild(img);
+            card.appendChild(imgWrap);
+
+            // Name + delete
+            const footer = document.createElement("div");
+            footer.style.cssText = "display:flex;align-items:center;justify-content:space-between;padding:8px 10px;gap:6px;";
+            const nameEl = document.createElement("span");
+            nameEl.textContent = name;
+            nameEl.style.cssText = `font-size:11px;color:${colors.text};font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;`;
+            nameEl.title = name;
+
+            if (!item.gameName || item.gameName.startsWith("Unknown")) {
+              namePromises.push(fetchSteamGameName(appid).then(function(resolved) {
+                if (resolved) { nameEl.textContent = resolved; nameEl.title = resolved; }
+              }));
+            } else {
+              namePromises.push(Promise.resolve());
+            }
+
+            const delBtn = document.createElement("a");
+            delBtn.href = "#";
+            delBtn.style.cssText = "color:#e57373;font-size:13px;text-decoration:none;flex-shrink:0;";
+            delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            delBtn.title = t("Delete", "Delete");
+            delBtn.onclick = function(e) {
+              e.preventDefault();
+              showLuaToolsConfirm("GreenVapor", t("Are you sure?", "Are you sure?"), function() {
+                Millennium.callServerMethod("greenvapor", "DeleteLuaToolsForApp", {
+                  appid: String(appid),
+                  contentScriptQuery: "",
+                }).then(function() {
+                  card.remove();
+                  if (grid.children.length === 0) {
+                    content.innerHTML = "";
+                    const empty = document.createElement("div");
+                    empty.style.cssText = `text-align:center;padding:32px;color:${colors.textSecondary};font-size:13px;`;
+                    empty.innerHTML = `<i class="fa-solid fa-gamepad" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>${t("menu.library.empty", "No games with scripts installed.")}`;
+                    content.appendChild(empty);
+                  }
+                }).catch(function(){});
+              }, function(){});
+            };
+
+            footer.appendChild(nameEl);
+            footer.appendChild(delBtn);
+            card.appendChild(footer);
+            grid.appendChild(card);
+          });
+
+          content.appendChild(grid);
+
+          // Re-sort cards alphabetically once all game names have resolved
+          Promise.all(namePromises).then(function() {
+            const cards = Array.from(grid.children);
+            cards.sort(function(a, b) {
+              const na = (a.querySelector("span") || {}).textContent || "";
+              const nb = (b.querySelector("span") || {}).textContent || "";
+              return na.localeCompare(nb, undefined, { sensitivity: "base" });
+            });
+            cards.forEach(function(c) { grid.appendChild(c); });
+          });
+        } catch(_) {}
+      })
+      .catch(function() {
+        content.innerHTML = `<div style="text-align:center;padding:32px;color:#e57373;font-size:13px;">${t("menu.library.error", "Failed to load library.")}</div>`;
+      });
   }
 
   function showLoadedAppsPopup(apps) {

@@ -38,9 +38,16 @@ function downloads.get_add_status(appid)
     if fs.exists(state_file) then
         local content = m_utils.read_file(state_file)
         if content and content ~= "" then
+            -- Strip UTF-8 BOM written by .NET Framework's System.Text.Encoding.UTF8
+            if content:sub(1, 3) == "\xEF\xBB\xBF" then content = content:sub(4) end
             local success, data = pcall(cjson.decode, content)
             if success and type(data) == "table" and data.status then
-                _set_download_state(appid, { status = data.status, error = data.error })
+                _set_download_state(appid, {
+                    status     = data.status,
+                    error      = data.error,
+                    bytesRead  = data.bytesRead  or _get_download_state(appid).bytesRead  or 0,
+                    totalBytes = data.totalBytes or _get_download_state(appid).totalBytes or 0,
+                })
                 
                 if data.status == "extracted" then
                     -- Background script finished! Complete the installation synchronously.
@@ -56,6 +63,7 @@ function downloads.get_add_status(appid)
                     -- Cleanup background script files
                     pcall(fs.remove, state_file)
                     pcall(fs.remove, fs.join(dest_root, tostring(appid) .. "_dl.ps1"))
+                    pcall(fs.remove, fs.join(dest_root, tostring(appid) .. "_dl.vbs"))
                     pcall(fs.remove, fs.join(dest_root, tostring(appid) .. "_dl.sh"))
                 elseif data.status == "failed" then
                     pcall(fs.remove, state_file)
@@ -123,17 +131,35 @@ local function _launch_async_download(appid, url, dest_path, extract_dir)
     local is_windows = m_utils.getenv("OS") == "Windows_NT"
     local dest_root = utils.ensure_temp_download_dir()
     local state_file = fs.join(dest_root, tostring(appid) .. "_state.json")
-    
-    m_utils.write_file(state_file, '{"status": "downloading"}')
+
+    m_utils.write_file(state_file, '{"status":"downloading"}')
     if not fs.exists(extract_dir) then fs.create_directories(extract_dir) end
-    
+
     if is_windows then
-        local ps1_path = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.ps1")
-        local cmd = string.format(
-            'powershell -WindowStyle Hidden -Command "Start-Process -FilePath powershell -WindowStyle Hidden -ArgumentList \'-ExecutionPolicy Bypass -File \\"%s\\" -Url \\"%s\\" -DestPath \\"%s\\" -ExtractDir \\"%s\\" -StateFile \\"%s\\"\'"',
-            ps1_path, url, dest_path, extract_dir, state_file
+        local ps1_src = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.ps1")
+        local function to_win(p) return (p or ""):gsub("/", "\\") end
+        local ps1_win     = to_win(ps1_src)
+        local dest_win    = to_win(dest_path)
+        local extract_win = to_win(extract_dir)
+        local state_win   = to_win(state_file)
+
+        -- Write a runner PS1 so path quoting is trivial (no shell escaping nightmares)
+        local runner_path = to_win(fs.join(dest_root, tostring(appid) .. "_dl.ps1"))
+        local runner_content = string.format(
+            '& "%s" -Url "%s" -DestPath "%s" -ExtractDir "%s" -StateFile "%s"',
+            ps1_win, url, dest_win, extract_win, state_win
         )
-        m_utils.exec(cmd)
+        m_utils.write_file(runner_path, runner_content)
+
+        -- Launch via wscript.exe (not intercepted by Windows Terminal)
+        local vbs_path = to_win(fs.join(dest_root, tostring(appid) .. "_dl.vbs"))
+        local vbs_content = string.format(
+            'Set oShell = CreateObject("Wscript.Shell")\r\n' ..
+            'oShell.Run "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File ""%s""", 0, False\r\n',
+            runner_path
+        )
+        m_utils.write_file(vbs_path, vbs_content)
+        m_utils.exec('wscript.exe "' .. vbs_path .. '"')
     else
         local sh_path = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.sh")
         m_utils.exec('chmod +x "' .. sh_path .. '"')

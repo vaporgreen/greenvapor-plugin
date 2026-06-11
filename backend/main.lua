@@ -417,7 +417,10 @@ function GetApplyFixStatus(appid)
 end
 
 function CancelApplyFix(appid)
-    return json_ok({ success = true })
+    if type(appid) == "table" then appid = appid.appid end
+    local ok, res = pcall(fixes.cancel_apply_fix, tonumber(appid))
+    if not ok then return json_err(res) end
+    return json_ok(res)
 end
 
 function UninstallFix(appid)
@@ -493,8 +496,9 @@ function GetGameInstallPath(appid)
     return json_ok(res)
 end
 
-function OpenGameFolder(path)
-    if type(path) == "table" then path = path.path end
+function OpenGameFolder(_csq, path)
+    -- JS keys alphabetically: contentScriptQuery < path, so _csq receives empty string
+    if type(_csq) == "table" then path = _csq.path; _csq = nil end
     local ok, success = pcall(steam_utils.open_game_folder, tostring(path or ""))
     if ok and success then
         return json_ok({ success = true })
@@ -502,8 +506,9 @@ function OpenGameFolder(path)
     return json_ok({ success = false, error = "Failed to open path" })
 end
 
-function OpenExternalUrl(url)
-    if type(url) == "table" then url = url.url end
+function OpenExternalUrl(_csq, url)
+    -- JS passes keys alphabetically: contentScriptQuery before url
+    if type(_csq) == "table" then url = _csq.url end
     url = tostring(url or "")
     if not (url:sub(1, 7) == "http://" or url:sub(1, 8) == "https://") then
         return json_err("Invalid URL")
