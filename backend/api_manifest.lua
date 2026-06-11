@@ -99,18 +99,54 @@ function api_manifest.fetch_free_apis_now()
         end
     end
 
-    local normalized = ""
-    if manifest_text ~= "" then
-        normalized = utils.normalize_manifest_text(manifest_text)
-    end
-
-    if normalized == "" then
+    local normalized = utils.normalize_manifest_text(manifest_text)
+    if not normalized or normalized == "" then
         return { success = false, error = "Empty manifest" }
     end
 
-    utils.write_text(paths.backend_path(config.API_JSON_FILE), normalized)
-    local count = utils.count_apis(normalized)
-    return { success = true, count = count }
+    local ok_remote, remote = pcall(utils.decode_json, normalized)
+    if not ok_remote or type(remote) ~= "table" or type(remote.api_list) ~= "table" then
+        return { success = false, error = "Invalid manifest format" }
+    end
+
+    -- Merge: preserve user's enabled/disabled state and keep custom APIs
+    local path = paths.backend_path(config.API_JSON_FILE)
+    local existing = utils.read_json(path) or { api_list = {} }
+    local user_state = {}
+    local user_custom = {}
+    for _, api in ipairs(existing.api_list or {}) do
+        if api.name then
+            user_state[api.name] = api.enabled ~= false
+            -- mark APIs not in the remote manifest as custom (user-added)
+            user_custom[api.name] = true
+        end
+    end
+
+    -- Apply remote list, preserving user's enabled state for known APIs
+    local merged = {}
+    for _, api in ipairs(remote.api_list) do
+        local name = api.name
+        if name then
+            user_custom[name] = nil  -- not custom, it's from remote
+            api.enabled = (user_state[name] ~= nil) and user_state[name] or (api.enabled ~= false)
+            table.insert(merged, api)
+        end
+    end
+
+    -- Append user's custom APIs (not in remote list) at the end
+    for _, api in ipairs(existing.api_list or {}) do
+        if api.name and user_custom[api.name] then
+            table.insert(merged, api)
+        end
+    end
+
+    local final = { api_list = merged }
+    local new_text = utils.encode_json(final)
+    local formatted = utils.normalize_manifest_text(new_text)
+    utils.write_text(path, formatted)
+
+    logger.log("GreenVapor: Merged manifest saved (" .. tostring(#merged) .. " APIs)")
+    return { success = true, count = #merged }
 end
 
 function api_manifest.load_api_manifest()
