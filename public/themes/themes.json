@@ -231,6 +231,27 @@
     "shadowHover": "rgba(220, 38, 38, 0.6)"
   },
   {
+    "value": "aurora",
+    "name": "Aurora",
+    "bgPrimary": "#07090f",
+    "bgSecondary": "#0e1320",
+    "bgTertiary": "rgba(14, 19, 32, 0.97)",
+    "bgHover": "rgba(26, 32, 52, 0.97)",
+    "bgContainer": "rgba(14, 19, 32, 0.75)",
+    "bgContainerGradient": "rgba(14, 19, 32, 0.92), #07090f",
+    "accent": "#00d4ff",
+    "accentLight": "#a855f7",
+    "accentDark": "#0099cc",
+    "border": "rgba(0, 212, 255, 0.2)",
+    "borderHover": "rgba(0, 212, 255, 0.5)",
+    "text": "#e2eeff",
+    "textSecondary": "#6e8fb0",
+    "gradient": "linear-gradient(135deg, #00d4ff 0%, #a855f7 100%)",
+    "gradientLight": "linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(168,85,247,0.15) 100%)",
+    "shadow": "rgba(0, 212, 255, 0.14)",
+    "shadowHover": "rgba(0, 212, 255, 0.30)"
+  },
+  {
     "value": "greenvapor",
     "name": "GreenVapor",
     "bgPrimary": "#1a2416",

@@ -35,7 +35,7 @@ options.SETTINGS_GROUPS = {
                 label = "Theme",
                 option_type = "select",
                 description = "Choose the color theme for GreenVapor interface.",
-                default = "greenvapor",
+                default = "aurora",
                 metadata = {dynamicChoices = "themes"}
             },
             {

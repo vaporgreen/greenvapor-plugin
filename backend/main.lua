@@ -19,6 +19,8 @@ local fixes            = require("fixes")
 local settings_manager = require("settings.manager")
 local auto_update      = require("auto_update")
 
+local _millennium_version = ""
+
 -- ── Helpers ──────────────────────────────────────────────────────────────────
 
 --- Safely encode a Lua table to a JSON string (same as Python json.dumps).
@@ -69,7 +71,8 @@ end
 -- ── Lifecycle ────────────────────────────────────────────────────────────────
 
 local function on_load()
-    logger.log("Bootstrapping GreenVapor plugin, millennium " .. millennium.version())
+    _millennium_version = tostring(millennium.version())
+    logger.log("Bootstrapping GreenVapor plugin, millennium " .. _millennium_version)
     steam_utils.detect_steam_install_path()
     utils.ensure_temp_download_dir()
 
@@ -529,13 +532,15 @@ function GetSettingsConfig()
         return json_err(payload)
     end
     return json_ok({
-        success       = true,
-        schemaVersion = payload.version,
-        schema        = payload.schema or {},
-        values        = payload.values or {},
-        language      = payload.language,
-        locales       = payload.locales or {},
-        translations  = payload.translations or {}
+        success            = true,
+        schemaVersion      = payload.version,
+        schema             = payload.schema or {},
+        values             = payload.values or {},
+        language           = payload.language,
+        locales            = payload.locales or {},
+        translations       = payload.translations or {},
+        plugin_version     = "1.1.2",
+        millennium_version = _millennium_version
     })
 end
 

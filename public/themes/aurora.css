@@ -1,0 +1,49 @@
+:root {
+    --lt-bg-primary: #07090f;
+    --lt-bg-secondary: #0e1320;
+    --lt-bg-tertiary: rgba(14, 19, 32, 0.97);
+    --lt-bg-hover: rgba(26, 32, 52, 0.97);
+    --lt-bg-container: rgba(14, 19, 32, 0.75);
+    --lt-bg-container-gradient: rgba(14, 19, 32, 0.92), #07090f;
+    --lt-accent: #00d4ff;
+    --lt-accent-light: #a855f7;
+    --lt-accent-dark: #0099cc;
+    --lt-border: rgba(0, 212, 255, 0.2);
+    --lt-border-hover: rgba(0, 212, 255, 0.5);
+    --lt-text: #e2eeff;
+    --lt-text-secondary: #6e8fb0;
+    --lt-gradient: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+    --lt-gradient-light: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+    --lt-shadow: rgba(0, 212, 255, 0.14);
+    --lt-shadow-hover: rgba(0, 212, 255, 0.30);
+    --lt-shadow-rgba: rgba(0, 212, 255, 0.08);
+    --lt-rgb: 0, 212, 255;
+}
+
+select {
+    background-color: rgba(14, 19, 32, 0.97) !important;
+    color: #e2eeff !important;
+    border: 1px solid rgba(0, 212, 255, 0.25) !important;
+    border-radius: 3px;
+}
+
+select option {
+    background-color: #0e1320;
+    color: #e2eeff;
+}
+
+select option:checked {
+    background: linear-gradient(#00d4ff, #00d4ff);
+    background-color: #00d4ff !important;
+    color: #07090f !important;
+}
+
+select:hover {
+    border-color: rgba(0, 212, 255, 0.55) !important;
+}
+
+select:focus {
+    outline: none;
+    border-color: #00d4ff !important;
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+}

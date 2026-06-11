@@ -707,10 +707,12 @@
       });
   }
 
-  // Cache for game names fetched from Steam API
+  // Cache for game names and header images fetched from Steam API
   const steamGameNameCache = {};
+  const steamHeaderImageCache = {};
   // Track in-flight promises so we don't fire duplicate requests for the same appid
   const steamGameNameInFlight = {};
+  const steamHeaderImageInFlight = {};
   // Throttle: max 2 concurrent fetch calls to avoid overwhelming Millennium's network interceptor
   let _steamFetchActive = 0;
   const _steamFetchQueue = [];
@@ -725,14 +727,23 @@
     )
       .then(function(res) { return res.json(); })
       .then(function(data) {
-        let name = null;
-        if (data && data[appid] && data[appid].success && data[appid].data && data[appid].data.name) {
-          name = data[appid].data.name;
-          steamGameNameCache[appid] = name;
+        if (data && data[appid] && data[appid].success && data[appid].data) {
+          const d = data[appid].data;
+          if (d.name) { steamGameNameCache[appid] = d.name; }
+          if (d.header_image) steamHeaderImageCache[appid] = d.header_image;
+          resolve(steamGameNameCache[appid] || null);
+        } else {
+          // Game delisted or not found — try SteamSpy for historical name
+          return fetch("https://steamspy.com/api.php?request=appdetails&appid=" + appid)
+            .then(function(r) { return r.json(); })
+            .then(function(spy) {
+              if (spy && spy.name) { steamGameNameCache[appid] = spy.name; }
+              resolve(steamGameNameCache[appid] || null);
+            })
+            .catch(function() { resolve(null); });
         }
-        resolve(name);
       })
-      .catch(function(err) {
+      .catch(function() {
         resolve(null);
       })
       .finally(function() {
@@ -758,6 +769,22 @@
       _runSteamFetchQueue();
     });
     steamGameNameInFlight[appid] = promise;
+    return promise;
+  }
+
+  function fetchSteamHeaderImage(appid) {
+    if (!appid) return Promise.resolve(null);
+    if (steamHeaderImageCache[appid]) return Promise.resolve(steamHeaderImageCache[appid]);
+    if (steamHeaderImageInFlight[appid]) return steamHeaderImageInFlight[appid];
+    // Piggyback on the same queue as fetchSteamGameName
+    const promise = new Promise(function(resolve, reject) {
+      _steamFetchQueue.push({ appid: appid, resolve: resolve, reject: reject });
+      _runSteamFetchQueue();
+    }).then(function() {
+      return steamHeaderImageCache[appid] || null;
+    });
+    steamHeaderImageInFlight[appid] = promise;
+    promise.finally(function() { delete steamHeaderImageInFlight[appid]; });
     return promise;
   }
 
@@ -1067,6 +1094,72 @@
                 background: ${theme.gradientLight};
                 border-color: ${theme.accent};
             }
+
+            /* Aurora-style menu cards */
+            .luatools-menu-card {
+                background: rgba(${theme.rgbString}, 0.05);
+                border: 1px solid ${theme.border};
+                border-radius: 5px;
+                padding: 14px 14px 12px;
+                cursor: pointer;
+                transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                text-decoration: none;
+                color: ${theme.text};
+                flex: 1;
+            }
+            .luatools-menu-card::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: ${theme.gradientLight};
+                opacity: 0;
+                transition: opacity 0.18s;
+                pointer-events: none;
+            }
+            .luatools-menu-card:hover {
+                border-color: ${theme.borderHover};
+                box-shadow: 0 0 0 1px rgba(${theme.rgbString}, 0.1), 0 4px 16px ${theme.shadow};
+                transform: translateY(-1px);
+                text-decoration: none;
+            }
+            .luatools-menu-card:hover::before { opacity: 1; }
+            .luatools-menu-card-icon {
+                width: 30px; height: 30px;
+                border-radius: 6px;
+                background: rgba(${theme.rgbString}, 0.1);
+                border: 1px solid ${theme.border};
+                display: flex; align-items: center; justify-content: center;
+                position: relative; z-index: 1;
+                flex-shrink: 0;
+            }
+            .luatools-menu-card-title {
+                font-size: 12px;
+                font-weight: 600;
+                color: ${theme.text};
+                position: relative; z-index: 1;
+                line-height: 1.3;
+            }
+            .luatools-menu-card-desc {
+                font-size: 10px;
+                color: ${theme.textSecondary};
+                position: relative; z-index: 1;
+                line-height: 1.4;
+                flex: 1;
+            }
+            .luatools-menu-card-arrow {
+                color: ${theme.accent};
+                opacity: 0;
+                transition: opacity 0.18s, transform 0.18s;
+                font-size: 12px;
+                position: relative; z-index: 1;
+                align-self: flex-end;
+            }
+            .luatools-menu-card:hover .luatools-menu-card-arrow { opacity: 1; transform: translateX(3px); }
 
             /* Modern Toggle Switch */
             .luatools-toggle-container {
@@ -1475,15 +1568,18 @@
 
         const modal = document.createElement("div");
         const colors = getThemeColors();
-        modal.style.cssText = `position:relative;background:${colors.modalBg};color:${colors.text};border:1px solid ${colors.border};border-radius:4px;width:460px;padding:20px 24px;box-shadow:0 24px 80px rgba(0,0,0,.65), 0 0 0 1px ${colors.shadowRgba};animation:slideUp 0.12s ease-out;`;
+        modal.style.cssText = `position:relative;background:${colors.modalBg};color:${colors.text};border:1px solid ${colors.border};border-radius:6px;width:480px;padding:0;box-shadow:0 8px 40px rgba(0,0,0,.65), 0 0 0 1px ${colors.shadowRgba}, inset 0 1px 0 rgba(255,255,255,.03);animation:slideUp 0.12s ease-out;overflow:hidden;`;
 
         const header = document.createElement("div");
-        header.style.cssText = `display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid ${colors.borderRgba};`;
+        header.style.cssText = `display:flex;justify-content:space-between;align-items:center;padding:14px 16px 13px;border-bottom:1px solid ${colors.borderRgba};background:rgba(${colors.rgbString},0.04);position:relative;overflow:hidden;`;
+        const headerGradientLine = document.createElement("div");
+        headerGradientLine.style.cssText = `position:absolute;bottom:0;left:0;right:0;height:1px;background:${colors.gradient};opacity:0.5;pointer-events:none;`;
+        header.appendChild(headerGradientLine);
 
         const title = document.createElement("div");
-        title.style.cssText = `display:flex;align-items:center;gap:10px;font-size:22px;color:${colors.text};font-weight:600;`;
+        title.style.cssText = "display:flex;align-items:center;gap:10px;position:relative;z-index:1;";
         const titleIcon = document.createElement("img");
-        titleIcon.style.cssText = "width:24px;height:24px;border-radius:4px;";
+        titleIcon.style.cssText = `width:32px;height:32px;border-radius:5px;box-shadow:0 0 10px ${colors.shadow};`;
         titleIcon.alt = "GreenVapor";
         try {
           Millennium.callServerMethod("greenvapor", "GetIconDataUrl", {
@@ -1505,41 +1601,40 @@
         titleIcon.onerror = function () {
           this.style.display = "none";
         };
-        const titleText = document.createElement("span");
-        titleText.textContent = t("menu.title", "GreenVapor · Menu");
+        const titleStack = document.createElement("div");
+        const titleText = document.createElement("div");
+        titleText.style.cssText = `font-size:14px;font-weight:700;color:${colors.text};line-height:1.2;`;
+        titleText.textContent = "GreenVapor";
+        const titleSub = document.createElement("div");
+        titleSub.style.cssText = `font-size:11px;color:${colors.textSecondary};margin-top:2px;`;
+        titleSub.textContent = t("menu.subtitle", "Gerenciador de scripts Steam");
+        titleStack.appendChild(titleText);
+        titleStack.appendChild(titleSub);
         title.appendChild(titleIcon);
-        title.appendChild(titleText);
+        title.appendChild(titleStack);
 
         const iconButtons = document.createElement("div");
-        iconButtons.style.cssText = "display:flex;gap:12px;";
+        iconButtons.style.cssText = "display:flex;align-items:center;gap:8px;position:relative;z-index:1;";
+        const versionBadge = document.createElement("div");
+        versionBadge.style.cssText = `font-size:10px;color:${colors.textSecondary};background:rgba(${colors.rgbString},0.07);border:1px solid ${colors.border};border-radius:3px;padding:2px 8px;`;
+        versionBadge.textContent = window.__GreenVaporVersion ? "v" + window.__GreenVaporVersion : "";
+        if (!versionBadge.textContent) versionBadge.style.display = "none";
+        const closeBtn = document.createElement("a");
+        closeBtn.id = "lt-settings-close";
+        closeBtn.href = "#";
+        closeBtn.style.cssText = `display:flex;align-items:center;justify-content:center;width:26px;height:26px;background:rgba(${colors.rgbString},0.07);border:1px solid ${colors.border};border-radius:4px;color:${colors.textSecondary};font-size:13px;text-decoration:none;transition:all 0.15s;`;
+        closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        closeBtn.onmouseover = function() { const c = getThemeColors(); this.style.background = `rgba(${c.rgbString},0.2)`; this.style.borderColor = c.borderHover; };
+        closeBtn.onmouseout = function() { const c = getThemeColors(); this.style.background = `rgba(${c.rgbString},0.07)`; this.style.borderColor = c.border; };
+        closeBtn.addEventListener("click", function(e) { e.preventDefault(); overlay.remove(); });
+        iconButtons.appendChild(versionBadge);
+        iconButtons.appendChild(closeBtn);
 
-        function createIconButton(id, iconClass, titleKey, titleFallback) {
-          const btn = document.createElement("a");
-          btn.id = id;
-          btn.href = "#";
-          const btnColors = getThemeColors();
-          btn.style.cssText = `display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(${btnColors.rgbString},0.1);border:1px solid ${btnColors.borderRgba};border-radius:3px;color:${btnColors.accent};font-size:18px;text-decoration:none;transition:all 0.3s ease;cursor:pointer;`;
-          btn.innerHTML = '<i class="fa-solid ' + iconClass + '"></i>';
-          btn.title = t(titleKey, titleFallback);
-          btn.onmouseover = function () {
-            this.style.background = `rgba(${btnColors.rgbString},0.25)`;
-            
-            
-            this.style.borderColor = btnColors.accent;
-          };
-          btn.onmouseout = function () {
-            this.style.background = `rgba(${btnColors.rgbString},0.1)`;
-            
-            
-            this.style.borderColor = btnColors.borderRgba;
-          };
-          iconButtons.appendChild(btn);
-          return btn;
-        }
+        function createIconButton(id, iconClass, titleKey, titleFallback) { return null; }
 
         const body = document.createElement("div");
         body.style.cssText =
-          "font-size:14px;line-height:1.6;margin-bottom:12px;";
+          "font-size:14px;line-height:1.6;padding:16px 16px 18px;";
 
         // Add mouse mode tip for Big Picture
         if (window.__LUATOOLS_IS_BIG_PICTURE__) {
@@ -1557,70 +1652,50 @@
 
         const container = document.createElement("div");
         container.style.cssText =
-          "margin-top:16px;display:flex;flex-direction:column;gap:12px;align-items:stretch;";
+          "display:flex;flex-direction:column;gap:12px;align-items:stretch;";
 
+        const CARD_DESCS = {
+          "menu.fixesMenu": t("menu.fixesMenuDesc", "Apply fixes & patches"),
+          "menu.settings": t("menu.settingsDesc", "Plugin settings & preferences"),
+          "menu.fetchFreeApis": t("menu.fetchApisDesc", "Download game scripts"),
+          "menu.library": t("menu.libraryDesc", "Manage installed scripts"),
+        };
         function createCardButton(id, key, fallback, iconClass) {
           const btn = document.createElement("a");
           btn.id = id;
           btn.href = "#";
+          btn.className = "luatools-menu-card";
           const btnColors = getThemeColors();
-          btn.style.cssText = `display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex:1;background:rgba(${btnColors.rgbString},0.06);border:1px solid ${btnColors.borderRgba};border-radius:3px;color:${btnColors.text};font-size:11px;font-weight:500;text-decoration:none;transition:all 0.2s ease;cursor:pointer;text-align:center;padding:14px 6px;min-width:0;`;
-          const iconHtml = iconClass
-            ? '<i class="fa-solid ' +
-              iconClass +
-              '" style="font-size:22px;color:' +
-              btnColors.accent +
-              ';"></i>'
-            : "";
-          const textSpan =
-            '<span style="text-align:center;line-height:1.3;">' +
-            t(key, fallback) +
-            "</span>";
-          btn.innerHTML = iconHtml + textSpan;
-          btn.onmouseover = function () {
-            const c = getThemeColors();
-            this.style.background = `rgba(${c.rgbString},0.15)`;
-            
-            
-            this.style.borderColor = c.accent;
-          };
-          btn.onmouseout = function () {
-            const c = getThemeColors();
-            this.style.background = `rgba(${c.rgbString},0.06)`;
-            
-            
-            this.style.borderColor = c.borderRgba;
-          };
+          const iconBox = document.createElement("div");
+          iconBox.className = "luatools-menu-card-icon";
+          if (iconClass) {
+            iconBox.innerHTML = '<i class="fa-solid ' + iconClass + '" style="font-size:14px;color:' + btnColors.accent + ';position:relative;z-index:1;"></i>';
+          }
+          const titleEl = document.createElement("div");
+          titleEl.className = "luatools-menu-card-title";
+          titleEl.textContent = t(key, fallback);
+          const descEl = document.createElement("div");
+          descEl.className = "luatools-menu-card-desc";
+          descEl.textContent = CARD_DESCS[key] || "";
+          const arrowEl = document.createElement("div");
+          arrowEl.className = "luatools-menu-card-arrow";
+          arrowEl.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+          btn.appendChild(iconBox);
+          btn.appendChild(titleEl);
+          btn.appendChild(descEl);
+          btn.appendChild(arrowEl);
           return btn;
         }
 
-        const discordBtn = createIconButton(
-          "lt-settings-discord",
-          "fa-brands fa-discord",
-          "menu.discord",
-          "Discord",
-        );
-        const settingsManagerBtn = createIconButton(
-          "lt-settings-open-manager",
-          "fa-gear",
-          "menu.settings",
-          "Settings",
-        );
-        const customApiBtn = createIconButton(
-          "lt-settings-custom-api",
-          "fa-solid fa-code-branch",
-          "menu.customApi",
-          "Custom API",
-        );
-        const closeBtn = createIconButton(
-          "lt-settings-close",
-          "fa-xmark",
-          "settings.close",
-          "Close",
-        );
+        const discordBtn = null;
+        const settingsManagerBtn = null;
+        const customApiBtn = null;
 
         // Check if we are on a game page
         const isGamePage = window.location.href.includes("/app/");
+        const menuUrlMatch = window.location.href.match(/https:\/\/store\.steampowered\.com\/app\/(\d+)/) ||
+                             window.location.href.match(/https:\/\/steamcommunity\.com\/app\/(\d+)/);
+        const menuAppId = menuUrlMatch ? parseInt(menuUrlMatch[1], 10) : (window.__LuaToolsCurrentAppId || NaN);
 
         if (customApiBtn) {
           customApiBtn.addEventListener("click", function (e) {
@@ -1656,7 +1731,7 @@
         // Card button grid
         const cardGrid = document.createElement("div");
         cardGrid.style.cssText =
-          "display:flex;gap:10px;justify-content:center;";
+          "display:grid;grid-template-columns:1fr 1fr;gap:10px;";
 
         const fixesMenuBtn = createCardButton(
           "lt-settings-fixes-menu",
@@ -1664,15 +1739,11 @@
           "Fixes Menu",
           "fa-wrench",
         );
-        if (isGamePage) cardGrid.appendChild(fixesMenuBtn);
-
-        const checkBtn = createCardButton(
-          "lt-settings-check",
-          "menu.checkForUpdates",
-          "Check Updates",
-          "fa-cloud-arrow-down",
-        );
-        cardGrid.appendChild(checkBtn);
+        cardGrid.appendChild(fixesMenuBtn);
+        if (!isGamePage) {
+          fixesMenuBtn.style.opacity = "0.4";
+          fixesMenuBtn.style.pointerEvents = "none";
+        }
 
         const fetchApisBtn = createCardButton(
           "lt-settings-fetch-apis",
@@ -1682,6 +1753,14 @@
         );
         cardGrid.appendChild(fetchApisBtn);
 
+        const settingsCard = createCardButton(
+          "lt-settings-open-settings",
+          "menu.settings",
+          "Settings",
+          "fa-gear",
+        );
+        cardGrid.appendChild(settingsCard);
+
         const libraryBtn = createCardButton(
           "lt-settings-library",
           "menu.library",
@@ -1689,15 +1768,100 @@
           "fa-gamepad",
         );
         cardGrid.appendChild(libraryBtn);
+        const checkBtn = null;
 
         container.appendChild(cardGrid);
 
         body.appendChild(container);
 
+        // Footer bar
+        const menuFooter = document.createElement("div");
+        menuFooter.style.cssText = `border-top:1px solid ${colors.borderRgba};padding:10px 14px;display:flex;gap:8px;align-items:center;background:rgba(0,0,0,.15);`;
+        const restartFooterBtn = document.createElement("a");
+        restartFooterBtn.href = "#";
+        restartFooterBtn.className = "luatools-btn";
+        restartFooterBtn.style.cssText = "display:flex;align-items:center;gap:6px;padding:6px 11px;font-size:12px;";
+        restartFooterBtn.innerHTML = '<i class="fa-solid fa-rotate-right" style="font-size:11px;"></i><span>' + t("menu.restartSteam", "Reiniciar Steam") + "</span>";
+        restartFooterBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          try { Millennium.callServerMethod("greenvapor", "RestartSteam", { contentScriptQuery: "" }); } catch(_) {}
+        });
+        const discordFooterBtn = document.createElement("a");
+        discordFooterBtn.href = "#";
+        discordFooterBtn.className = "luatools-btn";
+        discordFooterBtn.style.cssText = "display:flex;align-items:center;gap:6px;padding:6px 11px;font-size:12px;";
+        discordFooterBtn.innerHTML = '<i class="fa-brands fa-discord" style="font-size:11px;"></i><span>Discord</span>';
+        discordFooterBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          try { overlay.remove(); } catch(_) {}
+          try { Millennium.callServerMethod("greenvapor", "OpenExternalUrl", { url: "https://discord.gg/greenvapor", contentScriptQuery: "" }); } catch(_) {}
+        });
+        const millVersionEl = document.createElement("div");
+        millVersionEl.style.cssText = `margin-left:auto;font-size:10px;color:${colors.textSecondary};`;
+        if (window.__MillenniumVersion) millVersionEl.textContent = "Millennium " + window.__MillenniumVersion;
+        menuFooter.appendChild(restartFooterBtn);
+        menuFooter.appendChild(discordFooterBtn);
+        menuFooter.appendChild(millVersionEl);
+
         header.appendChild(title);
         header.appendChild(iconButtons);
         modal.appendChild(header);
+
+        // Game context bar
+        if (isGamePage && !isNaN(menuAppId)) {
+          const gameBar = document.createElement("div");
+          gameBar.style.cssText = `display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(0,0,0,.2);border-bottom:1px solid rgba(255,255,255,.04);`;
+          const gameThumb = document.createElement("div");
+          gameThumb.style.cssText = `width:44px;height:30px;border-radius:3px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.06);background:#0d1525;`;
+          const thumbImg = document.createElement("img");
+          thumbImg.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;";
+          thumbImg.src = "https://cdn.akamai.steamstatic.com/steam/apps/" + menuAppId + "/capsule_231x87.jpg";
+          thumbImg.onerror = function() {
+            fetchSteamHeaderImage(menuAppId).then(function(url) {
+              if (url) { thumbImg.onerror = function() { thumbImg.style.display = "none"; }; thumbImg.src = url; }
+              else thumbImg.style.display = "none";
+            }).catch(function() { thumbImg.style.display = "none"; });
+          };
+          gameThumb.appendChild(thumbImg);
+          const gameInfo = document.createElement("div");
+          gameInfo.style.cssText = "flex:1;min-width:0;";
+          const gameNameEl = document.createElement("div");
+          gameNameEl.style.cssText = `font-size:12px;font-weight:600;color:${colors.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;`;
+          gameNameEl.textContent = "AppID " + menuAppId;
+          try {
+            fetchSteamGameName(menuAppId).then(function(n) { if (n) gameNameEl.textContent = n; }).catch(function(){});
+          } catch(_) {}
+          const gameIdLabel = document.createElement("div");
+          gameIdLabel.style.cssText = `font-size:10px;color:${colors.textSecondary};margin-top:1px;`;
+          gameIdLabel.textContent = "AppID: " + menuAppId;
+          gameInfo.appendChild(gameNameEl);
+          gameInfo.appendChild(gameIdLabel);
+          const gameStatusEl = document.createElement("div");
+          gameStatusEl.style.cssText = `font-size:11px;display:flex;align-items:center;gap:5px;color:${colors.textSecondary};`;
+          try {
+            Millennium.callServerMethod("greenvapor", "HasLuaToolsForApp", { appid: menuAppId, contentScriptQuery: "" }).then(function(r) {
+              try {
+                const rp = typeof r === "string" ? JSON.parse(r) : r;
+                if (rp && rp.exists) {
+                  const dot = document.createElement("div");
+                  dot.style.cssText = "width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 5px #4ade80;flex-shrink:0;";
+                  gameStatusEl.appendChild(dot);
+                  const stxt = document.createElement("span");
+                  stxt.style.color = "#4ade80";
+                  stxt.textContent = t("menu.installed", "Instalado");
+                  gameStatusEl.appendChild(stxt);
+                }
+              } catch(_) {}
+            });
+          } catch(_) {}
+          gameBar.appendChild(gameThumb);
+          gameBar.appendChild(gameInfo);
+          gameBar.appendChild(gameStatusEl);
+          modal.appendChild(gameBar);
+        }
+
         modal.appendChild(body);
+        modal.appendChild(menuFooter);
         overlay.appendChild(modal);
         document.body.appendChild(overlay);
 
@@ -1708,43 +1872,11 @@
           }
         }, 150);
 
-        if (checkBtn) {
-          checkBtn.addEventListener("click", function (e) {
+        if (settingsCard) {
+          settingsCard.addEventListener("click", function (e) {
             e.preventDefault();
-            try {
-              overlay.remove();
-            } catch (_) {}
-            try {
-              Millennium.callServerMethod("greenvapor", "CheckForUpdatesNow", {
-                contentScriptQuery: "",
-              }).then(function (res) {
-                try {
-                  const payload =
-                    typeof res === "string" ? JSON.parse(res) : res;
-                  const msg =
-                    payload && payload.message
-                      ? String(payload.message)
-                      : lt("No updates available.");
-                  ShowLuaToolsAlert("GreenVapor", msg);
-                } catch (_) {}
-              });
-            } catch (_) {}
-          });
-        }
-
-        if (discordBtn) {
-          discordBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            try {
-              overlay.remove();
-            } catch (_) {}
-            const url = "https://discord.gg/greenvapor";
-            try {
-              Millennium.callServerMethod("greenvapor", "OpenExternalUrl", {
-                url,
-                contentScriptQuery: "",
-              });
-            } catch (_) {}
+            try { overlay.remove(); } catch (_) {}
+            showSettingsManagerPopup(false, showSettingsPopup);
           });
         }
 
@@ -1784,24 +1916,6 @@
             e.preventDefault();
             try { overlay.remove(); } catch (_) {}
             showLibraryModal();
-          });
-        }
-
-        if (closeBtn) {
-          closeBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            overlay.remove();
-          });
-        }
-
-        if (settingsManagerBtn) {
-          // This is the icon button now
-          settingsManagerBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            try {
-              overlay.remove();
-            } catch (_) {}
-            showSettingsManagerPopup(false, showSettingsPopup);
           });
         }
 
@@ -3441,6 +3555,8 @@
         locales: config.locales,
         strings: config.translations,
       });
+      if (payload.plugin_version) window.__GreenVaporVersion = String(payload.plugin_version);
+      if (payload.millennium_version) window.__MillenniumVersion = String(payload.millennium_version);
       window.__LuaToolsSettings = config;
       return config;
     });
@@ -8025,10 +8141,19 @@
             img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;";
             const imgUrls = [
               "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/header.jpg",
+              "https://cdn.akamai.steamstatic.com/steam/apps/" + appid + "/header.jpg",
               "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_616x353.jpg",
               "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_231x87.jpg",
             ];
             let imgUrlIdx = 0;
+            function _showGamepadIcon() {
+              imgWrap.style.cssText += "display:flex;align-items:center;justify-content:center;";
+              img.remove();
+              const ico = document.createElement("i");
+              ico.className = "fa-solid fa-gamepad";
+              ico.style.cssText = `font-size:28px;color:${colors.textSecondary};opacity:0.4;`;
+              imgWrap.appendChild(ico);
+            }
             img.src = imgUrls[imgUrlIdx];
             img.onerror = function() {
               imgUrlIdx++;
@@ -8036,12 +8161,15 @@
                 img.src = imgUrls[imgUrlIdx];
                 return;
               }
-              imgWrap.style.cssText += "display:flex;align-items:center;justify-content:center;";
-              img.remove();
-              const ico = document.createElement("i");
-              ico.className = "fa-solid fa-gamepad";
-              ico.style.cssText = `font-size:28px;color:${colors.textSecondary};opacity:0.4;`;
-              imgWrap.appendChild(ico);
+              // All static CDN URLs failed — fetch hash-based URL from Steam API
+              fetchSteamHeaderImage(appid).then(function(apiUrl) {
+                if (apiUrl) {
+                  img.onerror = _showGamepadIcon;
+                  img.src = apiUrl;
+                } else {
+                  _showGamepadIcon();
+                }
+              }).catch(_showGamepadIcon);
             };
             imgWrap.appendChild(img);
             card.appendChild(imgWrap);
