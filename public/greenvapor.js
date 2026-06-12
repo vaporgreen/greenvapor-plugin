@@ -1655,10 +1655,10 @@
           "display:flex;flex-direction:column;gap:12px;align-items:stretch;";
 
         const CARD_DESCS = {
-          "menu.fixesMenu": t("menu.fixesMenuDesc", "Apply fixes & patches"),
-          "menu.settings": t("menu.settingsDesc", "Plugin settings & preferences"),
-          "menu.fetchFreeApis": t("menu.fetchApisDesc", "Download game scripts"),
-          "menu.library": t("menu.libraryDesc", "Manage installed scripts"),
+          "menu.fixesMenu": t("menu.fixesMenuDesc", "Corrigir erros e aplicar patches"),
+          "menu.settings": t("menu.settingsDesc", "Configurações e preferências"),
+          "menu.fetchFreeApis": t("menu.fetchApisDesc", "Buscar e baixar scripts de jogo"),
+          "menu.library": t("menu.libraryDesc", "Gerenciar scripts instalados"),
         };
         function createCardButton(id, key, fallback, iconClass) {
           const btn = document.createElement("a");
@@ -1796,11 +1796,54 @@
           try { overlay.remove(); } catch(_) {}
           try { Millennium.callServerMethod("greenvapor", "OpenExternalUrl", { url: "https://discord.gg/greenvapor", contentScriptQuery: "" }); } catch(_) {}
         });
+        const updateFooterBtn = document.createElement("a");
+        updateFooterBtn.href = "#";
+        updateFooterBtn.className = "luatools-btn";
+        updateFooterBtn.style.cssText = "display:flex;align-items:center;gap:5px;padding:6px 10px;font-size:11px;";
+        updateFooterBtn.title = t("menu.checkForUpdates", "Check Updates");
+        const updateIcon = document.createElement("i");
+        updateIcon.className = "fa-solid fa-arrow-up-to-dotted-line";
+        updateIcon.style.fontSize = "11px";
+        const updateLabel = document.createElement("span");
+        updateLabel.textContent = window.__GreenVaporVersion ? "v" + window.__GreenVaporVersion : "...";
+        updateFooterBtn.appendChild(updateIcon);
+        updateFooterBtn.appendChild(updateLabel);
+        updateFooterBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          updateLabel.textContent = "...";
+          updateIcon.className = "fa-solid fa-spinner";
+          updateIcon.style.animation = "spin 1s linear infinite";
+          try {
+            Millennium.callServerMethod("greenvapor", "CheckForUpdatesNow", { contentScriptQuery: "" }).then(function(res) {
+              try {
+                const p = typeof res === "string" ? JSON.parse(res) : res;
+                const msg = p && p.message ? String(p.message) : "";
+                updateIcon.style.animation = "";
+                if (msg && msg.toLowerCase().includes("1.1.2")) {
+                  updateIcon.className = "fa-solid fa-check";
+                  updateLabel.textContent = "v" + (window.__GreenVaporVersion || "");
+                } else if (msg) {
+                  updateIcon.className = "fa-solid fa-arrow-up";
+                  updateLabel.textContent = t("menu.updateAvailable", "Atualizar");
+                  ShowLuaToolsAlert("GreenVapor", msg);
+                } else {
+                  updateIcon.className = "fa-solid fa-check";
+                  updateLabel.textContent = "v" + (window.__GreenVaporVersion || "");
+                }
+              } catch(_) {
+                updateIcon.className = "fa-solid fa-arrow-up-to-dotted-line";
+                updateIcon.style.animation = "";
+                updateLabel.textContent = window.__GreenVaporVersion ? "v" + window.__GreenVaporVersion : "?";
+              }
+            });
+          } catch(_) {}
+        });
         const millVersionEl = document.createElement("div");
         millVersionEl.style.cssText = `margin-left:auto;font-size:10px;color:${colors.textSecondary};`;
         if (window.__MillenniumVersion) millVersionEl.textContent = "Millennium " + window.__MillenniumVersion;
         menuFooter.appendChild(restartFooterBtn);
         menuFooter.appendChild(discordFooterBtn);
+        menuFooter.appendChild(updateFooterBtn);
         menuFooter.appendChild(millVersionEl);
 
         header.appendChild(title);
@@ -3607,43 +3650,59 @@
 
     const modal = document.createElement("div");
     const settingsModalColors = getThemeColors();
-    modal.style.cssText = `position:relative;background:${settingsModalColors.modalBg};color:${settingsModalColors.text};border:1px solid ${settingsModalColors.border};border-radius:4px;width:750px;max-height:88vh;padding:0;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.65), 0 0 0 1px ${settingsModalColors.shadowRgba};animation:slideUp 0.12s ease-out;overflow:hidden;`;
+    modal.style.cssText = `position:relative;background:${settingsModalColors.modalBg};color:${settingsModalColors.text};border:1px solid ${settingsModalColors.border};border-top:2px solid ${settingsModalColors.accent};border-radius:6px;width:750px;max-height:88vh;padding:0;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.65), 0 0 20px rgba(${settingsModalColors.rgbString},0.08), 0 0 0 1px ${settingsModalColors.shadowRgba};animation:slideUp 0.12s ease-out;overflow:hidden;`;
 
     const header = document.createElement("div");
     const settingsHeaderColors = getThemeColors();
-    header.style.cssText = `display:flex;justify-content:space-between;align-items:center;padding:20px 24px 16px;border-bottom:1px solid ${settingsHeaderColors.border.replace("0.3", "0.15")};`;
+    header.style.cssText = `display:flex;justify-content:space-between;align-items:center;padding:14px 20px 13px;border-bottom:1px solid ${settingsHeaderColors.borderRgba};background:rgba(${settingsHeaderColors.rgbString},0.04);position:relative;overflow:hidden;`;
+    const settingsHeaderGradLine = document.createElement("div");
+    settingsHeaderGradLine.style.cssText = `position:absolute;bottom:0;left:0;right:0;height:1px;background:${settingsHeaderColors.gradient};opacity:0.45;pointer-events:none;`;
+    header.appendChild(settingsHeaderGradLine);
 
     const title = document.createElement("div");
     const settingsTitleColors = getThemeColors();
-    title.style.cssText = `font-size:18px;color:${settingsTitleColors.text};font-weight:600;display:flex;align-items:center;gap:10px;`;
+    title.style.cssText = `display:flex;align-items:center;gap:10px;position:relative;z-index:1;`;
     const settingsTitleImg = document.createElement("img");
     settingsTitleImg.src = "GreenVapor/greenvapor-icon.png";
-    settingsTitleImg.style.cssText = "width:22px;height:22px;";
+    settingsTitleImg.style.cssText = `width:30px;height:30px;border-radius:5px;box-shadow:0 0 10px ${settingsTitleColors.shadow};`;
     settingsTitleImg.onerror = function() { this.style.display = "none"; };
+    try {
+      Millennium.callServerMethod("greenvapor", "GetIconDataUrl", { contentScriptQuery: "" }).then(function(res) {
+        try {
+          const p = typeof res === "string" ? JSON.parse(res) : res;
+          settingsTitleImg.src = (p && p.success && p.dataUrl) ? p.dataUrl : "GreenVapor/greenvapor-icon.png";
+        } catch(_) { settingsTitleImg.src = "GreenVapor/greenvapor-icon.png"; }
+      });
+    } catch(_) { settingsTitleImg.src = "GreenVapor/greenvapor-icon.png"; }
+    const settingsTitleStack = document.createElement("div");
+    const settingsTitleMain = document.createElement("div");
+    settingsTitleMain.style.cssText = `font-size:14px;font-weight:700;color:${settingsTitleColors.text};line-height:1.2;`;
+    settingsTitleMain.textContent = "GreenVapor";
+    const settingsTitleSub = document.createElement("div");
+    settingsTitleSub.style.cssText = `font-size:11px;color:${settingsTitleColors.textSecondary};margin-top:2px;`;
+    settingsTitleSub.textContent = t("settings.title", "Configurações");
+    settingsTitleStack.appendChild(settingsTitleMain);
+    settingsTitleStack.appendChild(settingsTitleSub);
     title.appendChild(settingsTitleImg);
-    title.appendChild(document.createTextNode(t("settings.title", "GreenVapor · Settings")));
+    title.appendChild(settingsTitleStack);
 
     const iconButtons = document.createElement("div");
-    iconButtons.style.cssText = "display:flex;gap:12px;";
+    iconButtons.style.cssText = "display:flex;gap:8px;position:relative;z-index:1;";
 
     const discordIconBtn = document.createElement("a");
     discordIconBtn.href = "#";
     const discordBtnColors = getThemeColors();
-    discordIconBtn.style.cssText = `display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(${discordBtnColors.rgbString},0.08);border:1px solid ${discordBtnColors.border};border-radius:3px;color:${discordBtnColors.accent};font-size:16px;text-decoration:none;transition:all 0.2s ease;cursor:pointer;`;
+    discordIconBtn.style.cssText = `display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(${discordBtnColors.rgbString},0.07);border:1px solid ${discordBtnColors.border};border-radius:4px;color:${discordBtnColors.accent};font-size:14px;text-decoration:none;transition:all 0.15s;cursor:pointer;`;
     discordIconBtn.innerHTML = '<i class="fa-brands fa-discord"></i>';
     discordIconBtn.title = t("menu.discord", "Discord");
     discordIconBtn.onmouseover = function () {
       const c = getThemeColors();
       this.style.background = `rgba(${c.rgbString},0.18)`;
-      
-      
-      this.style.borderColor = c.accent;
+      this.style.borderColor = c.borderHover;
     };
     discordIconBtn.onmouseout = function () {
       const c = getThemeColors();
-      this.style.background = `rgba(${c.rgbString},0.08)`;
-      
-      
+      this.style.background = `rgba(${c.rgbString},0.07)`;
       this.style.borderColor = c.border;
     };
     iconButtons.appendChild(discordIconBtn);
@@ -3651,21 +3710,17 @@
     const closeIconBtn = document.createElement("a");
     closeIconBtn.href = "#";
     const closeBtnColors = getThemeColors();
-    closeIconBtn.style.cssText = `display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(${closeBtnColors.rgbString},0.08);border:1px solid ${closeBtnColors.border};border-radius:3px;color:${closeBtnColors.accent};font-size:16px;text-decoration:none;transition:all 0.2s ease;cursor:pointer;`;
+    closeIconBtn.style.cssText = `display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(${closeBtnColors.rgbString},0.07);border:1px solid ${closeBtnColors.border};border-radius:4px;color:${closeBtnColors.textSecondary};font-size:14px;text-decoration:none;transition:all 0.15s;cursor:pointer;`;
     closeIconBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
     closeIconBtn.title = t("settings.close", "Close");
     closeIconBtn.onmouseover = function () {
       const c = getThemeColors();
-      this.style.background = `rgba(${c.rgbString},0.18)`;
-      
-      
-      this.style.borderColor = c.accent;
+      this.style.background = `rgba(${c.rgbString},0.2)`;
+      this.style.borderColor = c.borderHover;
     };
     closeIconBtn.onmouseout = function () {
       const c = getThemeColors();
-      this.style.background = `rgba(${c.rgbString},0.08)`;
-      
-      
+      this.style.background = `rgba(${c.rgbString},0.07)`;
       this.style.borderColor = c.border;
     };
     iconButtons.appendChild(closeIconBtn);
@@ -3738,8 +3793,11 @@
     }
 
     const btnRow = document.createElement("div");
-    btnRow.style.cssText =
-      "padding:16px 24px 20px;display:flex;gap:10px;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);";
+    const btnRowColors = getThemeColors();
+    btnRow.style.cssText = `padding:14px 20px 16px;display:flex;gap:10px;justify-content:space-between;align-items:center;border-top:1px solid ${btnRowColors.borderRgba};background:rgba(${btnRowColors.rgbString},0.03);position:relative;`;
+    const btnRowGradLine = document.createElement("div");
+    btnRowGradLine.style.cssText = `position:absolute;top:0;left:0;right:0;height:1px;background:${btnRowColors.gradient};opacity:0.25;pointer-events:none;`;
+    btnRow.appendChild(btnRowGradLine);
 
     const backBtn = createSettingsButton(
       "back",
@@ -4101,18 +4159,26 @@
 
         const groupEl = document.createElement("div");
         const groupCardColors = getThemeColors();
-        groupEl.style.cssText = `background:rgba(${groupCardColors.rgbString},0.04);border:1px solid ${groupCardColors.border};border-radius:3px;padding:18px 20px;margin-bottom:16px;`;
+        groupEl.style.cssText = `background:rgba(${groupCardColors.rgbString},0.04);border:1px solid ${groupCardColors.border};border-left:2px solid ${groupCardColors.accent};border-radius:4px;padding:18px 20px;margin-bottom:14px;`;
         groupEl.dataset.settingGroup = group.key;
 
         const groupTitle = document.createElement("div");
         const titleText = t("settings." + group.key, group.label || group.key);
         if (group.key === "general") {
           const generalTitleColors = getThemeColors();
-          groupTitle.innerHTML = `<i class="fa-solid fa-gear" style="margin-right:10px;color:${generalTitleColors.textSecondary};font-size:20px;"></i>${titleText}`;
-          groupTitle.style.cssText = `font-size:19px;color:${generalTitleColors.text};margin-bottom:14px;font-weight:600;display:flex;align-items:center;`;
+          groupTitle.style.cssText = `font-size:14px;color:${generalTitleColors.text};margin-bottom:14px;font-weight:700;display:flex;align-items:center;gap:8px;letter-spacing:0.02em;`;
+          const gIcon = document.createElement("i");
+          gIcon.className = "fa-solid fa-gear";
+          gIcon.style.cssText = `font-size:15px;background:${generalTitleColors.gradient};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;`;
+          const gText = document.createElement("span");
+          gText.style.cssText = `background:${generalTitleColors.gradient};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;`;
+          gText.textContent = titleText;
+          groupTitle.appendChild(gIcon);
+          groupTitle.appendChild(gText);
         } else {
           const otherTitleColors = getThemeColors();
-          groupTitle.style.cssText = `font-size:15px;font-weight:600;color:${otherTitleColors.accent};margin-bottom:6px;`;
+          groupTitle.style.cssText = `font-size:13px;font-weight:700;margin-bottom:6px;letter-spacing:0.04em;text-transform:uppercase;background:${otherTitleColors.gradient};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;`;
+          groupTitle.textContent = titleText;
         }
         groupEl.appendChild(groupTitle);
 
@@ -6463,7 +6529,49 @@
     }
 
     // Store Header Button Logic (always visible)
-    const headerContainer = document.querySelector("._1wn1lBlAzl3HMRqS1llwie");
+    // Try multiple selectors — Steam CSS module hashes change with updates.
+    // The wishlist/cart/GreenVapor row is rendered by the React "store-menu-v7" feature target.
+    function findHeaderContainer() {
+      const candidates = [
+        "._1wn1lBlAzl3HMRqS1llwie",
+        "._3M2S9I3DZPBx_N38METsJX",
+        "[class*='store_header_user_action']",
+        "[class*='header_user_action']",
+        "[class*='GlobalHeader'] [class*='actions']",
+        "[class*='StorePageHeader'] [class*='actions']",
+      ];
+      for (let i = 0; i < candidates.length; i++) {
+        try { const el = document.querySelector(candidates[i]); if (el) return el; } catch(_) {}
+      }
+      // Structural fallbacks: find the container that holds wishlist/cart buttons.
+      // The store-menu-v7 React component renders these into responsive_store_nav_ctn
+      // or as a sibling of the StoreMenuLoadingPlaceholder.
+      const storeNavCtn = document.getElementById("responsive_store_nav_ctn");
+      if (storeNavCtn) {
+        // Try to find an inner actions div
+        const inner = storeNavCtn.querySelector("div > div") || storeNavCtn.firstElementChild;
+        if (inner && inner.children.length > 0) return inner;
+      }
+      // Try to find the rendered store-menu-v7 sibling (it replaces the placeholder)
+      const placeholder = document.querySelector("[data-featuretarget='store-menu-v7']");
+      if (placeholder) {
+        let next = placeholder.nextElementSibling;
+        while (next) {
+          if (next.id !== "responsive_store_nav_ctn" && next.children.length > 0) return next;
+          next = next.nextElementSibling;
+        }
+      }
+      // Last resort: parent of wishlist link
+      const wishlist = document.querySelector("a[href*='/wishlist/']:not([class*='submenu'])");
+      if (wishlist && wishlist.parentElement) return wishlist.parentElement;
+      return null;
+    }
+    // If button was removed from DOM by a React re-render, allow re-insertion
+    if (window.__LuaToolsHeaderInserted && !document.querySelector(".luatools-header-button")) {
+      window.__LuaToolsHeaderInserted = false;
+    }
+
+    const headerContainer = findHeaderContainer();
     if (
       headerContainer &&
       !document.querySelector(".luatools-header-button") &&
@@ -6477,29 +6585,26 @@
       headerBtn.title = "GreenVapor Settings";
       headerBtn.setAttribute("data-tooltip-text", "GreenVapor Settings");
 
-      const img = document.createElement("img");
-      img.style.height = "18px";
-      img.style.width = "18px";
-      img.style.verticalAlign = "middle";
+      const _gearSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GreenVapor"><path fill="currentColor" d="M12 8a4 4 0 100 8 4 4 0 000-8zm9.94 3.06l-2.12-.35a7.962 7.962 0 00-1.02-2.46l1.29-1.72a.75.75 0 00-.09-.97l-1.41-1.41a.75.75 0 00-.97-.09l-1.72 1.29c-.77-.44-1.6-.78-2.46-1.02L13.06 2.06A.75.75 0 0012.31 2h-1.62a.75.75 0 00-.75.65l-.35 2.12a7.962 7.962 0 00-2.46 1.02L5 4.6a.75.75 0 00-.97.09L2.62 6.1a.75.75 0 00-.09.97l1.29 1.72c-.44.77-.78 1.6-1.02 2.46l-2.12.35a.75.75 0 00-.65.75v1.62c0 .37.27.69.63.75l2.14.36c.24.86.58 1.69 1.02 2.46L2.53 18a.75.75 0 00.09.97l1.41 1.41c.26.26.67.29.97.09l1.72-1.29c.77.44 1.6.78 2.46 1.02l.35 2.12c.06.36.38.63.75.63h1.62c.37 0 .69-.27.75-.63l.36-2.14c.86-.24 1.69-.58 2.46-1.02l1.72 1.29c.3.2.71.17.97-.09l1.41-1.41c.26-.26.29-.67.09-.97l-1.29-1.72c.44-.77.78-1.6 1.02-2.46l2.12-.35c.36-.06.63-.38.63-.75v-1.62a.75.75 0 00-.65-.75z"/></svg>';
 
-      img.onerror = function () {
-        // cogwheel fallback
-        headerBtn.innerHTML =
-          '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GreenVapor"><path fill="currentColor" d="M12 8a4 4 0 100 8 4 4 0 000-8zm9.94 3.06l-2.12-.35a7.962 7.962 0 00-1.02-2.46l1.29-1.72a.75.75 0 00-.09-.97l-1.41-1.41a.75.75 0 00-.97-.09l-1.72 1.29c-.77-.44-1.6-.78-2.46-1.02L13.06 2.06A.75.75 0 0012.31 2h-1.62a.75.75 0 00-.75.65l-.35 2.12a7.962 7.962 0 00-2.46 1.02L5 4.6a.75.75 0 00-.97.09L2.62 6.1a.75.75 0 00-.09.97l1.29 1.72c-.44.77-.78 1.6-1.02 2.46l-2.12.35a.75.75 0 00-.65.75v1.62c0 .37.27.69.63.75l2.14.36c.24.86.58 1.69 1.02 2.46L2.53 18a.75.75 0 00.09.97l1.41 1.41c.26.26.67.29.97.09l1.72-1.29c.77.44 1.6.78 2.46 1.02l.35 2.12c.06.36.38.63.75.63h1.62c.37 0 .69-.27.75-.63l.36-2.14c.86-.24 1.69-.58 2.46-1.02l1.72 1.29c.3.2.71.17.97-.09l1.41-1.41c.26-.26.29-.67.09-.97l-1.29-1.72c.44-.77.78-1.6 1.02-2.46l2.12-.35c.36-.06.63-.38.63-.75v-1.62a.75.75 0 00-.65-.75z"/></svg>';
-      };
+      // Start with gear as placeholder; replace with real icon when IPC resolves
+      headerBtn.innerHTML = _gearSvg;
 
-      img.src = "GreenVapor/greenvapor-icon.png";
-
-      Millennium.callServerMethod("greenvapor", "GetIconDataUrl", {})
+      Millennium.callServerMethod("greenvapor", "GetIconDataUrl", { contentScriptQuery: "" })
         .then(function (res) {
-          const payload = typeof res === "string" ? JSON.parse(res) : res;
-          if (payload && payload.success && payload.dataUrl) {
-            img.src = payload.dataUrl;
-          }
+          try {
+            const payload = typeof res === "string" ? JSON.parse(res) : res;
+            if (payload && payload.success && payload.dataUrl && payload.dataUrl.length > 50) {
+              const img = document.createElement("img");
+              img.style.cssText = "height:18px;width:18px;vertical-align:middle;";
+              img.src = payload.dataUrl;
+              img.onerror = function() { headerBtn.innerHTML = _gearSvg; };
+              headerBtn.innerHTML = "";
+              headerBtn.appendChild(img);
+            }
+          } catch(_) {}
         })
         .catch(function () {});
-
-      headerBtn.appendChild(img);
 
       headerBtn.onclick = function (e) {
         e.preventDefault();
@@ -6699,6 +6804,9 @@
                   }
                   window.__LuaToolsButtonInserted = true;
                   backendLog("GreenVapor button inserted");
+                  ensureTranslationsLoaded(false).then(function () {
+                    updateButtonTranslations();
+                  });
                 }
                 window.__LuaToolsPresenceCheckInFlight = false;
               } catch (_) {
@@ -6709,6 +6817,9 @@
                   steamdbContainer.appendChild(luatoolsButton);
                   window.__LuaToolsButtonInserted = true;
                   backendLog("GreenVapor button inserted");
+                  ensureTranslationsLoaded(false).then(function () {
+                    updateButtonTranslations();
+                  });
                 }
                 window.__LuaToolsPresenceCheckInFlight = false;
               }
@@ -6731,6 +6842,9 @@
               }
               window.__LuaToolsButtonInserted = true;
               backendLog("GreenVapor button inserted");
+              ensureTranslationsLoaded(false).then(function () {
+                updateButtonTranslations();
+              });
             }
           }
         } catch (_) {
@@ -6750,6 +6864,9 @@
             }
             window.__LuaToolsButtonInserted = true;
             backendLog("GreenVapor button inserted");
+            ensureTranslationsLoaded(false).then(function () {
+              updateButtonTranslations();
+            });
           }
         }
       }
@@ -6771,50 +6888,56 @@
             // Always enter the fetch path — badges are independent of the GreenVapor button.
             // The inner cacheKey guard prevents redundant DOM updates.
             fetchGamesDatabase().then(function (db) {
-                let pillsContainer = steamdbContainer.querySelector(
-                  ".luatools-pills-container",
-                );
+                // Remove old steamdb pills (moved to breadcrumb)
+                const oldPills = steamdbContainer.querySelector(".luatools-pills-container");
+                if (oldPills) oldPills.remove();
 
-                if (!pillsContainer) {
-                  pillsContainer = document.createElement("div");
-                  pillsContainer.className = "luatools-pills-container";
-                  // Try to insert after GreenVapor button, fallback to appending to container
-                  const gvBtn = steamdbContainer.querySelector(".luatools-button");
-                  if (gvBtn) {
-                    gvBtn.after(pillsContainer);
-                  } else {
-                    steamdbContainer.appendChild(pillsContainer);
-                  }
+                // Find breadcrumb bar — target for right-aligned badges
+                function findBreadcrumb() {
+                  return document.querySelector(".breadcrumbs .blockbg") ||
+                         document.querySelector(".breadcrumbs") ||
+                         document.querySelector("#breadcrumbs_wrapper") ||
+                         document.querySelector("[class*='breadcrumb']");
                 }
-                pillsContainer.dataset.appid = String(appid);
+                const bc = findBreadcrumb();
+                if (!bc) return;
+
+                // Make breadcrumb flex so we can push badges to the right
+                if (!bc.dataset.gvFlex) {
+                  bc.style.display = "flex";
+                  bc.style.alignItems = "center";
+                  bc.style.flexWrap = "nowrap";
+                  bc.dataset.gvFlex = "1";
+                }
+
+                let badgesEl = bc.querySelector(".luatools-bc-badges");
+                if (!badgesEl) {
+                  badgesEl = document.createElement("div");
+                  badgesEl.className = "luatools-bc-badges";
+                  badgesEl.style.cssText = "display:flex;gap:4px;align-items:center;margin-left:auto;padding-left:12px;flex-shrink:0;";
+                  bc.appendChild(badgesEl);
+                }
+
+                if (badgesEl.dataset.appid === String(appid) && badgesEl.dataset.content) return;
+                badgesEl.dataset.appid = String(appid);
 
                 const key = String(appid);
                 const gameData = db && db.apps && db.apps[key] ? db.apps[key] : null;
 
-                // check denuvo
                 const drmNotice = document.querySelector(".DRM_notice");
-                const hasDenuvo =
-                  drmNotice && drmNotice.textContent.includes("Denuvo");
+                const hasDenuvo = drmNotice && drmNotice.textContent.includes("Denuvo");
 
                 fetchFixes(appid).then(function (fixesData) {
                   const hasFixes =
                     fixesData &&
-                    ((fixesData.genericFix &&
-                      fixesData.genericFix.status === 200) ||
-                      (fixesData.onlineFix &&
-                        fixesData.onlineFix.status === 200));
+                    ((fixesData.genericFix && fixesData.genericFix.status === 200) ||
+                     (fixesData.onlineFix  && fixesData.onlineFix.status === 200));
                   const showDenuvoPill = hasDenuvo && !hasFixes;
 
-                  const cacheKey = JSON.stringify({
-                    d: gameData || "untested",
-                    showDenuvo: showDenuvoPill,
-                    hasFixes: hasFixes,
-                  });
-
-                  if (pillsContainer.dataset.content === cacheKey) return;
-                  pillsContainer.dataset.content = cacheKey;
-
-                  pillsContainer.innerHTML = "";
+                  const cacheKey = JSON.stringify({ d: gameData || "untested", showDenuvo: showDenuvoPill, hasFixes: hasFixes });
+                  if (badgesEl.dataset.content === cacheKey) return;
+                  badgesEl.dataset.content = cacheKey;
+                  badgesEl.innerHTML = "";
 
                   let status = "untested";
                   if (gameData && typeof gameData.playable !== "undefined") {
@@ -6822,51 +6945,32 @@
                     else if (gameData.playable === 0) status = "unplayable";
                     else if (gameData.playable === 2) status = "needs_fixes";
                   }
-
-                  if (status === "untested" && hasFixes) {
-                    status = "needs_fixes";
-                  }
+                  if (status === "untested" && hasFixes) status = "needs_fixes";
 
                   if (status !== "untested") {
                     const pill = document.createElement("span");
                     pill.className = "luatools-pill";
-                    if (status === "playable") {
-                      pill.classList.add("green");
-                      pill.textContent = t("gameStatus.playable", "Playable");
-                    } else if (status === "unplayable") {
-                      pill.classList.add("red");
-                      pill.textContent = t(
-                        "gameStatus.unplayable",
-                        "Unplayable",
-                      );
-                    } else if (status === "needs_fixes") {
-                      pill.classList.add("yellow");
-                      pill.textContent = t(
-                        "gameStatus.needsFixes",
-                        "Needs fixes",
-                      );
-                    }
-                    pillsContainer.appendChild(pill);
-                  }
-
-                  // reset button state
-                  const btn =
-                    steamdbContainer.querySelector(".luatools-button");
-                  if (btn) {
-                    btn.style.opacity = "";
-                    btn.style.pointerEvents = "";
-                    btn.style.cursor = "";
-                    const span = btn.querySelector("span");
-                    if (span && span.textContent === "Unplayable") {
-                      span.textContent = lt("Add via GreenVapor");
-                    }
+                    if (status === "playable") { pill.classList.add("green"); pill.textContent = t("gameStatus.playable", "Playable"); }
+                    else if (status === "unplayable") { pill.classList.add("red"); pill.textContent = t("gameStatus.unplayable", "Unplayable"); }
+                    else if (status === "needs_fixes") { pill.classList.add("yellow"); pill.textContent = t("gameStatus.needsFixes", "Fix disponível"); }
+                    badgesEl.appendChild(pill);
                   }
 
                   if (showDenuvoPill) {
                     const pill = document.createElement("span");
                     pill.className = "luatools-pill orange";
                     pill.textContent = t("gameStatus.denuvo", "Denuvo");
-                    pillsContainer.appendChild(pill);
+                    badgesEl.appendChild(pill);
+                  }
+
+                  // reset steamdb button state
+                  const btn = steamdbContainer.querySelector(".luatools-button");
+                  if (btn) {
+                    btn.style.opacity = "";
+                    btn.style.pointerEvents = "";
+                    btn.style.cursor = "";
+                    const span = btn.querySelector("span");
+                    if (span && span.textContent === "Unplayable") span.textContent = lt("Add via GreenVapor");
                   }
                 });
               });
@@ -8073,26 +8177,107 @@
 
     const colors = getThemeColors();
     const modal = document.createElement("div");
-    modal.style.cssText = `background:${colors.modalBg};color:${colors.text};border:2px solid ${colors.border};border-radius:3px;width:620px;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.8);animation:slideUp 0.1s ease-out;`;
+    modal.style.cssText = `background:${colors.modalBg};color:${colors.text};border:1px solid ${colors.border};border-top:2px solid ${colors.accent};border-radius:6px;width:640px;max-height:82vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.8),0 0 20px rgba(${colors.rgbString},0.07);animation:slideUp 0.1s ease-out;overflow:hidden;`;
 
     // Header
     const header = document.createElement("div");
-    header.style.cssText = `display:flex;align-items:center;justify-content:space-between;padding:20px 24px 14px;border-bottom:1px solid ${colors.border};flex-shrink:0;`;
+    header.style.cssText = `display:flex;align-items:center;justify-content:space-between;padding:13px 18px 12px;border-bottom:1px solid ${colors.borderRgba};background:rgba(${colors.rgbString},0.04);flex-shrink:0;position:relative;overflow:hidden;`;
+    const hGrad = document.createElement("div");
+    hGrad.style.cssText = `position:absolute;bottom:0;left:0;right:0;height:1px;background:${colors.gradient};opacity:0.4;pointer-events:none;`;
+    header.appendChild(hGrad);
+
     const titleEl = document.createElement("div");
-    titleEl.style.cssText = `font-size:18px;font-weight:700;color:${colors.text};display:flex;align-items:center;gap:10px;`;
-    titleEl.innerHTML = `<i class="fa-solid fa-gamepad" style="color:${colors.accent};"></i><span>${t("menu.library", "Library")}</span>`;
+    titleEl.style.cssText = "display:flex;align-items:center;gap:10px;position:relative;z-index:1;";
+    const titleImg = document.createElement("img");
+    titleImg.src = "GreenVapor/greenvapor-icon.png";
+    titleImg.style.cssText = `width:30px;height:30px;border-radius:5px;box-shadow:0 0 10px ${colors.shadow};flex-shrink:0;`;
+    titleImg.onerror = function() { this.style.display = "none"; };
+    try {
+      Millennium.callServerMethod("greenvapor", "GetIconDataUrl", { contentScriptQuery: "" }).then(function(res) {
+        try {
+          const p = typeof res === "string" ? JSON.parse(res) : res;
+          titleImg.src = (p && p.success && p.dataUrl) ? p.dataUrl : "GreenVapor/greenvapor-icon.png";
+        } catch(_) {}
+      });
+    } catch(_) {}
+    const titleTextEl = document.createElement("div");
+    titleTextEl.style.cssText = `font-size:14px;font-weight:700;color:${colors.text};line-height:1.2;`;
+    titleTextEl.textContent = "GreenVapor";
+    const subtitleEl = document.createElement("div");
+    subtitleEl.style.cssText = `font-size:11px;color:${colors.textSecondary};margin-top:2px;`;
+    subtitleEl.textContent = t("menu.library", "Biblioteca");
+    const titleStack = document.createElement("div");
+    titleStack.appendChild(titleTextEl);
+    titleStack.appendChild(subtitleEl);
+    titleEl.appendChild(titleImg);
+    titleEl.appendChild(titleStack);
+
+    const headerRight = document.createElement("div");
+    headerRight.style.cssText = "display:flex;align-items:center;gap:6px;position:relative;z-index:1;";
+
+    // View and sort state
+    let currentView = "grid";
+    let currentSort = "alpha";
+    let _originalOrder = {};
+    try { currentView = localStorage.getItem("gv_library_view") || "grid"; } catch(_) {}
+    try { currentSort = localStorage.getItem("gv_library_sort") || "alpha"; } catch(_) {}
+
+    function makeToggleBtn(icon, activeCheck, title) {
+      const btn = document.createElement("a");
+      btn.href = "#";
+      btn.title = title;
+      btn.style.cssText = `display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:4px;font-size:13px;text-decoration:none;transition:all 0.15s;border:1px solid ${colors.border};`;
+      btn.innerHTML = `<i class="${icon}"></i>`;
+      function update() {
+        const active = activeCheck();
+        btn.style.background = active ? `rgba(${colors.rgbString},0.18)` : `rgba(${colors.rgbString},0.07)`;
+        btn.style.color = active ? colors.accent : colors.textSecondary;
+        btn.style.borderColor = active ? colors.accent : colors.border;
+      }
+      update();
+      btn._update = update;
+      return btn;
+    }
+
+    const gridBtn = makeToggleBtn("fa-solid fa-grip", function() { return currentView === "grid"; }, t("menu.library.gridView", "Grade"));
+    const listBtn = makeToggleBtn("fa-solid fa-list", function() { return currentView === "list"; }, t("menu.library.listView", "Lista"));
+    const sortAlphaBtn = makeToggleBtn("fa-solid fa-arrow-down-a-z", function() { return currentSort === "alpha"; }, t("menu.library.sortAlpha", "Ordem A→Z"));
+    const sortDateBtn  = makeToggleBtn("fa-solid fa-clock-rotate-left", function() { return currentSort === "date"; }, t("menu.library.sortDate", "Ordem de inserção"));
+
+    function updateSortBtns() { sortAlphaBtn._update(); sortDateBtn._update(); }
+    function updateViewBtns() { gridBtn._update(); listBtn._update(); }
+
+    // Separator between groups
+    const sep = document.createElement("div");
+    sep.style.cssText = `width:1px;height:18px;background:${colors.border};margin:0 2px;flex-shrink:0;`;
+
     const closeBtn = document.createElement("a");
     closeBtn.href = "#";
-    closeBtn.style.cssText = `color:${colors.textSecondary};font-size:18px;text-decoration:none;line-height:1;`;
+    closeBtn.style.cssText = `display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(${colors.rgbString},0.07);border:1px solid ${colors.border};border-radius:4px;color:${colors.textSecondary};font-size:14px;text-decoration:none;transition:all 0.15s;`;
     closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    closeBtn.onmouseover = function() { const c=getThemeColors(); this.style.background=`rgba(${c.rgbString},0.2)`; this.style.borderColor=c.borderHover; };
+    closeBtn.onmouseout  = function() { const c=getThemeColors(); this.style.background=`rgba(${c.rgbString},0.07)`; this.style.borderColor=c.border; };
     closeBtn.onclick = function(e) { e.preventDefault(); overlay.remove(); };
+
+    headerRight.appendChild(sortAlphaBtn);
+    headerRight.appendChild(sortDateBtn);
+    headerRight.appendChild(sep);
+    headerRight.appendChild(gridBtn);
+    headerRight.appendChild(listBtn);
+    headerRight.appendChild(closeBtn);
     header.appendChild(titleEl);
-    header.appendChild(closeBtn);
+    header.appendChild(headerRight);
     modal.appendChild(header);
+
+    // Counter bar
+    const counterBar = document.createElement("div");
+    counterBar.style.cssText = `padding:6px 18px;font-size:10px;color:${colors.textSecondary};border-bottom:1px solid rgba(255,255,255,0.04);background:rgba(${colors.rgbString},0.03);flex-shrink:0;letter-spacing:0.02em;`;
+    counterBar.textContent = " ";
+    modal.appendChild(counterBar);
 
     // Content
     const content = document.createElement("div");
-    content.style.cssText = "flex:1;overflow-y:auto;padding:16px 24px;";
+    content.style.cssText = "flex:1;overflow-y:auto;padding:14px 16px;";
 
     const loading = document.createElement("div");
     loading.style.cssText = `text-align:center;padding:32px;color:${colors.textSecondary};font-size:13px;`;
@@ -8102,140 +8287,246 @@
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
 
-    overlay.addEventListener("click", function(e) {
-      if (e.target === overlay) overlay.remove();
-    });
+    overlay.addEventListener("click", function(e) { if (e.target === overlay) overlay.remove(); });
+
+    // ── helpers ──────────────────────────────────────────────────────────────
+    function buildImgElement(appid, wrapCss, imgCss, fallbackIconSize) {
+      const wrap = document.createElement("div");
+      wrap.style.cssText = wrapCss;
+      const img = document.createElement("img");
+      img.style.cssText = imgCss;
+      const urls = [
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/header.jpg",
+        "https://cdn.akamai.steamstatic.com/steam/apps/" + appid + "/header.jpg",
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_616x353.jpg",
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_231x87.jpg",
+      ];
+      let idx = 0;
+      function showIcon() {
+        img.remove();
+        wrap.style.cssText += "display:flex;align-items:center;justify-content:center;";
+        const ico = document.createElement("i");
+        ico.className = "fa-solid fa-gamepad";
+        ico.style.cssText = `font-size:${fallbackIconSize};color:${colors.textSecondary};opacity:0.4;`;
+        wrap.appendChild(ico);
+      }
+      img.src = urls[idx];
+      img.onerror = function() {
+        idx++;
+        if (idx < urls.length) { img.src = urls[idx]; return; }
+        fetchSteamHeaderImage(appid).then(function(url) {
+          if (url) { img.onerror = showIcon; img.src = url; }
+          else showIcon();
+        }).catch(showIcon);
+      };
+      wrap.appendChild(img);
+      return wrap;
+    }
+
+    function makeDeleteBtn(appid, onDeleted) {
+      const btn = document.createElement("a");
+      btn.href = "#";
+      btn.style.cssText = `display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(229,115,115,0.08);border:1px solid rgba(229,115,115,0.25);border-radius:3px;color:#e57373;font-size:12px;text-decoration:none;transition:all 0.15s;flex-shrink:0;`;
+      btn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+      btn.title = t("Delete", "Deletar");
+      btn.onmouseover = function() { this.style.background="rgba(229,115,115,0.2)"; this.style.borderColor="#e57373"; };
+      btn.onmouseout  = function() { this.style.background="rgba(229,115,115,0.08)"; this.style.borderColor="rgba(229,115,115,0.25)"; };
+      btn.onclick = function(e) {
+        e.preventDefault();
+        showLuaToolsConfirm("GreenVapor", t("Are you sure?", "Tem certeza?"), function() {
+          Millennium.callServerMethod("greenvapor", "DeleteLuaToolsForApp", {
+            appid: String(appid), contentScriptQuery: "",
+          }).then(function() { onDeleted(); }).catch(function(){});
+        }, function(){});
+      };
+      return btn;
+    }
+
+    // ── render functions ──────────────────────────────────────────────────────
+    function renderGrid(apps) {
+      const grid = document.createElement("div");
+      grid.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px;";
+      const namePromises = [];
+
+      apps.forEach(function(item) {
+        const appid = item.appid || item;
+        let name = item.gameName && !item.gameName.startsWith("Unknown") ? item.gameName : ("App " + appid);
+        const card = document.createElement("div");
+        card.dataset.appid = String(appid);
+        card.dataset.sortname = name;
+        card.style.cssText = `background:${colors.bgContainer};border:1px solid ${colors.border};border-radius:6px;overflow:hidden;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;cursor:default;`;
+        card.onmouseover = function() { card.style.borderColor=colors.accent; card.style.transform="translateY(-2px)"; card.style.boxShadow=`0 4px 20px rgba(${colors.rgbString},0.2)`; };
+        card.onmouseout  = function() { card.style.borderColor=colors.border; card.style.transform=""; card.style.boxShadow=""; };
+
+        card.appendChild(buildImgElement(appid, "position:relative;width:100%;aspect-ratio:460/215;background:#111;", "width:100%;height:100%;object-fit:cover;display:block;", "28px"));
+
+        const foot = document.createElement("div");
+        foot.style.cssText = `display:flex;align-items:center;justify-content:space-between;padding:7px 10px;gap:6px;background:rgba(${colors.rgbString},0.06);border-top:1px solid ${colors.borderRgba};`;
+        const nameEl = document.createElement("span");
+        nameEl.textContent = name;
+        nameEl.style.cssText = `font-size:11px;color:${colors.text};font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;`;
+        nameEl.title = name;
+
+        if (!item.gameName || item.gameName.startsWith("Unknown")) {
+          namePromises.push(fetchSteamGameName(appid).then(function(r) { if (r) { nameEl.textContent=r; nameEl.title=r; card.dataset.sortname=r; } }));
+        } else {
+          namePromises.push(Promise.resolve());
+        }
+
+        foot.appendChild(nameEl);
+        foot.appendChild(makeDeleteBtn(appid, function() {
+          card.remove();
+          checkEmpty();
+          updateCounter(grid);
+        }));
+        card.appendChild(foot);
+        grid.appendChild(card);
+      });
+
+      content.appendChild(grid);
+
+      Promise.all(namePromises).then(function() { applySortToContainer(grid); });
+    }
+
+    function renderList(apps) {
+      const list = document.createElement("div");
+      list.style.cssText = "display:flex;flex-direction:column;gap:6px;";
+      const namePromises = [];
+
+      apps.forEach(function(item) {
+        const appid = item.appid || item;
+        let name = item.gameName && !item.gameName.startsWith("Unknown") ? item.gameName : ("App " + appid);
+        const scriptCount = Array.isArray(item.scripts) ? item.scripts.length : (item.scriptCount || 1);
+
+        const row = document.createElement("div");
+        row.dataset.appid = String(appid);
+        row.dataset.sortname = name;
+        row.style.cssText = `display:flex;align-items:center;gap:12px;padding:8px 10px;background:rgba(${colors.rgbString},0.04);border:1px solid ${colors.border};border-radius:4px;transition:border-color 0.15s,background 0.15s;`;
+        row.onmouseover = function() { row.style.borderColor=colors.accent; row.style.background=`rgba(${colors.rgbString},0.09)`; };
+        row.onmouseout  = function() { row.style.borderColor=colors.border; row.style.background=`rgba(${colors.rgbString},0.04)`; };
+
+        row.appendChild(buildImgElement(appid, "width:72px;height:34px;border-radius:3px;overflow:hidden;flex-shrink:0;background:#111;", "width:100%;height:100%;object-fit:cover;display:block;", "14px"));
+
+        const nameEl = document.createElement("div");
+        nameEl.textContent = name;
+        nameEl.title = name;
+        nameEl.style.cssText = `flex:1;font-size:13px;font-weight:500;color:${colors.text};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;`;
+
+        if (!item.gameName || item.gameName.startsWith("Unknown")) {
+          namePromises.push(fetchSteamGameName(appid).then(function(r) { if (r) { nameEl.textContent=r; nameEl.title=r; row.dataset.sortname=r; } }));
+        } else {
+          namePromises.push(Promise.resolve());
+        }
+
+        const badge = document.createElement("div");
+        badge.textContent = scriptCount + " " + (scriptCount === 1 ? t("menu.library.script", "script") : t("menu.library.scripts", "scripts"));
+        badge.style.cssText = `font-size:10px;color:${colors.textSecondary};background:rgba(${colors.rgbString},0.08);border:1px solid ${colors.border};border-radius:10px;padding:2px 8px;white-space:nowrap;flex-shrink:0;`;
+
+        row.appendChild(nameEl);
+        row.appendChild(badge);
+        row.appendChild(makeDeleteBtn(appid, function() {
+          row.remove();
+          checkEmpty();
+          updateCounter(list);
+        }));
+        list.appendChild(row);
+      });
+
+      content.appendChild(list);
+
+      Promise.all(namePromises).then(function() { applySortToContainer(list); });
+    }
+
+    function checkEmpty() {
+      const items = content.querySelectorAll("[data-appid]");
+      if (items.length === 0) {
+        content.innerHTML = "";
+        const empty = document.createElement("div");
+        empty.style.cssText = `text-align:center;padding:40px;color:${colors.textSecondary};font-size:13px;`;
+        empty.innerHTML = `<i class="fa-solid fa-gamepad" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>${t("menu.library.empty", "Nenhum jogo com scripts instalados.")}`;
+        content.appendChild(empty);
+        counterBar.textContent = " ";
+      }
+    }
+
+    function updateCounter(container) {
+      const n = container ? container.querySelectorAll("[data-appid]").length : 0;
+      if (n > 0) counterBar.textContent = n + " " + (n === 1 ? t("menu.library.game", "jogo") : t("menu.library.games", "jogos")) + " " + t("menu.library.withScripts", "com scripts instalados");
+    }
+
+    function renderView(apps) {
+      content.innerHTML = "";
+      if (apps.length === 0) { checkEmpty(); return; }
+      updateCounter({ querySelectorAll: function() { return apps; } });
+      counterBar.textContent = apps.length + " " + (apps.length === 1 ? t("menu.library.game", "jogo") : t("menu.library.games", "jogos")) + " " + t("menu.library.withScripts", "com scripts instalados");
+      if (currentView === "list") renderList(apps);
+      else renderGrid(apps);
+    }
+
+    let _loadedApps = null;
+
+    function applySortToContainer(container) {
+      const items = Array.from(container.children);
+      if (currentSort === "alpha") {
+        items.sort(function(a, b) {
+          return (a.dataset.sortname || "").localeCompare(b.dataset.sortname || "", undefined, { sensitivity: "base" });
+        });
+      } else {
+        items.sort(function(a, b) {
+          return (_originalOrder[a.dataset.appid] || 0) - (_originalOrder[b.dataset.appid] || 0);
+        });
+      }
+      items.forEach(function(el) { container.appendChild(el); });
+    }
+
+    gridBtn.onclick = function(e) {
+      e.preventDefault();
+      if (currentView === "grid") return;
+      currentView = "grid";
+      try { localStorage.setItem("gv_library_view", "grid"); } catch(_) {}
+      updateViewBtns();
+      if (_loadedApps) renderView(_loadedApps);
+    };
+    listBtn.onclick = function(e) {
+      e.preventDefault();
+      if (currentView === "list") return;
+      currentView = "list";
+      try { localStorage.setItem("gv_library_view", "list"); } catch(_) {}
+      updateViewBtns();
+      if (_loadedApps) renderView(_loadedApps);
+    };
+    sortAlphaBtn.onclick = function(e) {
+      e.preventDefault();
+      if (currentSort === "alpha") return;
+      currentSort = "alpha";
+      try { localStorage.setItem("gv_library_sort", "alpha"); } catch(_) {}
+      updateSortBtns();
+      const container = content.querySelector("[data-appid]") && content.firstChild;
+      if (container) applySortToContainer(container);
+    };
+    sortDateBtn.onclick = function(e) {
+      e.preventDefault();
+      if (currentSort === "date") return;
+      currentSort = "date";
+      try { localStorage.setItem("gv_library_sort", "date"); } catch(_) {}
+      updateSortBtns();
+      const container = content.querySelector("[data-appid]") && content.firstChild;
+      if (container) applySortToContainer(container);
+    };
 
     Millennium.callServerMethod("greenvapor", "GetInstalledLuaScripts", { contentScriptQuery: "" })
       .then(function(res) {
         try {
           const payload = typeof res === "string" ? JSON.parse(res) : res;
-          const apps = (payload && Array.isArray(payload.scripts)) ? payload.scripts : [];
-          content.innerHTML = "";
-
-          if (apps.length === 0) {
-            const empty = document.createElement("div");
-            empty.style.cssText = `text-align:center;padding:32px;color:${colors.textSecondary};font-size:13px;`;
-            empty.innerHTML = `<i class="fa-solid fa-gamepad" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>${t("menu.library.empty", "No games with scripts installed.")}`;
-            content.appendChild(empty);
-            return;
-          }
-
-          const grid = document.createElement("div");
-          grid.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;";
-
-          const namePromises = [];
-
-          apps.forEach(function(item) {
-            const appid = item.appid || item;
-            const name  = item.gameName && !item.gameName.startsWith("Unknown") ? item.gameName : ("App " + appid);
-            const card  = document.createElement("div");
-            card.style.cssText = `background:${colors.bgContainer};border:1px solid ${colors.border};border-radius:3px;overflow:hidden;transition:border-color 0.15s;cursor:default;`;
-            card.onmouseover = function() { card.style.borderColor = colors.accent; };
-            card.onmouseout  = function() { card.style.borderColor = colors.border; };
-
-            // Game image — try multiple Steam CDN formats in sequence
-            const imgWrap = document.createElement("div");
-            imgWrap.style.cssText = "position:relative;width:100%;aspect-ratio:460/215;background:#111;";
-            const img = document.createElement("img");
-            img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;";
-            const imgUrls = [
-              "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/header.jpg",
-              "https://cdn.akamai.steamstatic.com/steam/apps/" + appid + "/header.jpg",
-              "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_616x353.jpg",
-              "https://cdn.cloudflare.steamstatic.com/steam/apps/" + appid + "/capsule_231x87.jpg",
-            ];
-            let imgUrlIdx = 0;
-            function _showGamepadIcon() {
-              imgWrap.style.cssText += "display:flex;align-items:center;justify-content:center;";
-              img.remove();
-              const ico = document.createElement("i");
-              ico.className = "fa-solid fa-gamepad";
-              ico.style.cssText = `font-size:28px;color:${colors.textSecondary};opacity:0.4;`;
-              imgWrap.appendChild(ico);
-            }
-            img.src = imgUrls[imgUrlIdx];
-            img.onerror = function() {
-              imgUrlIdx++;
-              if (imgUrlIdx < imgUrls.length) {
-                img.src = imgUrls[imgUrlIdx];
-                return;
-              }
-              // All static CDN URLs failed — fetch hash-based URL from Steam API
-              fetchSteamHeaderImage(appid).then(function(apiUrl) {
-                if (apiUrl) {
-                  img.onerror = _showGamepadIcon;
-                  img.src = apiUrl;
-                } else {
-                  _showGamepadIcon();
-                }
-              }).catch(_showGamepadIcon);
-            };
-            imgWrap.appendChild(img);
-            card.appendChild(imgWrap);
-
-            // Name + delete
-            const footer = document.createElement("div");
-            footer.style.cssText = "display:flex;align-items:center;justify-content:space-between;padding:8px 10px;gap:6px;";
-            const nameEl = document.createElement("span");
-            nameEl.textContent = name;
-            nameEl.style.cssText = `font-size:11px;color:${colors.text};font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;`;
-            nameEl.title = name;
-
-            if (!item.gameName || item.gameName.startsWith("Unknown")) {
-              namePromises.push(fetchSteamGameName(appid).then(function(resolved) {
-                if (resolved) { nameEl.textContent = resolved; nameEl.title = resolved; }
-              }));
-            } else {
-              namePromises.push(Promise.resolve());
-            }
-
-            const delBtn = document.createElement("a");
-            delBtn.href = "#";
-            delBtn.style.cssText = "color:#e57373;font-size:13px;text-decoration:none;flex-shrink:0;";
-            delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
-            delBtn.title = t("Delete", "Delete");
-            delBtn.onclick = function(e) {
-              e.preventDefault();
-              showLuaToolsConfirm("GreenVapor", t("Are you sure?", "Are you sure?"), function() {
-                Millennium.callServerMethod("greenvapor", "DeleteLuaToolsForApp", {
-                  appid: String(appid),
-                  contentScriptQuery: "",
-                }).then(function() {
-                  card.remove();
-                  if (grid.children.length === 0) {
-                    content.innerHTML = "";
-                    const empty = document.createElement("div");
-                    empty.style.cssText = `text-align:center;padding:32px;color:${colors.textSecondary};font-size:13px;`;
-                    empty.innerHTML = `<i class="fa-solid fa-gamepad" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>${t("menu.library.empty", "No games with scripts installed.")}`;
-                    content.appendChild(empty);
-                  }
-                }).catch(function(){});
-              }, function(){});
-            };
-
-            footer.appendChild(nameEl);
-            footer.appendChild(delBtn);
-            card.appendChild(footer);
-            grid.appendChild(card);
+          _loadedApps = (payload && Array.isArray(payload.scripts)) ? payload.scripts : [];
+          _loadedApps.forEach(function(item, i) {
+            _originalOrder[String(item.appid || item)] = i;
           });
-
-          content.appendChild(grid);
-
-          // Re-sort cards alphabetically once all game names have resolved
-          Promise.all(namePromises).then(function() {
-            const cards = Array.from(grid.children);
-            cards.sort(function(a, b) {
-              const na = (a.querySelector("span") || {}).textContent || "";
-              const nb = (b.querySelector("span") || {}).textContent || "";
-              return na.localeCompare(nb, undefined, { sensitivity: "base" });
-            });
-            cards.forEach(function(c) { grid.appendChild(c); });
-          });
+          renderView(_loadedApps);
         } catch(_) {}
       })
       .catch(function() {
-        content.innerHTML = `<div style="text-align:center;padding:32px;color:#e57373;font-size:13px;">${t("menu.library.error", "Failed to load library.")}</div>`;
+        content.innerHTML = `<div style="text-align:center;padding:32px;color:#e57373;font-size:13px;">${t("menu.library.error", "Falha ao carregar biblioteca.")}</div>`;
       });
   }
 
