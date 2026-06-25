@@ -221,48 +221,23 @@ function fixes.apply_game_fix(appid, download_url, install_path, fix_type, game_
     logger.log("GreenVapor: ApplyGameFix appid=" .. tostring(appid) .. " type=" .. tostring(fix_type))
     m_utils.write_file(state_file, '{"status":"downloading"}')
 
-    local is_win = (m_utils.getenv("OS") or ""):find("Windows") ~= nil
-    if is_win then
-        local ps1 = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.ps1")
-
-        -- Use backslashes for all paths so PowerShell and wscript.exe accept them unambiguously
-        local function to_win(p) return (p or ""):gsub("/", "\\") end
-        local ps1_win      = to_win(ps1)
-        local dest_zip_win = to_win(dest_zip)
-        local state_win    = to_win(state_file)
-        local install_win  = to_win(install_path)
-
-        local runner_path = dest_root .. "\\fix_runner_" .. tostring(appid) .. ".ps1"
-        local runner_content = string.format(
-            '& "%s" -Url "%s" -DestPath "%s" -ExtractDir "%s" -StateFile "%s"',
-            ps1_win, download_url, dest_zip_win, install_win, state_win
+    local is_windows = m_utils.getenv("OS") == "Windows_NT"
+    if is_windows then
+        local cmd = string.format(
+            'cmd.exe /C start "GreenVapor Downloader" cmd.exe /C "color 0B && echo GreenVapor is downloading the requested files... && echo Please keep this window open until it closes automatically. && echo. && (echo {"status": "downloading"} > "%s" && curl.exe -# -L -A "discord(dot)gg/greenvapor" "%s" -o "%s" && echo {"status": "extracting"} > "%s" && echo. && echo Extracting files... && tar.exe -xf "%s" -C "%s" && echo {"status": "extracted"} > "%s") || (echo. && echo ERROR: Download or extraction failed! && echo {"status": "failed"} > "%s" && timeout /t 5)"',
+            state_file, download_url, dest_zip, state_file, dest_zip, install_path, state_file, state_file
         )
-        m_utils.write_file(runner_path, runner_content)
-        PENDING_FIX_INFO[appid].runnerPath = runner_path
-
-        -- Launch via wscript.exe (graphical host) so Windows Terminal cannot intercept it.
-        -- oShell.Run with window-style 0 produces a truly hidden process on all Windows versions.
-        local runner_win = to_win(runner_path)
-        local vbs_path   = dest_root .. "\\fix_runner_" .. tostring(appid) .. ".vbs"
-        local vbs_content = string.format(
-            'Set oShell = CreateObject("Wscript.Shell")\r\n' ..
-            'oShell.Run "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File ""%s""", 0, False\r\n',
-            runner_win
-        )
-        m_utils.write_file(vbs_path, vbs_content)
-        PENDING_FIX_INFO[appid].vbsPath = vbs_path
-
-        m_utils.exec('wscript.exe "' .. to_win(vbs_path) .. '"')
+        m_utils.exec(cmd)
     else
-        local sh = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.sh")
-        m_utils.exec('chmod +x "' .. sh .. '"')
+        local sh_path = fs.join(paths.get_plugin_dir(), "backend", "scripts", "downloader.sh")
+        m_utils.exec('chmod +x "' .. sh_path .. '"')
         local cmd = string.format(
             'nohup bash "%s" "%s" "%s" "%s" "%s" > /dev/null 2>&1 &',
-            sh, download_url, dest_zip, install_path, state_file
+            sh_path, download_url, dest_zip, install_path, state_file
         )
         m_utils.exec(cmd)
     end
-
+    
     return { success = true }
 end
 

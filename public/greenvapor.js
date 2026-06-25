@@ -1655,10 +1655,11 @@
           "display:flex;flex-direction:column;gap:12px;align-items:stretch;";
 
         const CARD_DESCS = {
-          "menu.fixesMenu": t("menu.fixesMenuDesc", "Corrigir erros e aplicar patches"),
-          "menu.settings": t("menu.settingsDesc", "Configurações e preferências"),
-          "menu.fetchFreeApis": t("menu.fetchApisDesc", "Buscar e baixar scripts de jogo"),
-          "menu.library": t("menu.libraryDesc", "Gerenciar scripts instalados"),
+          "menu.checkForUpdates": t("menu.checkUpdatesDesc", "Check for plugin updates"),
+          "menu.fixesMenu": t("menu.fixesMenuDesc", "Apply fixes & patches"),
+          "menu.settings": t("menu.settingsDesc", "Plugin settings & preferences"),
+          "menu.fetchFreeApis": t("menu.fetchApisDesc", "Download game scripts"),
+          "menu.library": t("menu.libraryDesc", "Manage installed scripts"),
         };
         function createCardButton(id, key, fallback, iconClass) {
           const btn = document.createElement("a");
@@ -1739,11 +1740,7 @@
           "Fixes Menu",
           "fa-wrench",
         );
-        cardGrid.appendChild(fixesMenuBtn);
-        if (!isGamePage) {
-          fixesMenuBtn.style.opacity = "0.4";
-          fixesMenuBtn.style.pointerEvents = "none";
-        }
+        if (isGamePage) cardGrid.appendChild(fixesMenuBtn);
 
         const fetchApisBtn = createCardButton(
           "lt-settings-fetch-apis",
@@ -1768,7 +1765,16 @@
           "fa-gamepad",
         );
         cardGrid.appendChild(libraryBtn);
-        const checkBtn = null;
+
+        const checkBtn = createCardButton(
+          "lt-settings-check",
+          "menu.checkForUpdates",
+          "Check Updates",
+          "fa-cloud-arrow-down",
+        );
+        cardGrid.appendChild(checkBtn);
+
+        if (isGamePage) {checkBtn.style.display = "none";}
 
         container.appendChild(cardGrid);
 
@@ -1843,8 +1849,9 @@
         if (window.__MillenniumVersion) millVersionEl.textContent = "Millennium " + window.__MillenniumVersion;
         menuFooter.appendChild(restartFooterBtn);
         menuFooter.appendChild(discordFooterBtn);
-        menuFooter.appendChild(updateFooterBtn);
+        if (isGamePage) menuFooter.appendChild(updateFooterBtn);
         menuFooter.appendChild(millVersionEl);
+
 
         header.appendChild(title);
         header.appendChild(iconButtons);
@@ -1961,7 +1968,30 @@
             showLibraryModal();
           });
         }
-
+        
+        if (checkBtn) {
+          checkBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            try {
+              overlay.remove();
+            } catch (_) {}
+            try {
+              Millennium.callServerMethod("greenvapor", "CheckForUpdatesNow", {
+                contentScriptQuery: "",
+              }).then(function (res) {
+                try {
+                  const payload =
+                    typeof res === "string" ? JSON.parse(res) : res;
+                  const msg =
+                    payload && payload.message
+                      ? String(payload.message)
+                      : lt("No updates available.");
+                  ShowLuaToolsAlert("GreenVapor", msg);
+                } catch (_) {}
+              });
+            } catch (_) {}
+          });
+        }
         if (fixesMenuBtn) {
           fixesMenuBtn.addEventListener("click", function (e) {
             e.preventDefault();
@@ -6529,49 +6559,7 @@
     }
 
     // Store Header Button Logic (always visible)
-    // Try multiple selectors — Steam CSS module hashes change with updates.
-    // The wishlist/cart/GreenVapor row is rendered by the React "store-menu-v7" feature target.
-    function findHeaderContainer() {
-      const candidates = [
-        "._1wn1lBlAzl3HMRqS1llwie",
-        "._3M2S9I3DZPBx_N38METsJX",
-        "[class*='store_header_user_action']",
-        "[class*='header_user_action']",
-        "[class*='GlobalHeader'] [class*='actions']",
-        "[class*='StorePageHeader'] [class*='actions']",
-      ];
-      for (let i = 0; i < candidates.length; i++) {
-        try { const el = document.querySelector(candidates[i]); if (el) return el; } catch(_) {}
-      }
-      // Structural fallbacks: find the container that holds wishlist/cart buttons.
-      // The store-menu-v7 React component renders these into responsive_store_nav_ctn
-      // or as a sibling of the StoreMenuLoadingPlaceholder.
-      const storeNavCtn = document.getElementById("responsive_store_nav_ctn");
-      if (storeNavCtn) {
-        // Try to find an inner actions div
-        const inner = storeNavCtn.querySelector("div > div") || storeNavCtn.firstElementChild;
-        if (inner && inner.children.length > 0) return inner;
-      }
-      // Try to find the rendered store-menu-v7 sibling (it replaces the placeholder)
-      const placeholder = document.querySelector("[data-featuretarget='store-menu-v7']");
-      if (placeholder) {
-        let next = placeholder.nextElementSibling;
-        while (next) {
-          if (next.id !== "responsive_store_nav_ctn" && next.children.length > 0) return next;
-          next = next.nextElementSibling;
-        }
-      }
-      // Last resort: parent of wishlist link
-      const wishlist = document.querySelector("a[href*='/wishlist/']:not([class*='submenu'])");
-      if (wishlist && wishlist.parentElement) return wishlist.parentElement;
-      return null;
-    }
-    // If button was removed from DOM by a React re-render, allow re-insertion
-    if (window.__LuaToolsHeaderInserted && !document.querySelector(".luatools-header-button")) {
-      window.__LuaToolsHeaderInserted = false;
-    }
-
-    const headerContainer = findHeaderContainer();
+    const headerContainer = document.querySelector("._1wn1lBlAzl3HMRqS1llwie");
     if (
       headerContainer &&
       !document.querySelector(".luatools-header-button") &&
@@ -6888,7 +6876,6 @@
             // Always enter the fetch path — badges are independent of the GreenVapor button.
             // The inner cacheKey guard prevents redundant DOM updates.
             fetchGamesDatabase().then(function (db) {
-                // Remove old steamdb pills (moved to breadcrumb)
                 const oldPills = steamdbContainer.querySelector(".luatools-pills-container");
                 if (oldPills) oldPills.remove();
 
@@ -8648,3 +8635,38 @@
   // Note: The gamepad back handler is configured in the gamepad system at the top of this file
   // It already handles all overlay types automatically using OVERLAY_SELECTOR_STRING
 })();
+// ============================================
+// SISTEMA DE AUTO-UPDATE (BACKEND INTEGRATION)
+// ============================================
+
+function ExecutarVerificacaoDeUpdate(mostrarAlertSeAtualizado = false) {
+    console.log("[GreenVapor-Updater] Iniciando checagem de rotina...");
+    
+    // Chama a função exportada pelo seu auto_update.lua
+    Millennium.callServerMethod("auto_update", "check_for_updates_now")
+        .then(response => {
+            if (response && response.success) {
+                console.log("[GreenVapor-Updater]:", response.message);
+                
+                // Se a mensagem contiver o aviso de que foi atualizado
+                if (response.message.includes("updated to")) {
+                    alert("GreenVapor: " + response.message);
+                } else if (mostrarAlertSeAtualizado) {
+                    alert("O GreenVapor já está na versão mais recente!");
+                }
+            } else if (response && response.error) {
+                console.error("[GreenVapor-Updater] Erro reportado pelo backend:", response.error);
+                if (mostrarAlertSeAtualizado) {
+                    alert("Erro ao verificar atualizações: " + response.error);
+                }
+            }
+        })
+        .catch(err => {
+            console.error("[GreenVapor-Updater] Falha crítica na chamada de rede:", err);
+        });
+}
+
+// Inicialização automática: Verifica assim que a Steam/Plugin abrir
+setTimeout(() => {
+    ExecutarVerificacaoDeUpdate(false);
+}, 5000); // Aguarda 5 segundos para não travar o carregamento inicial da Steam
