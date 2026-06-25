@@ -1655,11 +1655,11 @@
           "display:flex;flex-direction:column;gap:12px;align-items:stretch;";
 
         const CARD_DESCS = {
-          "menu.checkForUpdates": t("menu.checkUpdatesDesc", "Check for plugin updates"),
-          "menu.fixesMenu": t("menu.fixesMenuDesc", "Apply fixes & patches"),
-          "menu.settings": t("menu.settingsDesc", "Plugin settings & preferences"),
-          "menu.fetchFreeApis": t("menu.fetchApisDesc", "Download game scripts"),
-          "menu.library": t("menu.libraryDesc", "Manage installed scripts"),
+          "menu.checkForUpdates": t("menu.checkUpdatesDesc", "Atualizar o GreenVapor"),
+          "menu.fixesMenu": t("menu.fixesMenuDesc", "Corrigir erros e aplicar patches"),
+          "menu.settings": t("menu.settingsDesc", "Configurações e preferências"),
+          "menu.fetchFreeApis": t("menu.fetchApisDesc", "Buscar e baixar scripts de jogo"),
+          "menu.library": t("menu.libraryDesc", "Gerenciar scripts instalados"),
         };
         function createCardButton(id, key, fallback, iconClass) {
           const btn = document.createElement("a");
