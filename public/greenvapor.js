@@ -2877,6 +2877,132 @@
       unfixSection.style.cursor = "not-allowed";
     }
 
+    // [FREEZE-PATCH-1] freeze card in fixes menu
+    // Adds a 5th card to the Fixes Menu that lets the user pin the game
+    // build to the Steam CM latest, preventing Steam from prompting for
+    // updates.  Calls GetGameFreezeStatus / FreezeGameUpdates /
+    // UnfreezeGameUpdates from acf_freeze.lua via the Millennium IPC.
+    var freezeCard = createFixButton(
+      lt("Freeze Updates"),
+      lt("Checking…"),
+      "fa-snowflake",
+      null,
+      function (e) { e.preventDefault(); }
+    );
+    freezeCard.id = "lt-freeze-card";
+    columnsContainer.appendChild(freezeCard);
+
+    if (!isGameInstalled) {
+      freezeCard.style.opacity = "0.5";
+      freezeCard.style.cursor = "not-allowed";
+      var fcTextEl = freezeCard.querySelectorAll("span")[1];
+      if (fcTextEl) fcTextEl.textContent = lt("Game not installed");
+    } else if (
+      typeof Millennium !== "undefined" &&
+      typeof Millennium.callServerMethod === "function"
+    ) {
+      Millennium.callServerMethod("greenvapor", "GetGameFreezeStatus", {
+        appid: data.appid,
+        contentScriptQuery: "",
+      }).then(function (statusRes) {
+        try {
+          var sp = typeof statusRes === "string" ? JSON.parse(statusRes) : statusRes;
+          var frozen = sp && sp.success && sp.frozen === true;
+          var fcIconEl  = freezeCard.querySelector("i");
+          var fcLabelEl = freezeCard.querySelectorAll("span")[0];
+          var fcSubEl   = freezeCard.querySelectorAll("span")[1];
+
+          var applyFrozenStyle = function () {
+            freezeCard.style.background =
+              "linear-gradient(135deg, rgba(30,100,210,0.4) 0%, rgba(30,100,210,0.2) 100%)";
+            freezeCard.style.borderColor = "rgba(30,100,210,0.65)";
+            freezeCard.onmouseover = function () {
+              this.style.background =
+                "linear-gradient(135deg, rgba(30,100,210,0.6) 0%, rgba(30,100,210,0.3) 100%)";
+              this.style.transform = "translateY(-2px)";
+              this.style.boxShadow = "0 8px 20px rgba(30,100,210,0.3)";
+              this.style.borderColor = "#4da6ff";
+            };
+            freezeCard.onmouseout = function () {
+              this.style.background =
+                "linear-gradient(135deg, rgba(30,100,210,0.4) 0%, rgba(30,100,210,0.2) 100%)";
+              this.style.transform = "translateY(0)";
+              this.style.boxShadow = "none";
+              this.style.borderColor = "rgba(30,100,210,0.65)";
+            };
+          };
+
+          var applyUnfrozenStyle = function () {
+            var c = getThemeColors();
+            freezeCard.style.background =
+              "linear-gradient(135deg, rgba(" + c.rgbString + ",0.15) 0%, rgba(" + c.rgbString + ",0.05) 100%)";
+            freezeCard.style.borderColor = c.border;
+            freezeCard.onmouseover = function () {
+              var cc = getThemeColors();
+              this.style.background =
+                "linear-gradient(135deg, rgba(" + cc.rgbString + ",0.3) 0%, rgba(" + cc.rgbString + ",0.15) 100%)";
+              this.style.transform = "translateY(-2px)";
+              this.style.boxShadow = "0 8px 20px rgba(" + cc.rgbString + ",0.25)";
+              this.style.borderColor = cc.accent;
+            };
+            freezeCard.onmouseout = function () {
+              var cc = getThemeColors();
+              this.style.background =
+                "linear-gradient(135deg, rgba(" + cc.rgbString + ",0.15) 0%, rgba(" + cc.rgbString + ",0.05) 100%)";
+              this.style.transform = "translateY(0)";
+              this.style.boxShadow = "none";
+              this.style.borderColor = cc.border;
+            };
+          };
+
+          var updateFreezeCard = function (isFz) {
+            if (fcIconEl)  fcIconEl.className  = isFz ? "fa-solid fa-lock" : "fa-solid fa-snowflake";
+            if (fcLabelEl) fcLabelEl.textContent = lt("Freeze Updates");
+            if (fcSubEl)   fcSubEl.textContent   =
+              isFz ? lt("Pinned — click to unfreeze") : lt("Pin build to CM latest");
+            if (isFz) { applyFrozenStyle(); } else { applyUnfrozenStyle(); }
+          };
+
+          updateFreezeCard(frozen);
+
+          freezeCard.onclick = function (e) {
+            e.preventDefault();
+            var action = frozen ? "UnfreezeGameUpdates" : "FreezeGameUpdates";
+            if (fcIconEl)  fcIconEl.className  = "fa-solid fa-spinner fa-spin";
+            if (fcLabelEl) fcLabelEl.textContent = lt("Working…");
+            if (fcSubEl)   fcSubEl.textContent   = "";
+            Millennium.callServerMethod("greenvapor", action, {
+              appid: data.appid,
+              contentScriptQuery: "",
+            }).then(function (r) {
+              try {
+                var rp = typeof r === "string" ? JSON.parse(r) : r;
+                if (rp && rp.success) {
+                  frozen = !frozen;
+                  updateFreezeCard(frozen);
+                  ShowLuaToolsAlert("GreenVapor",
+                    frozen
+                      ? lt("Updates frozen! Build ID patched to CM latest.")
+                      : lt("Updates unfrozen. Steam will check for updates normally.")
+                  );
+                } else {
+                  updateFreezeCard(frozen);
+                  ShowLuaToolsAlert("GreenVapor",
+                    "Error: " + (rp && rp.error ? rp.error : "Unknown error"));
+                }
+              } catch (_) { updateFreezeCard(frozen); }
+            }).catch(function () { updateFreezeCard(frozen); });
+          };
+        } catch (_) {
+          var fcSubEl2 = freezeCard.querySelectorAll("span")[1];
+          if (fcSubEl2) fcSubEl2.textContent = lt("Status unavailable");
+        }
+      }).catch(function () {
+        var fcSubEl3 = freezeCard.querySelectorAll("span")[1];
+        if (fcSubEl3) fcSubEl3.textContent = lt("Status unavailable");
+      });
+    }
+
     // Credit message
     const creditMsg = document.createElement("div");
     const creditColors = getThemeColors();

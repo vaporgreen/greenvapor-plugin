@@ -18,6 +18,7 @@ local downloads        = require("downloads")
 local fixes            = require("fixes")
 local settings_manager = require("settings.manager")
 local auto_update      = require("auto_update")
+local acf_freeze       = require("acf_freeze")
 
 local _millennium_version = ""
 
@@ -539,7 +540,7 @@ function GetSettingsConfig()
         language           = payload.language,
         locales            = payload.locales or {},
         translations       = payload.translations or {},
-        plugin_version     = "1.1.4",
+        plugin_version     = "1.1.5",
         millennium_version = _millennium_version
     })
 end
@@ -650,6 +651,29 @@ function GetAvailableThemes()
 end
 
 -- ── Return lifecycle table ────────────────────────────────────────────────────
+
+-- ACF Freeze / Unfreeze
+
+function GetGameFreezeStatus(appid, contentScriptQuery)
+    if type(appid) == "table" then appid = appid.appid end
+    local ok, res = pcall(acf_freeze.get_status, tonumber(appid))
+    if not ok then return json_err(res) end
+    return json_ok(res)
+end
+
+function FreezeGameUpdates(appid, contentScriptQuery)
+    if type(appid) == "table" then appid = appid.appid end
+    local ok, res = pcall(acf_freeze.freeze, tonumber(appid))
+    if not ok then return json_err(res) end
+    return json_ok(res)
+end
+
+function UnfreezeGameUpdates(appid, contentScriptQuery)
+    if type(appid) == "table" then appid = appid.appid end
+    local ok, res = pcall(acf_freeze.unfreeze, tonumber(appid))
+    if not ok then return json_err(res) end
+    return json_ok(res)
+end
 
 return {
     on_load            = on_load,
