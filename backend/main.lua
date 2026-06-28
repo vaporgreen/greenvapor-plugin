@@ -539,7 +539,7 @@ function GetSettingsConfig()
         language           = payload.language,
         locales            = payload.locales or {},
         translations       = payload.translations or {},
-        plugin_version     = "1.1.2",
+        plugin_version     = "1.1.4",
         millennium_version = _millennium_version
     })
 end

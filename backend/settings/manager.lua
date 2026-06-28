@@ -49,24 +49,6 @@ local STEAM_LANG_MAP = {
 }
 
 local function _detect_steam_language()
-    -- Windows: read HKCU\Software\Valve\Steam\Language synchronously via reg query
-    local ok, handle = pcall(io.popen, 'reg query "HKCU\\Software\\Valve\\Steam" /v Language 2>nul')
-    if ok and handle then
-        local result = handle:read("*a")
-        handle:close()
-        local steam_lang = result:match("Language%s+REG_SZ%s+(%S+)")
-        if steam_lang then
-            local mapped = STEAM_LANG_MAP[steam_lang:lower()]
-            if mapped then
-                logger.log("GreenVapor: detected Steam language: " .. steam_lang .. " -> " .. mapped)
-                return mapped
-            end
-            logger.warn("GreenVapor: unknown Steam language: " .. steam_lang .. " (falling back to en)")
-            return nil
-        end
-    end
-
-    -- Linux/Mac fallback: try config/config.vdf
     local steam_path = steam_utils.detect_steam_install_path()
     if steam_path and steam_path ~= "" then
         local config_path = fs.join(steam_path, "config", "config.vdf")
@@ -83,8 +65,10 @@ local function _detect_steam_language()
         end
     end
 
-    return nil
+
+    return "pt-BR" 
 end
+
 
 local function _available_locale_codes()
     local manager = locales.get_locale_manager()
