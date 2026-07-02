@@ -81,15 +81,29 @@ local function on_load()
     if not ok_s then logger.warn("settings init failed: " .. tostring(err_s)) end
 
     local ok_u, upd_msg = pcall(auto_update.apply_pending_update_if_any)
-    if ok_u and upd_msg and upd_msg ~= "" then
-        api_manifest.store_last_message(upd_msg)
+    if ok_u and upd_msg and upd_msg ~= "" then 
+        api_manifest.store_last_message(upd_msg) 
+    end 
+
+    copy_webkit_files() 
+    inject_webkit_files() 
+
+    local res = api_manifest.init_apis() 
+    logger.log("InitApis (boot) result: " .. tostring(res.message or "")) 
+
+    -- =================================================================
+    -- GATILHO DE ATUALIZAÇÃO SÓ NO ON_LOAD (RODA UMA VEZ AO INICIAR)
+    -- =================================================================
+    if steam_utils and steam_utils.set_timeout then
+        -- Dá 3 segundos após a inicialização para não engargalar o boot da Steam
+        steam_utils.set_timeout(function()
+            pcall(auto_update.run_async_background_check)
+        end, 3000)
+    else
+        -- Protege contra travamentos caso não haja um timer assíncrono disponível
+        pcall(auto_update.run_async_background_check)
     end
-
-    copy_webkit_files()
-    inject_webkit_files()
-
-    local res = api_manifest.init_apis()
-    logger.log("InitApis (boot) result: " .. tostring(res.message or ""))
+    -- =================================================================
 
     millennium.ready()
 end

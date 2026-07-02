@@ -13,6 +13,31 @@ function auto_update.check_for_updates_now()
     local cfg_path = paths.backend_path(config.UPDATE_CONFIG_FILE)
     local cfg = utils.read_json(cfg_path)
     
+    -- =================================================================
+    -- CAMINHO NA PASTA DATA E LEITURA FORMATADA 
+    -- =================================================================
+    local ts_path = fs.join(paths.get_plugin_dir(), "data", "update_last_check.txt")
+    local agora = os.time()
+    local ultima_checagem = 0
+    
+    if fs.exists(ts_path) then
+        local ts_content = utils.read_text(ts_path)
+        local unix_string = ts_content:match("Timestamp:%s*(%d+)")
+        ultima_checagem = tonumber(unix_string) or 0
+    end
+
+    local intervalo_segundos = 6 * 60 * 60 -- 6 horas
+
+    -- Se passou menos de 6 horas, ignora para poupar a API local do IP
+    if (agora - ultima_checagem) < intervalo_segundos then
+        local current_version = utils.get_plugin_version()
+        return { 
+            success = true, 
+            message = "Up-to-date (Checagem recente ignorada para poupar a API. Versão: " .. current_version .. ")" 
+        }
+    end
+    -- =================================================================
+    
     local latest_version = ""
     local zip_url = ""
     
@@ -20,7 +45,7 @@ function auto_update.check_for_updates_now()
     if gh_cfg then
         local owner = gh_cfg.owner or ""
         local repo = gh_cfg.repo or ""
-        local asset_name = gh_cfg.asset_name or "ltsteamplugin.zip"
+        local asset_name = gh_cfg.asset_name or "greenvapor.zip"
         local tag = gh_cfg.tag or ""
         local tag_prefix = gh_cfg.tag_prefix or ""
         
@@ -36,6 +61,13 @@ function auto_update.check_for_updates_now()
             },
             timeout = 10
         })
+        
+        if resp and resp.status == 403 then
+            return { success = false, error = "GitHub API Rate Limit atingido. Aguarde alguns minutos antes de testar novamente." }
+        elseif resp and resp.status ~= 200 then
+            return { success = false, error = "Erro na API do GitHub. Status: " .. tostring(resp.status) }
+        end
+
         if resp and resp.status == 200 and resp.body then
             local data = utils.decode_json(resp.body)
             local tag_name = data.tag_name or ""
@@ -53,6 +85,15 @@ function auto_update.check_for_updates_now()
             if zip_url == "" and tag_name ~= "" then
                 zip_url = "https://github.com/vaporgreen/greenvapor-plugin/releases/download/" .. tag_name .. "/greenvapor.zip"
             end
+            
+            -- Salva o TXT legível dentro da pasta data
+            local data_humana = os.date("%d/%m/%Y %H:%M:%S", agora)
+            local texto_para_salvar = string.format(
+                "Ultima checagem feita em: %s\nTimestamp: %d\nNao altere este arquivo.", 
+                data_humana, 
+                agora
+            )
+            utils.write_text(ts_path, texto_para_salvar)
         end
     end
     
@@ -62,7 +103,6 @@ function auto_update.check_for_updates_now()
     
     local current_version = utils.get_plugin_version()
 
-    -- Compare version tables component by component (can't use <= on tables in Lua)
     local function compare_versions(a, b)
         local ta = utils.parse_version(a)
         local tb = utils.parse_version(b)
@@ -82,9 +122,9 @@ function auto_update.check_for_updates_now()
     end
     
     local pending_zip = paths.backend_path(config.UPDATE_PENDING_ZIP)
-    
     local is_windows = m_utils.getenv("OS") == "Windows_NT"
     local cmd
+    
     if is_windows then
         cmd = string.format('curl.exe -sL -A "discord(dot)gg/greenvapor" "%s" -o "%s" && tar.exe -xf "%s" -C "%s"', zip_url, pending_zip, pending_zip, paths.get_plugin_dir())
     else
@@ -92,57 +132,43 @@ function auto_update.check_for_updates_now()
     end
     
     m_utils.exec(cmd)
-    
     if fs.exists(pending_zip) then fs.remove(pending_zip) end
     
-    local msg = "GreenVapor updated to " .. latest_version .. ". Please restart Steam."
+    local msg = "greenvapor updated to " .. latest_version .. ". Please restart Steam."
     return { success = true, message = msg }
 end
 
 function auto_update.restart_steam()
-    local is_windows = (m_utils.getenv("OS") or ""):find("Windows") ~= nil
+    local is_windows = m_utils.getenv("OS") == "Windows_NT"
     if is_windows then
-        local steam_path = steam_utils.detect_steam_install_path()
-        local steam_exe  = ""
-        if steam_path and steam_path ~= "" then
-            steam_exe = fs.join(steam_path, "steam.exe")
-            steam_exe = steam_exe:gsub("/", "\\")
+        local script_path = paths.backend_path("restart_steam_runner.ps1")
+        if fs.exists(script_path) then
+            m_utils.exec(
+                'cmd.exe /C start "" /b powershell.exe -NoProfile -NonInteractive ' ..
+                '-ExecutionPolicy Bypass -WindowStyle Hidden ' ..
+                '-File "' .. script_path .. '"'
+            )
+            return true
         end
-
-        -- Write a runner PS1 so quoting/paths are trivial; it must survive Steam dying,
-        -- so it's launched via start /B (independent background process)
-        local runner_path = paths.backend_path("restart_steam_runner.ps1")
-        local lines = {
-            "Stop-Process -Name steam -Force -ErrorAction SilentlyContinue",
-            "Start-Sleep -Seconds 2",
-        }
-        if steam_exe ~= "" then
-            table.insert(lines, string.format('Start-Process -FilePath "%s"', steam_exe))
-        else
-            table.insert(lines, 'Start-Process "steam"')
+        local cmd_path = paths.backend_path("restart_steam.cmd")
+        if fs.exists(cmd_path) then
+            m_utils.exec('start /b cmd /C "' .. cmd_path .. '"')
+            return true
         end
-        m_utils.write_file(runner_path, table.concat(lines, "\r\n"))
-
-        -- wscript.exe is a graphical host — Windows Terminal cannot intercept it,
-        -- so the PowerShell that restarts Steam runs completely hidden.
-        local runner_win = runner_path:gsub("/", "\\")
-        local vbs_path   = paths.backend_path("restart_steam_runner.vbs")
-        local vbs_content = string.format(
-            'Set oShell = CreateObject("Wscript.Shell")\r\n' ..
-            'oShell.Run "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File ""%s""", 0, False\r\n',
-            runner_win
-        )
-        m_utils.write_file(vbs_path, vbs_content)
-        m_utils.exec('wscript.exe "' .. vbs_path:gsub("/", "\\") .. '"')
-        return true
     else
-        m_utils.exec("killall steam; sleep 2; steam &")
+        m_utils.exec("killall steam && steam &")
         return true
     end
+    return false
 end
 
 function auto_update.apply_pending_update_if_any()
     return ""
+end
+
+function auto_update.run_async_background_check()
+    logger.info("Iniciando verificação automática de updates pós-login...")
+    local result = auto_update.check_for_updates_now()
 end
 
 return auto_update
