@@ -13,7 +13,7 @@ function auto_update.check_for_updates_now(is_manual)
     local cfg_path = paths.backend_path(config.UPDATE_CONFIG_FILE)
     local cfg = utils.read_json(cfg_path)
     
-    local ts_path = fs.join(paths.get_plugin_dir(), "data", "update_last_check.txt")
+    local ts_path = paths.backend_path("data/update_last_check.txt")
     local agora = os.time()
     local ultima_checagem = 0
     
@@ -25,7 +25,6 @@ function auto_update.check_for_updates_now(is_manual)
 
     local intervalo_segundos = 6 * 60 * 60 -- 6 horas
 
-    -- Se NÃO for clique manual no botão e fez checagem em menos de 6 horas, ignora
     if not is_manual and (agora - ultima_checagem) < intervalo_segundos then
         local current_version = utils.get_plugin_version()
         return { 
@@ -34,10 +33,23 @@ function auto_update.check_for_updates_now(is_manual)
         }
     end
     
+    local data_dir = paths.backend_path("data")
+    if not fs.exists(data_dir) then
+        fs.create_directories(data_dir)
+    end
+
+    local data_humana = os.date("%d/%m/%Y %H:%M:%S", agora)
+    local texto_para_salvar = string.format(
+        "Ultima checagem feita em: %s\nTimestamp: %d\nNao altere este arquivo.", 
+        data_humana, 
+        agora
+    )
+    utils.write_text(ts_path, texto_para_salvar)
+    
     local latest_version = ""
     local zip_url = ""
     
-    local gh_cfg = cfg.github
+    local gh_cfg = cfg and cfg.github
     if gh_cfg then
         local owner = gh_cfg.owner or ""
         local repo = gh_cfg.repo or ""
@@ -58,12 +70,6 @@ function auto_update.check_for_updates_now(is_manual)
             timeout = 10
         })
         
-        if resp and resp.status == 403 then
-            return { success = false, error = "GitHub API Rate Limit atingido. Aguarde alguns minutos." }
-        elseif resp and resp.status ~= 200 then
-            return { success = false, error = "Erro na API do GitHub. Status: " .. tostring(resp.status) }
-        end
-
         if resp and resp.status == 200 and resp.body then
             local data = utils.decode_json(resp.body)
             local tag_name = data.tag_name or ""
@@ -81,15 +87,6 @@ function auto_update.check_for_updates_now(is_manual)
             if zip_url == "" and tag_name ~= "" then
                 zip_url = "https://github.com/vaporgreen/greenvapor-plugin/releases/download/" .. tag_name .. "/greenvapor.zip"
             end
-            
-            -- Atualiza o timestamp apenas se a requisição teve sucesso
-            local data_humana = os.date("%d/%m/%Y %H:%M:%S", agora)
-            local texto_para_salvar = string.format(
-                "Ultima checagem feita em: %s\nTimestamp: %d\nNao altere este arquivo.", 
-                data_humana, 
-                agora
-            )
-            utils.write_text(ts_path, texto_para_salvar)
         end
     end
     
@@ -117,27 +114,33 @@ function auto_update.check_for_updates_now(is_manual)
         return { success = true, message = "Up-to-date (current " .. current_version .. ")" }
     end
     
-    local pending_zip = paths.backend_path(config.UPDATE_PENDING_ZIP)
+    local pending_zip = paths.backend_path("update_pending.zip")
     local plugin_dir = paths.get_plugin_dir()
     local is_windows = m_utils.getenv("OS") == "Windows_NT"
     local cmd
     
     if is_windows then
-        -- Baixa e extrai via PowerShell (totalmente oculto e sem abrir janelas CMD)
-        local ps_cmd = string.format(
-            'Invoke-WebRequest -Uri "%s" -OutFile "%s" -UserAgent "GreenVapor-Updater"; Expand-Archive -Path "%s" -DestinationPath "%s" -Force',
-            zip_url, pending_zip, pending_zip, plugin_dir
+        local zip_path_win = pending_zip:gsub("\\", "/")
+        local plugin_dir_win = plugin_dir:gsub("\\", "/")
+        
+        cmd = string.format(
+            'powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command "' ..
+            'curl.exe -sL \'%s\' -o \'%s\'; ' ..
+            'tar.exe -xf \'%s\' -C \'%s\'"',
+            zip_url, zip_path_win, zip_path_win, plugin_dir_win
         )
-        cmd = string.format('powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command "%s"', ps_cmd)
     else
         cmd = string.format('curl -L -o "%s" "%s" && unzip -o -q "%s" -d "%s"', pending_zip, zip_url, pending_zip, plugin_dir)
     end
-    
+
+    logger.info("Executando atualização via comando...")
     m_utils.exec(cmd)
-    if fs.exists(pending_zip) then fs.remove(pending_zip) end
     
-    local msg = "GreenVapor atualizado para a versão " .. latest_version .. ". Por favor, reinicie a Steam."
-    return { success = true, message = msg }
+    if fs.exists(pending_zip) then 
+        fs.remove(pending_zip) 
+    end
+    
+    return { success = true, message = "GreenVapor atualizado para a versão " .. latest_version .. ". Reinicie a Steam." }
 end
 
 function auto_update.restart_steam()
