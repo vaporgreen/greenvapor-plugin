@@ -10,11 +10,10 @@ local cjson = require("json")
 
 local fixes = {}
 
-local FIXES_INDEX_URL       = "https://index.luatools.work/fixes-index.json"
-local FIXES_INDEX_PROXY_URL = "https://luatools.vercel.app/fixes-index.json"
-local FIXES_DATA_FILE       = "data/installed_fixes.json"
-local FIXES_INDEX_CACHE_FILE = "data/fixes_index_cache.json"
-local FIXES_CACHE_MAX_AGE   = 86400  -- 24 hours in seconds
+local RYUU_FIXES_URL         = "https://greenvapor.vercel.app/ryuu_fixes.json"
+local FIXES_DATA_FILE        = "data/installed_fixes.json"
+local FIXES_INDEX_CACHE_FILE = "data/ryuu_fixes_cache.json"  -- new name to avoid stale luatools cache
+local FIXES_CACHE_MAX_AGE    = 3600  -- 1 hour
 
 -- In-memory state
 local PENDING_FIX_INFO  = {}
@@ -119,84 +118,52 @@ function fixes.check_for_fixes(appid)
     }
 
     -- 1. In-memory cache (same session)
-    local data = _FIXES_INDEX_CACHE
+    local fix_list = _FIXES_INDEX_CACHE
 
-    -- 2. Disk cache (survives Steam restarts, avoids rate limiting)
-    if not data then
-        data = load_fixes_index_disk_cache()
-        if data then
-            _FIXES_INDEX_CACHE = data
-            logger.log("GreenVapor: fixes index loaded from disk cache")
+    -- 2. Disk cache
+    if not fix_list then
+        fix_list = load_fixes_index_disk_cache()
+        if fix_list then
+            _FIXES_INDEX_CACHE = fix_list
+            logger.log("GreenVapor: ryuu fixes loaded from disk cache (" .. tostring(#fix_list) .. " entries)")
         end
     end
 
-    -- 3. Fetch from network
-    if not data then
-        local req_opts = {
+    -- 3. Fetch from our Vercel (greenvapor.vercel.app/ryuu_fixes.json)
+    if not fix_list then
+        local resp = http_client.get(RYUU_FIXES_URL, {
             timeout = 10,
             headers = { ["User-Agent"] = config.USER_AGENT }
-        }
-        local resp = http_client.get(FIXES_INDEX_URL, req_opts)
-        if not (resp and resp.status == 200 and resp.body) then
-            logger.warn("GreenVapor: fixes index primary failed (status=" ..
-                tostring(resp and resp.status or "nil") .. "), trying proxy")
-            resp = http_client.get(FIXES_INDEX_PROXY_URL, req_opts)
-        end
+        })
         if resp and resp.status == 200 and resp.body then
-            data = utils.decode_json(resp.body)
-            if type(data) == "table" then
-                _FIXES_INDEX_CACHE = data
-                pcall(save_fixes_index_disk_cache, data)
-                logger.log("GreenVapor: fixes index fetched and cached (" ..
-                    tostring(#(data.genericFixes or {})) .. " generic, " ..
-                    tostring(#(data.onlineFixes or {})) .. " online)")
+            local ok, parsed = pcall(cjson.decode, resp.body)
+            if ok and type(parsed) == "table" and type(parsed.fixes) == "table" then
+                fix_list = parsed.fixes
+                _FIXES_INDEX_CACHE = fix_list
+                pcall(save_fixes_index_disk_cache, fix_list)
+                logger.log("GreenVapor: ryuu fixes fetched (" .. tostring(#fix_list) .. " entries)")
             end
+        else
+            logger.warn("GreenVapor: failed to fetch ryuu_fixes.json (status=" ..
+                tostring(resp and resp.status or "nil") .. ")")
         end
     end
 
-    local generic_url = "https://files.luatools.work/GameBypasses/" .. tostring(appid) .. ".zip"
-    local online_url  = "https://files.luatools.work/OnlineFix1/"   .. tostring(appid) .. ".zip"
-    local head_opts   = { timeout = 5, headers = { ["User-Agent"] = config.USER_AGENT } }
-
-    if type(data) == "table" then
-        -- Use the index (fast path: no extra requests per game)
-        for _, v in ipairs(data.genericFixes or {}) do
-            if tonumber(v) == appid then
-                result.genericFix = { status = 200, available = true, url = generic_url }
-                break
+    -- Search our JSON for a matching fix
+    if type(fix_list) == "table" then
+        for _, fix in ipairs(fix_list) do
+            if tonumber(fix.appid) == appid then
+                local fix_type = fix.type or "generic"
+                if fix_type == "online" then
+                    result.onlineFix = { status = 200, available = true, url = fix.url, fixType = fix_type }
+                else
+                    result.genericFix = { status = 200, available = true, url = fix.url, fixType = fix_type }
+                end
+                -- keep scanning: might have both online and generic entries for same appid
             end
         end
-        if not result.genericFix.available then result.genericFix.status = 404 end
-
-        for _, v in ipairs(data.onlineFixes or {}) do
-            if tonumber(v) == appid then
-                result.onlineFix = { status = 200, available = true, url = online_url }
-                break
-            end
-        end
-        if not result.onlineFix.available then result.onlineFix.status = 404 end
-    else
-        -- Fallback: HEAD requests per file (same as Python original when index unavailable)
-        logger.log("GreenVapor: index unavailable, falling back to HEAD requests for appid=" .. tostring(appid))
-        local gr = http_client.head(generic_url, head_opts)
-        if not (gr and gr.status == 200) then
-            gr = http_client.get(generic_url, head_opts)
-        end
-        if gr and gr.status == 200 then
-            result.genericFix = { status = 200, available = true, url = generic_url }
-        else
-            result.genericFix.status = gr and gr.status or 0
-        end
-
-        local or_ = http_client.head(online_url, head_opts)
-        if not (or_ and or_.status == 200) then
-            or_ = http_client.get(online_url, head_opts)
-        end
-        if or_ and or_.status == 200 then
-            result.onlineFix = { status = 200, available = true, url = online_url }
-        else
-            result.onlineFix.status = or_ and or_.status or 0
-        end
+        if not result.genericFix.available  then result.genericFix.status  = 404 end
+        if not result.onlineFix.available   then result.onlineFix.status   = 404 end
     end
 
     return result
