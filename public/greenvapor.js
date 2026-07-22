@@ -7045,7 +7045,7 @@
                     fixesData &&
                     ((fixesData.genericFix && fixesData.genericFix.status === 200) ||
                      (fixesData.onlineFix  && fixesData.onlineFix.status === 200));
-                  const showDenuvoPill = hasDenuvo && !hasFixes;
+                  const showDenuvoPill = hasDenuvo;
 
                   const cacheKey = JSON.stringify({ d: gameData || "untested", showDenuvo: showDenuvoPill, hasFixes: hasFixes });
                   if (badgesEl.dataset.content === cacheKey) return;
