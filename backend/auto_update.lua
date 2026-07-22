@@ -9,13 +9,10 @@ local steam_utils = require("steam_utils")
 
 local auto_update = {}
 
-function auto_update.check_for_updates_now()
+function auto_update.check_for_updates_now(is_manual)
     local cfg_path = paths.backend_path(config.UPDATE_CONFIG_FILE)
     local cfg = utils.read_json(cfg_path)
     
-    -- =================================================================
-    -- CAMINHO NA PASTA DATA E LEITURA FORMATADA 
-    -- =================================================================
     local ts_path = fs.join(paths.get_plugin_dir(), "data", "update_last_check.txt")
     local agora = os.time()
     local ultima_checagem = 0
@@ -28,15 +25,14 @@ function auto_update.check_for_updates_now()
 
     local intervalo_segundos = 6 * 60 * 60 -- 6 horas
 
-    -- Se passou menos de 6 horas, ignora para poupar a API local do IP
-    if (agora - ultima_checagem) < intervalo_segundos then
+    -- Se NÃO for clique manual no botão e fez checagem em menos de 6 horas, ignora
+    if not is_manual and (agora - ultima_checagem) < intervalo_segundos then
         local current_version = utils.get_plugin_version()
         return { 
             success = true, 
-            message = "Up-to-date (Checagem recente ignorada para poupar a API. Versão: " .. current_version .. ")" 
+            message = "Up-to-date (Checagem recente ignorada. Versão: " .. current_version .. ")" 
         }
     end
-    -- =================================================================
     
     local latest_version = ""
     local zip_url = ""
@@ -63,7 +59,7 @@ function auto_update.check_for_updates_now()
         })
         
         if resp and resp.status == 403 then
-            return { success = false, error = "GitHub API Rate Limit atingido. Aguarde alguns minutos antes de testar novamente." }
+            return { success = false, error = "GitHub API Rate Limit atingido. Aguarde alguns minutos." }
         elseif resp and resp.status ~= 200 then
             return { success = false, error = "Erro na API do GitHub. Status: " .. tostring(resp.status) }
         end
@@ -86,7 +82,7 @@ function auto_update.check_for_updates_now()
                 zip_url = "https://github.com/vaporgreen/greenvapor-plugin/releases/download/" .. tag_name .. "/greenvapor.zip"
             end
             
-            -- Salva o TXT legível dentro da pasta data
+            -- Atualiza o timestamp apenas se a requisição teve sucesso
             local data_humana = os.date("%d/%m/%Y %H:%M:%S", agora)
             local texto_para_salvar = string.format(
                 "Ultima checagem feita em: %s\nTimestamp: %d\nNao altere este arquivo.", 
@@ -122,19 +118,25 @@ function auto_update.check_for_updates_now()
     end
     
     local pending_zip = paths.backend_path(config.UPDATE_PENDING_ZIP)
+    local plugin_dir = paths.get_plugin_dir()
     local is_windows = m_utils.getenv("OS") == "Windows_NT"
     local cmd
     
     if is_windows then
-        cmd = string.format('curl.exe -sL -A "discord(dot)gg/greenvapor" "%s" -o "%s" && tar.exe -xf "%s" -C "%s"', zip_url, pending_zip, pending_zip, paths.get_plugin_dir())
+        -- Baixa e extrai via PowerShell (totalmente oculto e sem abrir janelas CMD)
+        local ps_cmd = string.format(
+            'Invoke-WebRequest -Uri "%s" -OutFile "%s" -UserAgent "GreenVapor-Updater"; Expand-Archive -Path "%s" -DestinationPath "%s" -Force',
+            zip_url, pending_zip, pending_zip, plugin_dir
+        )
+        cmd = string.format('powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command "%s"', ps_cmd)
     else
-        cmd = string.format('curl -L -o "%s" "%s" && unzip -o -q "%s" -d "%s"', pending_zip, zip_url, pending_zip, paths.get_plugin_dir())
+        cmd = string.format('curl -L -o "%s" "%s" && unzip -o -q "%s" -d "%s"', pending_zip, zip_url, pending_zip, plugin_dir)
     end
     
     m_utils.exec(cmd)
     if fs.exists(pending_zip) then fs.remove(pending_zip) end
     
-    local msg = "greenvapor updated to " .. latest_version .. ". Please restart Steam."
+    local msg = "GreenVapor atualizado para a versão " .. latest_version .. ". Por favor, reinicie a Steam."
     return { success = true, message = msg }
 end
 

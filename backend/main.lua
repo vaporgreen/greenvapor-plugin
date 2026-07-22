@@ -170,7 +170,7 @@ function FetchFreeApisNow()
 end
 
 function CheckForUpdatesNow()
-    local ok, res = pcall(auto_update.check_for_updates_now)
+    local ok, res = pcall(auto_update.check_for_updates_now, true)
     if not ok then
         logger.warn("CheckForUpdatesNow failed: " .. tostring(res))
         return json_err(res)
