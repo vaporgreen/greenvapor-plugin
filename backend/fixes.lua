@@ -10,10 +10,10 @@ local cjson = require("json")
 
 local fixes = {}
 
-local RYUU_FIXES_URL         = "https://greenvapor.vercel.app/ryuu_fixes.json"
+local RYUU_FIXES_FILE        = "data/ryuu_fixes.json"       -- bundled with plugin, updated on release
 local FIXES_DATA_FILE        = "data/installed_fixes.json"
-local FIXES_INDEX_CACHE_FILE = "data/ryuu_fixes_cache.json"  -- new name to avoid stale luatools cache
-local FIXES_CACHE_MAX_AGE    = 3600  -- 1 hour
+local FIXES_INDEX_CACHE_FILE = "data/ryuu_fixes_cache.json"  -- in-memory cache checkpoint (not used for local reads)
+local FIXES_CACHE_MAX_AGE    = 3600
 
 -- In-memory state
 local PENDING_FIX_INFO  = {}
@@ -117,53 +117,37 @@ function fixes.check_for_fixes(appid)
         onlineFix  = { status = 0, available = false }
     }
 
-    -- 1. In-memory cache (same session)
+    -- 1. In-memory cache (same session — avoids re-reading 165KB file every call)
     local fix_list = _FIXES_INDEX_CACHE
 
-    -- 2. Disk cache
+    -- 2. Read bundled local file (shipped with plugin, updated on each release)
     if not fix_list then
-        fix_list = load_fixes_index_disk_cache()
-        if fix_list then
+        local local_path = paths.backend_path(RYUU_FIXES_FILE)
+        local parsed = utils.read_json(local_path)
+        if type(parsed) == "table" and type(parsed.fixes) == "table" then
+            fix_list = parsed.fixes
             _FIXES_INDEX_CACHE = fix_list
-            logger.log("GreenVapor: ryuu fixes loaded from disk cache (" .. tostring(#fix_list) .. " entries)")
-        end
-    end
-
-    -- 3. Fetch from our Vercel (greenvapor.vercel.app/ryuu_fixes.json)
-    if not fix_list then
-        local resp = http_client.get(RYUU_FIXES_URL, {
-            timeout = 10,
-            headers = { ["User-Agent"] = config.USER_AGENT }
-        })
-        if resp and resp.status == 200 and resp.body then
-            local ok, parsed = pcall(cjson.decode, resp.body)
-            if ok and type(parsed) == "table" and type(parsed.fixes) == "table" then
-                fix_list = parsed.fixes
-                _FIXES_INDEX_CACHE = fix_list
-                pcall(save_fixes_index_disk_cache, fix_list)
-                logger.log("GreenVapor: ryuu fixes fetched (" .. tostring(#fix_list) .. " entries)")
-            end
+            logger.log("GreenVapor: ryuu fixes loaded from local file (" .. tostring(#fix_list) .. " entries)")
         else
-            logger.warn("GreenVapor: failed to fetch ryuu_fixes.json (status=" ..
-                tostring(resp and resp.status or "nil") .. ")")
+            logger.warn("GreenVapor: ryuu_fixes.json not found or empty at " .. tostring(local_path))
         end
     end
 
-    -- Search our JSON for a matching fix
+    -- Search for a matching fix
     if type(fix_list) == "table" then
         for _, fix in ipairs(fix_list) do
             if tonumber(fix.appid) == appid then
                 local fix_type = fix.type or "generic"
                 if fix_type == "online" then
-                    result.onlineFix = { status = 200, available = true, url = fix.url, fixType = fix_type }
+                    result.onlineFix  = { status = 200, available = true, url = fix.url, fixType = fix_type }
                 else
                     result.genericFix = { status = 200, available = true, url = fix.url, fixType = fix_type }
                 end
-                -- keep scanning: might have both online and generic entries for same appid
+                -- keep scanning: a game may have both online and generic entries
             end
         end
-        if not result.genericFix.available  then result.genericFix.status  = 404 end
-        if not result.onlineFix.available   then result.onlineFix.status   = 404 end
+        if not result.genericFix.available then result.genericFix.status = 404 end
+        if not result.onlineFix.available  then result.onlineFix.status  = 404 end
     end
 
     return result

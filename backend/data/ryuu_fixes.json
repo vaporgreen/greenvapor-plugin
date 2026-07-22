@@ -1,0 +1,3583 @@
+﻿{
+    "updated_at":  "2026-07-14T18:48:00Z",
+    "total":  511,
+    "fixes":  [
+                  {
+                      "appid":  3768760,
+                      "name":  "007 First Light",
+                      "file":  "007.first.light-voices38.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/007.first.light-voices38.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  958520,
+                      "name":  "33 Immortals",
+                      "file":  "33 Immortals.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/33 Immortals.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2202120,
+                      "name":  "63 Days",
+                      "file":  "63 Days.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/63 Days.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  251570,
+                      "name":  "7 Days to Die",
+                      "file":  "7 Days to Die.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/7 Days to Die.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  752590,
+                      "name":  "A Plague Tale: Innocence",
+                      "file":  "A Plague Tale Innocence Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/A Plague Tale Innocence Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  1222700,
+                      "name":  "A Way Out",
+                      "file":  "A Way Out.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/A Way Out.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  427410,
+                      "name":  "Abiotic Factor",
+                      "file":  "Abiotic Factor.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Abiotic Factor.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1715280,
+                      "name":  "AirportSim",
+                      "file":  "AirportSim.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/AirportSim.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2683150,
+                      "name":  "Ale \u0026amp; Tale Tavern",
+                      "file":  "Ale and Tale Tavern.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ale and Tale Tavern.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1549970,
+                      "name":  "Aliens: Fireteam Elite",
+                      "file":  "Aliens Fireteam Elite.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Aliens Fireteam Elite.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1660080,
+                      "name":  "Aloft",
+                      "file":  "Aloft.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Aloft.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2524700,
+                      "name":  "Altarium",
+                      "file":  "Altarium.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Altarium.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  270880,
+                      "name":  "American Truck Simulator",
+                      "file":  "American Truck Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/American Truck Simulator.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  945360,
+                      "name":  "Among Us",
+                      "file":  "Among_Us_Freetp_Epic_Sign.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Among_Us_Freetp_Epic_Sign.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2788040,
+                      "name":  "Another Try 2",
+                      "file":  "Another Try 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Another Try 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1158370,
+                      "name":  "Aragami 2",
+                      "file":  "Aragami 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Aragami 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2399830,
+                      "name":  "ARK: Survival Ascended",
+                      "file":  "ARK Survival Ascended.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ARK Survival Ascended.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1874880,
+                      "name":  "Arma Reforger",
+                      "file":  "Arma Reforger.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Arma Reforger.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1888160,
+                      "name":  "ARMORED CORE™ VI FIRES OF RUBICON™",
+                      "file":  "ARMORED CORE VI FIRES OF RUBICON.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ARMORED CORE VI FIRES OF RUBICON.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  33230,
+                      "name":  "Assassin\u0026#39;s Creed 2",
+                      "file":  "Assassin\u0026#39;s Creed II.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin\u0026#39;s Creed II.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3035570,
+                      "name":  "Assassin\u0026#39;s Creed Mirage",
+                      "file":  "Assassins.Creed.Mirage-voices38.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassins.Creed.Mirage-voices38.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2208920,
+                      "name":  "Assassin\u0026#39;s Creed Valhalla",
+                      "file":  "Assassin Creed Valhalla Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin Creed Valhalla Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  812140,
+                      "name":  "Assassin\u0026#39;s Creed® Odyssey",
+                      "file":  "Assassin\u0026#39;s Creed Odyssey 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin\u0026#39;s Creed Odyssey 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  812140,
+                      "name":  "Assassin\u0026#39;s Creed® Odyssey",
+                      "file":  "Assassin\u0026#39;s Creed Odyssey 1.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin\u0026#39;s Creed Odyssey 1.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  582160,
+                      "name":  "Assassin\u0026#39;s Creed® Origins",
+                      "file":  "Assassin\u0026#39;s Creed Origin Ubisoft Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin\u0026#39;s Creed Origin Ubisoft Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  201870,
+                      "name":  "Assassin\u0026#39;s Creed® Revelations",
+                      "file":  "Assassin\u0026#39;s Creed Revelations Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin\u0026#39;s Creed Revelations Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  368500,
+                      "name":  "Assassin\u0026#39;s Creed® Syndicate",
+                      "file":  "Assassin\u0026#39;s Creed Syndicate Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin\u0026#39;s Creed Syndicate Bypass.zip",
+                      "type":  "Bypass, Tested, Unstable"
+                  },
+                  {
+                      "appid":  289650,
+                      "name":  "Assassin\u0026#39;s Creed® Unity",
+                      "file":  "Assassin Creed Unity.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin Creed Unity.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  48190,
+                      "name":  "Assassin’s Creed® Brotherhood",
+                      "file":  "Assassin Creed Brotherhood.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin Creed Brotherhood.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  208480,
+                      "name":  "Assassin’s Creed® III",
+                      "file":  "Assassin Creed III.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin Creed III.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  242050,
+                      "name":  "Assassin’s Creed® IV Black Flag™",
+                      "file":  "Assassins Creed IV Black Flag Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassins Creed IV Black Flag Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  311560,
+                      "name":  "Assassin’s Creed® Rogue",
+                      "file":  "Assassin Creed Rogue.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Assassin Creed Rogue.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  361420,
+                      "name":  "ASTRONEER",
+                      "file":  "ASTRONEER.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ASTRONEER.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  2924860,
+                      "name":  "Astrumis - Survive Together",
+                      "file":  "Astrumis - Survive Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Astrumis - Survive Together.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  449800,
+                      "name":  "Attack on Titan / A.O.T. Wings of Freedom",
+                      "file":  "Attack on Titan A.O.T Wings of Freedom.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Attack on Titan A.O.T Wings of Freedom.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1066890,
+                      "name":  "Automobilista 2",
+                      "file":  "Automobilista 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Automobilista 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3140990,
+                      "name":  "Backrooms Cleanup Crew",
+                      "file":  "Backrooms Cleanup Crew.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Backrooms Cleanup Crew.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2275020,
+                      "name":  "Backrooms Rec.",
+                      "file":  "Backrooms Rec.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Backrooms Rec.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2141730,
+                      "name":  "Backrooms: Escape Together",
+                      "file":  "Backrooms Escape Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Backrooms Escape Together.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2835530,
+                      "name":  "Backrooms: Extractions",
+                      "file":  "Backrooms Extractions.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Backrooms Extractions.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1086940,
+                      "name":  "Baldur\u0026#39;s Gate 3",
+                      "file":  "Baldur\u0026#39;s Gate 3.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Baldur\u0026#39;s Gate 3.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1025600,
+                      "name":  "Battle Realms: Zen Edition",
+                      "file":  "Battle Realms Zen Edition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Battle Realms Zen Edition.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1331510,
+                      "name":  "Battle Talent",
+                      "file":  "Battle Talent.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Battle Talent.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1238820,
+                      "name":  "Battlefield 3™",
+                      "file":  "Battlefield 3.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Battlefield 3.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1238860,
+                      "name":  "Battlefield 4™",
+                      "file":  "Battlefield 4™.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Battlefield 4™.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1238840,
+                      "name":  "Battlefield™ 1",
+                      "file":  "Battlefield™ 1 Revolution.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Battlefield™ 1 Revolution.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1238810,
+                      "name":  "Battlefield™ V",
+                      "file":  "Battlefield V.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Battlefield V.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  284160,
+                      "name":  "BeamNG.drive",
+                      "file":  "BeamNG.Drive.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/BeamNG.Drive.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3130340,
+                      "name":  "Bean There, Won That",
+                      "file":  "Bean There, Won That.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Bean There, Won That.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  620980,
+                      "name":  "Beat Saber",
+                      "file":  "Beat Saber.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Beat Saber.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1812450,
+                      "name":  "Bellwright",
+                      "file":  "Bellwright.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Bellwright.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  509980,
+                      "name":  "BIGFOOT",
+                      "file":  "BIGFOOT.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/BIGFOOT.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2358720,
+                      "name":  "Black Myth: Wukong",
+                      "file":  "Bl4ck.Myth.Wukong.CRACKFIXandFIX-voices38.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Bl4ck.Myth.Wukong.CRACKFIXandFIX-voices38.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1158940,
+                      "name":  "Blazing Sails",
+                      "file":  "Blazing Sails.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Blazing Sails.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1689620,
+                      "name":  "BLEACH Rebirth of Souls",
+                      "file":  "BLEACH Rebirth Of Souls.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/BLEACH Rebirth Of Souls.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2790330,
+                      "name":  "Blood Typers",
+                      "file":  "Blood Typers.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Blood Typers.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  871540,
+                      "name":  "BMX Streets",
+                      "file":  "BMX Streets.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/BMX Streets.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2406770,
+                      "name":  "Bodycam",
+                      "file":  "Bodycam.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Bodycam.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  49520,
+                      "name":  "Borderlands 2",
+                      "file":  "Borderlands 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Borderlands 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  397540,
+                      "name":  "Borderlands 3",
+                      "file":  "Borderlands 3.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Borderlands 3.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  8980,
+                      "name":  "Borderlands Game of the Year",
+                      "file":  "Borderlands GOTY.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Borderlands GOTY.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  261640,
+                      "name":  "Borderlands: The Pre-Sequel",
+                      "file":  "Borderlands The Pre-Sequel.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Borderlands The Pre-Sequel.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2235150,
+                      "name":  "Brain Show: Party Game",
+                      "file":  "Brain Show Party Quiz.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Brain Show Party Quiz.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1354260,
+                      "name":  "Brave Escape",
+                      "file":  "Brave Escape.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Brave Escape.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2835570,
+                      "name":  "Buckshot Roulette",
+                      "file":  "Buckshot Roulette.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Buckshot Roulette.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  2780470,
+                      "name":  "Bunker Invaders",
+                      "file":  "Bunker Invaders.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Bunker Invaders.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3408110,
+                      "name":  "Cafemart Simulator",
+                      "file":  "Cafemart Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Cafemart Simulator.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  7940,
+                      "name":  "Call of Duty 4: Modern Warfare",
+                      "file":  "Call of Duty 4 Modern Warfare.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty 4 Modern Warfare.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  42700,
+                      "name":  "Call of Duty®: Black Ops",
+                      "file":  "Call of Duty - Black Ops.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty - Black Ops.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1985810,
+                      "name":  "Call of Duty®: Black Ops Cold War",
+                      "file":  "Call of Duty Black Ops Cold War.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Black Ops Cold War.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  202970,
+                      "name":  "Call of Duty®: Black Ops II",
+                      "file":  "Call of Duty® Black Ops II.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty® Black Ops II.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  202970,
+                      "name":  "Call of Duty®: Black Ops II",
+                      "file":  "Black Ops II.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Black Ops II.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  311210,
+                      "name":  "Call of Duty®: Black Ops III",
+                      "file":  "Call of Duty Black Ops III.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Black Ops III.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  209160,
+                      "name":  "Call of Duty®: Ghosts",
+                      "file":  "Call of Duty Ghosts.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Ghosts.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  292730,
+                      "name":  "Call of Duty®: Infinite Warfare",
+                      "file":  "Call of Duty Infinite Warfare.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Infinite Warfare.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2000950,
+                      "name":  "Call of Duty®: Modern Warfare®",
+                      "file":  "Call of Duty Modern Warfare (2019).zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Modern Warfare (2019).zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  10180,
+                      "name":  "Call of Duty®: Modern Warfare® 2 (2009)",
+                      "file":  "Call of Duty Modern Warfare 2 (2009).zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Modern Warfare 2 (2009).zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  115300,
+                      "name":  "Call of Duty®: Modern Warfare® 3 (2011)",
+                      "file":  "Call of Duty Modern Warfare 3 (2011).zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Modern Warfare 3 (2011).zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1985820,
+                      "name":  "Call of Duty®: Vanguard",
+                      "file":  "Call of Duty Vanguard.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call of Duty Vanguard.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  476600,
+                      "name":  "Call of Duty®: WWII",
+                      "file":  "Call Of Duty WWII.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call Of Duty WWII.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  400750,
+                      "name":  "Call to Arms - Gates of Hell: Ostfront",
+                      "file":  "Call to Arms Gates of Hell Ostfront.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Call to Arms Gates of Hell Ostfront.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2400430,
+                      "name":  "Capcom Fighting Collection 2",
+                      "file":  "Capcom Fighting Collection 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Capcom Fighting Collection 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2248760,
+                      "name":  "Car For Sale Simulator 2023",
+                      "file":  "Car For Sale Simulator 2023.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Car For Sale Simulator 2023.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3501070,
+                      "name":  "Car Service Together",
+                      "file":  "CarServiceTogether_Fix_Repair_Steam_V2_Generic.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/CarServiceTogether_Fix_Repair_Steam_V2_Generic.rar",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2457540,
+                      "name":  "Cardfight!! Vanguard Dear Days 2",
+                      "file":  "Cardfight!! Vanguard Dear Days 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Cardfight!! Vanguard Dear Days 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3263320,
+                      "name":  "Carry The Glass",
+                      "file":  "Carry The Glass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Carry The Glass.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  635260,
+                      "name":  "CarX Drift Racing Online",
+                      "file":  "CarX Drift Racing.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/CarX Drift Racing.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1114150,
+                      "name":  "CarX Street",
+                      "file":  "CarX Street.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/CarX Street.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1114150,
+                      "name":  "CarX Street",
+                      "file":  "carxstreet.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/carxstreet.zip",
+                      "type":  "Online, Bypass, Tested"
+                  },
+                  {
+                      "appid":  3060170,
+                      "name":  "Chained in the Backrooms",
+                      "file":  "Chained in the Backrooms.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Chained in the Backrooms.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2567870,
+                      "name":  "Chained Together",
+                      "file":  "Chained Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Chained Together.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  2818480,
+                      "name":  "Chaos Express: Delivery Simulator",
+                      "file":  "Chaos Express Delivery Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Chaos Express Delivery Simulator.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3438990,
+                      "name":  "Cheaters Cheetah",
+                      "file":  "Cheaters Cheetah.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Cheaters Cheetah.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1824220,
+                      "name":  "Chivalry 2",
+                      "file":  "Chivalry 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Chivalry 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1903340,
+                      "name":  "Clair Obscur: Expedition 33",
+                      "file":  "Clair Obscur Expedition 33.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Clair Obscur Expedition 33.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1722870,
+                      "name":  "Clank!",
+                      "file":  "Clank!.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Clank!.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1479730,
+                      "name":  "Commandos: Origins",
+                      "file":  "Commandos Origins.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Commandos Origins.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  440900,
+                      "name":  "Conan Exiles",
+                      "file":  "Conan Exiles.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Conan Exiles.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2186700,
+                      "name":  "Contain",
+                      "file":  "Contain.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Contain.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2719160,
+                      "name":  "Contractors Showdown : ExfilZone",
+                      "file":  "Contractors Showdown.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Contractors Showdown.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2698780,
+                      "name":  "ContractVille",
+                      "file":  "ContractVille.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ContractVille.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1656930,
+                      "name":  "Coridden",
+                      "file":  "Coridden.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Coridden.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  774801,
+                      "name":  "Crab Champions",
+                      "file":  "Crab Champions.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Crab Champions.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2933080,
+                      "name":  "Crime Boss: Rockay City",
+                      "file":  "Crime Boss Rockay City.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Crime Boss Rockay City.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1158310,
+                      "name":  "Crusader Kings III",
+                      "file":  "Crusader Kings III.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Crusader Kings III.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1892140,
+                      "name":  "Cryptid Farm",
+                      "file":  "Cryptid Farm.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Cryptid Farm.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3400000,
+                      "name":  "Cubic Odyssey",
+                      "file":  "Cubic Odyssey.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Cubic Odyssey.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2328310,
+                      "name":  "CUSTOM MECH WARS",
+                      "file":  "CUSTOM MECH WARS.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/CUSTOM MECH WARS.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1116170,
+                      "name":  "CyberCorp",
+                      "file":  "CyberCorp.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/CyberCorp.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2208570,
+                      "name":  "Dark Hours",
+                      "file":  "Dark Hours.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dark Hours.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  374320,
+                      "name":  "DARK SOULS™ III",
+                      "file":  "DARKSOULS III.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/DARKSOULS III.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  570940,
+                      "name":  "DARK SOULS™: REMASTERED",
+                      "file":  "DARK SOULS REMASTERED.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/DARK SOULS REMASTERED.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  262060,
+                      "name":  "Darkest Dungeon®",
+                      "file":  "Darkest Dungeon.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Darkest Dungeon.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  619540,
+                      "name":  "Darkwater",
+                      "file":  "Darkwater.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Darkwater.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2059530,
+                      "name":  "Dawn of Defiance",
+                      "file":  "Dawn of Defiance.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dawn of Defiance.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  221100,
+                      "name":  "DayZ",
+                      "file":  "DayZ (DayZavr).zip",
+                      "url":  "https://generator.ryuu.lol/fixes/DayZ (DayZavr).zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  934700,
+                      "name":  "Dead Island 2",
+                      "file":  "Dead Island 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dead Island 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  383150,
+                      "name":  "Dead Island Definitive Edition",
+                      "file":  "Dead Island Definitive Edition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dead Island Definitive Edition.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  383180,
+                      "name":  "Dead Island: Riptide Definitive Edition",
+                      "file":  "Dead Island Riptide Definitive Edition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dead Island Riptide Definitive Edition.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  543460,
+                      "name":  "Dead Rising 4",
+                      "file":  "Dead Rising 4.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dead Rising 4.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  224060,
+                      "name":  "Deadpool",
+                      "file":  "Deadpool.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Deadpool.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3228590,
+                      "name":  "Deadzone: Rogue",
+                      "file":  "Deadzone Rogue.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Deadzone Rogue.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2599370,
+                      "name":  "DeathWatchers",
+                      "file":  "DeathWatchers.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/DeathWatchers.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  548430,
+                      "name":  "Deep Rock Galactic",
+                      "file":  "Deep Rock Galactic.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Deep Rock Galactic.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1929610,
+                      "name":  "Demonologist",
+                      "file":  "Demonologist.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Demonologist.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2868070,
+                      "name":  "Descending The Woods",
+                      "file":  "Descending The Woods.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Descending The Woods.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1274570,
+                      "name":  "DEVOUR",
+                      "file":  "DEVOUR.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/DEVOUR.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2536520,
+                      "name":  "Diablo II: Resurrected – Infernal Edition",
+                      "file":  "Diablo_II_Resurrected_-_Infernal_Edition_v2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Diablo_II_Resurrected_-_Infernal_Edition_v2.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  1959140,
+                      "name":  "Diesel Legacy: The Brazen Age",
+                      "file":  "Diesel Legacy The Brazen Age.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Diesel Legacy The Brazen Age.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1062520,
+                      "name":  "Dinkum",
+                      "file":  "Dinkum.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dinkum.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  690790,
+                      "name":  "DiRT Rally 2.0",
+                      "file":  "Dirt Rally 2.0.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dirt Rally 2.0.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  782330,
+                      "name":  "DOOM Eternal",
+                      "file":  "Doom Eternal.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Doom Eternal.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  678950,
+                      "name":  "DRAGON BALL FighterZ",
+                      "file":  "Dragon Ball FighterZ.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dragon Ball FighterZ.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  323470,
+                      "name":  "DRAGON BALL XENOVERSE",
+                      "file":  "Dragon Ball Xeno Verse.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dragon Ball Xeno Verse.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1790600,
+                      "name":  "DRAGON BALL: Sparking! ZERO",
+                      "file":  "Dragon Ball Sparking Zero.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dragon Ball Sparking Zero.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1418630,
+                      "name":  "Dread Hunger",
+                      "file":  "Dread Hunger.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dread Hunger.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1855580,
+                      "name":  "DreadHaunt",
+                      "file":  "DreadHaunt.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/DreadHaunt.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2625420,
+                      "name":  "Drive Beyond Horizons",
+                      "file":  "Drive Beyond Horizons.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Drive Beyond Horizons.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  33440,
+                      "name":  "Driver San Francisco",
+                      "file":  "Driver San Francisco.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Driver San Francisco.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1708850,
+                      "name":  "Drug Dealer Simulator 2",
+                      "file":  "Drug Dealer Simulator 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Drug Dealer Simulator 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2939830,
+                      "name":  "Dungeon Done",
+                      "file":  "Dungeon Done.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dungeon Done.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  239140,
+                      "name":  "Dying Light",
+                      "file":  "Dying Light.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dying Light.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  534380,
+                      "name":  "Dying Light 2 Stay Human: Reloaded Edition",
+                      "file":  "Dying Light 2 Stay Human Reloaded Edition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Dying Light 2 Stay Human Reloaded Edition.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2963840,
+                      "name":  "EA SPORTS FC™ 25 SHOWCASE",
+                      "file":  "FC25 SHOWCASE to FC25 FULL GAME.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/FC25 SHOWCASE to FC25 FULL GAME.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1811260,
+                      "name":  "EA SPORTS™ FIFA 23",
+                      "file":  "FIFA 23 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/FIFA 23 Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2291060,
+                      "name":  "EARTH DEFENSE FORCE 6",
+                      "file":  "EARTH DEFENSE FORCE 6.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/EARTH DEFENSE FORCE 6.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1039890,
+                      "name":  "EARTH DEFENSE FORCE: IRON RAIN",
+                      "file":  "EARTH DEFENSE FORCE IRON RAIN.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/EARTH DEFENSE FORCE IRON RAIN.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  382310,
+                      "name":  "Eco",
+                      "file":  "ECO.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ECO.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1259970,
+                      "name":  "eFootball PES 2021 SEASON UPDATE",
+                      "file":  "PES2021.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PES2021.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1245620,
+                      "name":  "ELDEN RING",
+                      "file":  "Elden Ring.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Elden Ring.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2622380,
+                      "name":  "ELDEN RING NIGHTREIGN",
+                      "file":  "ELDEN RING NIGHTREIGN.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ELDEN RING NIGHTREIGN.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3176060,
+                      "name":  "Emissary Zero",
+                      "file":  "Emissary Zero.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Emissary Zero.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2287330,
+                      "name":  "Empire of the Ants",
+                      "file":  "Empire of the Ants.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Empire of the Ants.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1485590,
+                      "name":  "ENDLESS™ Dungeon - Definitive Edition",
+                      "file":  "ENDLESS Dungeon.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ENDLESS Dungeon.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1203620,
+                      "name":  "Enshrouded",
+                      "file":  "Enshrouded.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Enshrouded.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  2602030,
+                      "name":  "Entropy Survivors",
+                      "file":  "Entropy Survivors.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Entropy Survivors.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1258460,
+                      "name":  "Escape First 3",
+                      "file":  "Escape First 3.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Escape First 3.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  227300,
+                      "name":  "Euro Truck Simulator 2",
+                      "file":  "Euro Truck Simulator 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Euro Truck Simulator 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  236850,
+                      "name":  "Europa Universalis IV",
+                      "file":  "Europa Universalis IV.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Europa Universalis IV.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1722840,
+                      "name":  "Everdell",
+                      "file":  "Everdell.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Everdell.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1403650,
+                      "name":  "Everdream Valley",
+                      "file":  "Everdream Valley.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Everdream Valley.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  515220,
+                      "name":  "F1™ 2017",
+                      "file":  "F1 2017.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/F1 2017.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  377160,
+                      "name":  "Fallout 4",
+                      "file":  "Fallout 4.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Fallout 4.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2993780,
+                      "name":  "FANTASY LIFE i: The Girl Who Steals Time",
+                      "file":  "ANTASY LIFE i The Girl Who Steals Time.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ANTASY LIFE i The Girl Who Steals Time.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  220240,
+                      "name":  "Far Cry 3",
+                      "file":  "Far Cry 3 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Far Cry 3 Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  298110,
+                      "name":  "Far Cry® 4",
+                      "file":  "Far Cry 4 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Far Cry 4 Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  2369390,
+                      "name":  "Far Cry® 6",
+                      "file":  "Far Cry 6.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Far Cry 6.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  939960,
+                      "name":  "Far Cry® New Dawn",
+                      "file":  "Far Cry New Dawn.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Far Cry New Dawn.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  371660,
+                      "name":  "Far Cry® Primal",
+                      "file":  "Far Cry Primal.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Far Cry Primal.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  673950,
+                      "name":  "Farm Together",
+                      "file":  "Farm Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Farm Together.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2418520,
+                      "name":  "Farm Together 2",
+                      "file":  "Farm Together 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Farm Together 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2300320,
+                      "name":  "Farming Simulator 25",
+                      "file":  "Farming Simulator 25.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Farming Simulator 25.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2916430,
+                      "name":  "Fast Food Simulator",
+                      "file":  "Fast Food Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Fast Food Simulator.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2492040,
+                      "name":  "FATAL FURY: City of the Wolves",
+                      "file":  "FATAL FURY City of the Wolves.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/FATAL FURY City of the Wolves.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2300230,
+                      "name":  "Feather Party",
+                      "file":  "Feather Party.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Feather Party.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  39140,
+                      "name":  "FINAL FANTASY VII",
+                      "file":  "FINAL FANTASY VII.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/FINAL FANTASY VII.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2374030,
+                      "name":  "Five Nights: No Escape",
+                      "file":  "Five Nights No Escape.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Five Nights No Escape.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  696220,
+                      "name":  "Folklore Hunter",
+                      "file":  "Folklore Hunter.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Folklore Hunter.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1641960,
+                      "name":  "Forever Skies",
+                      "file":  "Forever Skies.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Forever Skies.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1562420,
+                      "name":  "FOREWARNED",
+                      "file":  "FOREWARNED.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/FOREWARNED.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2810780,
+                      "name":  "Forsaken Frontiers",
+                      "file":  "Forsaken Frontiers.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Forsaken Frontiers.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1551360,
+                      "name":  "Forza Horizon 5",
+                      "file":  "Forza Horizon 5.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Forza Horizon 5.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2440510,
+                      "name":  "Forza Motorsport",
+                      "file":  "Forza Motorsport.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Forza Motorsport.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  2707940,
+                      "name":  "FPV Kamikaze Drone",
+                      "file":  "FPV Kamikaze Drone.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/FPV Kamikaze Drone.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3004100,
+                      "name":  "FREEDOM WARS Remastered",
+                      "file":  "FREEDOM WARS Remastered.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/FREEDOM WARS Remastered.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  438740,
+                      "name":  "Friday the 13th: The Game",
+                      "file":  "Friday the 13th The Game.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Friday the 13th The Game.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3441460,
+                      "name":  "Fuel Harvest Together",
+                      "file":  "Fuel Harvest Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Fuel Harvest Together.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1843310,
+                      "name":  "Funko Fusion",
+                      "file":  "Funko Fusion.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Funko Fusion.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2749770,
+                      "name":  "Galaxy Burger",
+                      "file":  "Galaxy Burger.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Galaxy Burger.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3892270,
+                      "name":  "Gamble With Your Friends",
+                      "file":  "GambleWithYourFriends_Fix_Repair_Steam_Generic.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/GambleWithYourFriends_Fix_Repair_Steam_Generic.rar",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  285900,
+                      "name":  "Gang Beasts",
+                      "file":  "Gang Beasts.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Gang Beasts.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  4000,
+                      "name":  "Garry\u0026#39;s Mod",
+                      "file":  "Garrys_Mod_freetp.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Garrys_Mod_freetp.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3044440,
+                      "name":  "Gas Station Manager",
+                      "file":  "Gas Station Manager.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Gas Station Manager.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1618540,
+                      "name":  "Ghost Exorcism INC.",
+                      "file":  "Ghost Exorcism INC.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ghost Exorcism INC.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2215430,
+                      "name":  "Ghost of Tsushima DIRECTOR\u0026#39;S CUT",
+                      "file":  "Ghost of Tsushima DIRECTORS CUT.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ghost of Tsushima DIRECTORS CUT.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2689120,
+                      "name":  "Gladio Mori",
+                      "file":  "Gladio Mori.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Gladio Mori.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1183530,
+                      "name":  "Go Fight Fantastic",
+                      "file":  "Go Fight Fantastic.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Go Fight Fantastic.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  899440,
+                      "name":  "GOD EATER 3",
+                      "file":  "GOD EATER 3.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/GOD EATER 3.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2322010,
+                      "name":  "God of War Ragnarök",
+                      "file":  "God of War Ragnarok.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/God of War Ragnarok.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  571740,
+                      "name":  "Golf It!",
+                      "file":  "Golf It!.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Golf It!.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2627570,
+                      "name":  "Goofy Gorillas",
+                      "file":  "Goofy Gorillas.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Goofy Gorillas.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  881020,
+                      "name":  "Granblue Fantasy: Relink",
+                      "file":  "Granblue Fantasy Relink.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Granblue Fantasy Relink.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  12100,
+                      "name":  "Grand Theft Auto III",
+                      "file":  "GTA III.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/GTA III.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3240220,
+                      "name":  "Grand Theft Auto V Enhanced",
+                      "file":  "Grand_Theft_Auto_V_Enhanced_Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Grand_Theft_Auto_V_Enhanced_Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  271590,
+                      "name":  "Grand Theft Auto V Legacy",
+                      "file":  "GTA V Legacy.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/GTA V Legacy.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1547000,
+                      "name":  "Grand Theft Auto: San Andreas – The Definitive Edition",
+                      "file":  "GTA SA DE.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/GTA SA DE.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1546990,
+                      "name":  "Grand Theft Auto: Vice City – The Definitive Edition",
+                      "file":  "GTA VICE DE.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/GTA VICE DE.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3070520,
+                      "name":  "Granny: Escape Together",
+                      "file":  "Granny Escape Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Granny Escape Together.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2961880,
+                      "name":  "Grocery Store Simulator",
+                      "file":  "Grocery Store Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Grocery Store Simulator.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  16900,
+                      "name":  "GROUND BRANCH",
+                      "file":  "Ground Branch.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ground Branch.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  962130,
+                      "name":  "Grounded",
+                      "file":  "Grounded.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Grounded.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  493520,
+                      "name":  "GTFO",
+                      "file":  "GTFO.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/GTFO.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3400930,
+                      "name":  "Guilty as Sock!",
+                      "file":  "Guilty as Sock!.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Guilty as Sock!.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1672500,
+                      "name":  "GUNDAM BREAKER 4",
+                      "file":  "Gundam Breaker 4.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Gundam Breaker 4.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  70,
+                      "name":  "Half-Life",
+                      "file":  "Half-Life.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Half-Life.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1691320,
+                      "name":  "Hellbreach: Vegas",
+                      "file":  "Hellbreach Vegas.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Hellbreach Vegas.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  553850,
+                      "name":  "HELLDIVERS™ 2",
+                      "file":  "HELLDIVERS.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/HELLDIVERS.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  619820,
+                      "name":  "Heroes of Hammerwatch II",
+                      "file":  "Heroes of Hammerwatch 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Heroes of Hammerwatch 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1729140,
+                      "name":  "Hired 2 Die",
+                      "file":  "Hired2Die.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Hired2Die.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1659040,
+                      "name":  "HITMAN World of Assassination",
+                      "file":  "HITMAN World of Assassination.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/HITMAN World of Assassination.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  203140,
+                      "name":  "Hitman: Absolution™",
+                      "file":  "HITMAN Absolution.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/HITMAN Absolution.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  632300,
+                      "name":  "Hobo: Tough Life",
+                      "file":  "Hobo Tough Life.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Hobo Tough Life.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  990080,
+                      "name":  "Hogwarts Legacy",
+                      "file":  "Hogwarts Legacy - Specific Version.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Hogwarts Legacy - Specific Version.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2774380,
+                      "name":  "Hospital 666",
+                      "file":  "Hospital 666.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Hospital 666.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1190970,
+                      "name":  "House Flipper 2",
+                      "file":  "House Flipper 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/House Flipper 2.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  477160,
+                      "name":  "Human Fall Flat",
+                      "file":  "Human Fall Flat.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Human Fall Flat.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1124300,
+                      "name":  "HUMANKIND™",
+                      "file":  "HUMANKIND.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/HUMANKIND.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1534840,
+                      "name":  "Hyper Light Breaker",
+                      "file":  "Hyper Light Breaker.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Hyper Light Breaker.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  523660,
+                      "name":  "HYPERCHARGE: Unboxed",
+                      "file":  "HYPERCHARGE Unboxed.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/HYPERCHARGE Unboxed.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3447690,
+                      "name":  "iDigging",
+                      "file":  "iDigging.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/iDigging.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2271930,
+                      "name":  "IfSunSets",
+                      "file":  "IfSunSets.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/IfSunSets.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1858650,
+                      "name":  "In Sink: A Co-op Escape Adventure",
+                      "file":  "In Sink A Co-op Escape Adventure.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/In Sink A Co-op Escape Adventure.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2799860,
+                      "name":  "INAZUMA ELEVEN: Victory Road",
+                      "file":  "INAZUMAELEVENVictoryRoad_Fix_Repair_Steam_Generic.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/INAZUMAELEVENVictoryRoad_Fix_Repair_Steam_Generic.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2116120,
+                      "name":  "Incursion Red River",
+                      "file":  "Incursion Red River.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Incursion Red River.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1426210,
+                      "name":  "It Takes Two",
+                      "file":  "It Takes Two.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/It Takes Two.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2058180,
+                      "name":  "Judgment",
+                      "file":  "Judgment Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Judgment Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1877020,
+                      "name":  "Jujutsu Kaisen Cursed Clash",
+                      "file":  "Jujutsu Kaisen Cursed Clash.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Jujutsu Kaisen Cursed Clash.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  816020,
+                      "name":  "JUMP FORCE",
+                      "file":  "Jump Force Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Jump Force Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2331130,
+                      "name":  "Just Another Night Shift",
+                      "file":  "Just Another Night Shift.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Just Another Night Shift.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  517630,
+                      "name":  "Just Cause 4 Reloaded",
+                      "file":  "Just Cause 4 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Just Cause 4 Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  225540,
+                      "name":  "Just Cause™ 3",
+                      "file":  "Just Cause 3 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Just Cause 3 Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2354330,
+                      "name":  "Keep Keepers",
+                      "file":  "Keep Keepers.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Keep Keepers.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2357000,
+                      "name":  "KILL IT WITH FIRE! 2",
+                      "file":  "Kill It With Fire 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Kill It With Fire 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1307890,
+                      "name":  "Kingdoms Reborn",
+                      "file":  "Kingdoms Reborn.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Kingdoms Reborn.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2107090,
+                      "name":  "KitHack Model Club",
+                      "file":  "KitHack Model Club.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/KitHack Model Club.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  736820,
+                      "name":  "Knights of Honor II: Sovereign",
+                      "file":  "Knights of Honor II Sovereign.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Knights of Honor II Sovereign.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1302240,
+                      "name":  "Labyrinthine",
+                      "file":  "Labyrinthine.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Labyrinthine.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  511440,
+                      "name":  "Last Year: The Nightmare",
+                      "file":  "Last Year the Nightmare.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Last Year the Nightmare.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  550,
+                      "name":  "Left 4 Dead 2",
+                      "file":  "Left 4 Dead 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Left 4 Dead 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2215200,
+                      "name":  "LEGO® Batman™: Legacy of the Dark Knight",
+                      "file":  "LEGO.Batman.Legacy.of.the.Dark.Knight-voices38.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/LEGO.Batman.Legacy.of.the.Dark.Knight-voices38.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1820380,
+                      "name":  "Let\u0026#39;s Cook",
+                      "file":  "Let\u0026#39;s Cook.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Let\u0026#39;s Cook.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1966720,
+                      "name":  "Lethal Company",
+                      "file":  "Lethal Company.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Lethal Company.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3097560,
+                      "name":  "Liar\u0026#39;s Bar",
+                      "file":  "Liar\u0026#39;s Bar.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Liar\u0026#39;s Bar.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  410340,
+                      "name":  "Liftoff®: FPV Drone Racing",
+                      "file":  "Liftoff.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Liftoff.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3107800,
+                      "name":  "LIZARDS MUST DIE 2",
+                      "file":  "LIZARDS MUST DIE 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/LIZARDS MUST DIE 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2780980,
+                      "name":  "LOCKDOWN Protocol",
+                      "file":  "LOCKDOWN Protocol.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/LOCKDOWN Protocol.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1501750,
+                      "name":  "Lords of the Fallen",
+                      "file":  "Lords of the Fallen.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Lords of the Fallen.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2903710,
+                      "name":  "Lost Lullabies: The Orphanage Chronicles",
+                      "file":  "Lost Lullabies The Orphanage Chronicles.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Lost Lullabies The Orphanage Chronicles.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1931180,
+                      "name":  "Lost Skies",
+                      "file":  "Lost Skies.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Lost Skies.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2408820,
+                      "name":  "Luma Island",
+                      "file":  "Luma Island.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Luma Island.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  234140,
+                      "name":  "Mad Max",
+                      "file":  "MAD MAX Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/MAD MAX Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  50130,
+                      "name":  "Mafia II (Classic)",
+                      "file":  "Mafia_II_Classic_Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mafia_II_Classic_Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1941540,
+                      "name":  "Mafia: The Old Country",
+                      "file":  "Mafia.The.Old.Country-voices38.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Mafia.The.Old.Country-voices38.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  3716600,
+                      "name":  "Mage Arena",
+                      "file":  "MageArena_Fix_Repair_Steam_Generic.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/MageArena_Fix_Repair_Steam_Generic.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  493840,
+                      "name":  "Marvel vs. Capcom: Infinite",
+                      "file":  "Marvel vs Capcom Infinite.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Marvel vs Capcom Infinite.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1088850,
+                      "name":  "Marvel\u0026#39;s Guardians of the Galaxy",
+                      "file":  "Marvel\u0026#39;s Guardians of the Galaxy Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Marvel\u0026#39;s Guardians of the Galaxy Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  433300,
+                      "name":  "Marvel: Ultimate Alliance",
+                      "file":  "Marvel Ultimate Alliance.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Marvel Ultimate Alliance.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1328670,
+                      "name":  "Mass Effect™ Legendary Edition",
+                      "file":  "Mass Effect Legendary Edition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mass Effect Legendary Edition.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1238000,
+                      "name":  "Mass Effect™: Andromeda Deluxe Edition",
+                      "file":  "Mass Effect Andromeda.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mass Effect Andromeda.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  204100,
+                      "name":  "Max Payne 3",
+                      "file":  "Max Payne 3 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Max Payne 3 Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  4704690,
+                      "name":  "MECCHA CHAMELEON",
+                      "file":  "MecchaChameleon_Fix_Repair_Steam_Generic.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/MecchaChameleon_Fix_Repair_Steam_Generic.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2061620,
+                      "name":  "Mechanic Heroes",
+                      "file":  "Mechanic Heroes.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mechanic Heroes.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1129580,
+                      "name":  "Medieval Dynasty",
+                      "file":  "Medieval Dynasty.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Medieval Dynasty.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2450450,
+                      "name":  "MEGATON MUSASHI W: WIRED",
+                      "file":  "MEGATON MUSASHI W WIRED.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/MEGATON MUSASHI W WIRED.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1268590,
+                      "name":  "Millennia",
+                      "file":  "Millennia.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Millennia.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3265250,
+                      "name":  "MindsEye",
+                      "file":  "Mindseye.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mindseye.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1672970,
+                      "name":  "Minecraft Dungeons",
+                      "file":  "MinecraftDungeons_Fix_Repair_GDK.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/MinecraftDungeons_Fix_Repair_GDK.rar",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1233570,
+                      "name":  "Mirror\u0026#39;s Edge™ Catalyst",
+                      "file":  "Mirror\u0026#39;s Edge™ Catalyst.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mirror\u0026#39;s Edge™ Catalyst.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1063030,
+                      "name":  "Monaco 2",
+                      "file":  "MONACO 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/MONACO 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1446780,
+                      "name":  "MONSTER HUNTER RISE",
+                      "file":  "MONSTER HUNTER RISE.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/MONSTER HUNTER RISE.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  307780,
+                      "name":  "Mortal Kombat X",
+                      "file":  "Mortal Kombat X.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mortal Kombat X.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  976310,
+                      "name":  "Mortal Kombat 11",
+                      "file":  "Mortal Kombat 11.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mortal Kombat 11.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  261550,
+                      "name":  "Mount \u0026amp; Blade II: Bannerlord",
+                      "file":  "Mount \u0026amp; Blade II Bannerlord.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Mount \u0026amp; Blade II Bannerlord.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  996770,
+                      "name":  "Moving Out",
+                      "file":  "Moving Out.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Moving Out.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2263920,
+                      "name":  "Multiplayer Platform Golf",
+                      "file":  "Multiplayer Platform Golf.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Multiplayer Platform Golf.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2963880,
+                      "name":  "Murky Divers",
+                      "file":  "Murky Divers.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Murky Divers.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  516750,
+                      "name":  "My Summer Car",
+                      "file":  "My Summer Car.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/My Summer Car.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1371580,
+                      "name":  "Myth of Empires",
+                      "file":  "Myth of Empires.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Myth of Empires.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  363860,
+                      "name":  "MythForce",
+                      "file":  "MythForce.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/MythForce.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  349040,
+                      "name":  "NARUTO SHIPPUDEN: Ultimate Ninja STORM 4",
+                      "file":  "Naruto Shippuden Ultimate Ninja STORM 4.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Naruto Shippuden Ultimate Ninja STORM 4.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  272510,
+                      "name":  "NARUTO SHIPPUDEN: Ultimate Ninja STORM Revolution",
+                      "file":  "NARUTO SHIPPUDEN Ultimate Ninja STORM Revolution.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/NARUTO SHIPPUDEN Ultimate Ninja STORM Revolution.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1020790,
+                      "name":  "NARUTO X BORUTO Ultimate Ninja STORM CONNECTIONS",
+                      "file":  "Naruto x Boruto Ultimate Ninja Storm Connections.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Naruto x Boruto Ultimate Ninja Storm Connections.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1127980,
+                      "name":  "NASCAR Heat 4",
+                      "file":  "NASCAR Heat 4.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/NASCAR Heat 4.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1265860,
+                      "name":  "NASCAR Heat 5",
+                      "file":  "NASCAR Heat 5.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/NASCAR Heat 5.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1262560,
+                      "name":  "Need for Speed™ Most Wanted",
+                      "file":  "Need for Speed Most Wanted Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Need for Speed Most Wanted Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1262580,
+                      "name":  "Need for Speed™ Payback",
+                      "file":  "Need For Speed PayBack.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Need For Speed PayBack.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1262600,
+                      "name":  "Need for Speed™ Rivals",
+                      "file":  "Need For Speed Rival Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Need For Speed Rival Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1732430,
+                      "name":  "Neighbors: Suburban Warfare",
+                      "file":  "Neighbors Suburban Warfare.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Neighbors Suburban Warfare.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1983990,
+                      "name":  "Nexus 5X",
+                      "file":  "Stellaris Nexus.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Stellaris Nexus.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1377380,
+                      "name":  "Night of the Dead",
+                      "file":  "Night of the Dead.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Night of the Dead.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3376250,
+                      "name":  "Nine-Ball Roulette",
+                      "file":  "Nine-Ball Roulette.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Nine-Ball Roulette.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1325200,
+                      "name":  "Nioh 2 – The Complete Edition",
+                      "file":  "Nioh 2 The Complete Edition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Nioh 2 The Complete Edition.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  275850,
+                      "name":  "No Man\u0026#39;s Sky",
+                      "file":  "No Man\u0026#39;s Sky Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/No Man\u0026#39;s Sky Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2732610,
+                      "name":  "Nobody Sleeps Tonight",
+                      "file":  "Nobody Sleeps Tonight.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Nobody Sleeps Tonight.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2909110,
+                      "name":  "Nuclear Nightmare",
+                      "file":  "Nuclear Nightmare.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Nuclear Nightmare.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2168680,
+                      "name":  "Nuclear Option",
+                      "file":  "Nuclear Option.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Nuclear Option.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1745680,
+                      "name":  "Odd Remedy",
+                      "file":  "Odd Remedy.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Odd Remedy.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2262080,
+                      "name":  "Omega Crafter",
+                      "file":  "Omega Crafter.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Omega Crafter.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  425220,
+                      "name":  "One Piece Burning Blood",
+                      "file":  "One Piece Burning Blood.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/One Piece Burning Blood.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2500750,
+                      "name":  "Only Climb: Better Together",
+                      "file":  "Only Climb Better Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Only Climb Better Together.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2928650,
+                      "name":  "Only Up: SKIBIDI TOGETHER",
+                      "file":  "Only Up SKIBIDI TOGETHER.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Only Up SKIBIDI TOGETHER.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2522520,
+                      "name":  "Only Up: With Friends",
+                      "file":  "Only_Up_With_Friends_FREETP.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Only_Up_With_Friends_FREETP.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1913370,
+                      "name":  "OPERATOR",
+                      "file":  "OPERATOR.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/OPERATOR.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2273980,
+                      "name":  "Orcs Must Die! Deathtrap",
+                      "file":  "Orcs Must Die! Deathtrap.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Orcs Must Die! Deathtrap.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  402710,
+                      "name":  "Osiris: New Dawn",
+                      "file":  "Osiris New Dawn.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Osiris New Dawn.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2009350,
+                      "name":  "Out of Ore",
+                      "file":  "Out of Ore.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Out of Ore.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1107320,
+                      "name":  "OUTBRK",
+                      "file":  "OUTBRK.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/OUTBRK.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  753640,
+                      "name":  "Outer Wilds",
+                      "file":  "Outer Wilds.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Outer Wilds.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  680420,
+                      "name":  "OUTRIDERS",
+                      "file":  "OUTRIDERS.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/OUTRIDERS.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1243830,
+                      "name":  "Overcooked! All You Can Eat",
+                      "file":  "Overcooked! All You Can Eat.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Overcooked! All You Can Eat.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1830630,
+                      "name":  "Overpass 2",
+                      "file":  "Overpass 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Overpass 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1133500,
+                      "name":  "Overthrown",
+                      "file":  "Overthrown.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Overthrown.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  967050,
+                      "name":  "Pacify",
+                      "file":  "Pacify.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Pacify.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1623730,
+                      "name":  "Palworld",
+                      "file":  "Palworld.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Palworld.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3036880,
+                      "name":  "Panic In The Woods",
+                      "file":  "Panic In The Woods.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Panic In The Woods.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2695940,
+                      "name":  "PANICORE",
+                      "file":  "PANICORE.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PANICORE.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1592290,
+                      "name":  "PARANOIA PLACE",
+                      "file":  "PARANOIA PLACE.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PARANOIA PLACE.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1726130,
+                      "name":  "Pathless Woods",
+                      "file":  "Pathless Woods.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Pathless Woods.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  218620,
+                      "name":  "PAYDAY 2",
+                      "file":  "PAYDAY 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PAYDAY 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1272080,
+                      "name":  "PAYDAY 3",
+                      "file":  "PAYDAY 3.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PAYDAY 3.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3527290,
+                      "name":  "PEAK",
+                      "file":  "Peak.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Peak.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1521580,
+                      "name":  "Perfect Heist 2",
+                      "file":  "Perfect Heist 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Perfect Heist 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1687950,
+                      "name":  "Persona 5 Royal",
+                      "file":  "Persona.5.Royal.CRACKONLY-MKDEV.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Persona.5.Royal.CRACKONLY-MKDEV.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  739630,
+                      "name":  "Phasmophobia",
+                      "file":  "Phasmophobia.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Phasmophobia.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1509960,
+                      "name":  "PICO PARK",
+                      "file":  "PICO PARK.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PICO PARK.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2644470,
+                      "name":  "PICO PARK 2",
+                      "file":  "PICO PARK 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PICO PARK 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  246620,
+                      "name":  "Plague Inc: Evolved",
+                      "file":  "Plague Inc Evolved.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Plague Inc Evolved.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2800450,
+                      "name":  "Planetaries",
+                      "file":  "Planetaries.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Planetaries.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3654560,
+                      "name":  "Plants vs. Zombies™: Replanted",
+                      "file":  "Plants_vs_Zombies.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Plants_vs_Zombies.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  997010,
+                      "name":  "Police Simulator: Patrol Officers",
+                      "file":  "Police Simulator Patrol Officers.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Police Simulator Patrol Officers.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  620,
+                      "name":  "Portal 2",
+                      "file":  "Portal 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Portal 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1290000,
+                      "name":  "PowerWash Simulator",
+                      "file":  "PowerWash Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PowerWash Simulator.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3357650,
+                      "name":  "PRAGMATA",
+                      "file":  "Pragmata-voices38.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Pragmata-voices38.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  33320,
+                      "name":  "Prince of Persia: The Forgotten Sands™",
+                      "file":  "Prince of Persia The Forgotten Sands Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Prince of Persia The Forgotten Sands Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2725200,
+                      "name":  "Prisoners",
+                      "file":  "Prisoners.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Prisoners.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2115390,
+                      "name":  "Project Unknown",
+                      "file":  "Project Unknown.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Project Unknown.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  108600,
+                      "name":  "Project Zomboid",
+                      "file":  "Project Zomboid.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Project Zomboid.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1682050,
+                      "name":  "PropHunter",
+                      "file":  "PropHunter.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/PropHunter.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  115320,
+                      "name":  "Prototype 2",
+                      "file":  "ProtoType 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ProtoType 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3030360,
+                      "name":  "Puppet Team",
+                      "file":  "Puppet Team.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Puppet Team.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3298460,
+                      "name":  "Pushing it! Together - Sisyphus Co-op",
+                      "file":  "Pushing it! Together Sisyphus.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Pushing it! Together Sisyphus.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3241660,
+                      "name":  "R.E.P.O.",
+                      "file":  "R.E.P.O.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/R.E.P.O.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  3241660,
+                      "name":  "R.E.P.O.",
+                      "file":  "R.E.P.O_Update.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/R.E.P.O_Update.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  648800,
+                      "name":  "Raft",
+                      "file":  "Raft.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Raft.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  1677970,
+                      "name":  "Railroad Corporation 2",
+                      "file":  "Railroad Corporation 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Railroad Corporation 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1644320,
+                      "name":  "Railway Empire 2",
+                      "file":  "RAILWAY EMPIRE 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/RAILWAY EMPIRE 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  242550,
+                      "name":  "Rayman Legends",
+                      "file":  "Rayman_Legends_Baypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Rayman_Legends_Baypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1144200,
+                      "name":  "Ready or Not",
+                      "file":  "Ready Or Not.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ready Or Not.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2668510,
+                      "name":  "Red Dead Redemption",
+                      "file":  "Red Dead Redemption 1 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Red Dead Redemption 1 Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  1174180,
+                      "name":  "Red Dead Redemption 2",
+                      "file":  "Red Dead Redemption 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Red Dead Redemption 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1282100,
+                      "name":  "REMNANT II®",
+                      "file":  "Remnant II.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Remnant II.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2533020,
+                      "name":  "Renaissance Kingdom Wars",
+                      "file":  "Renaissance Kingdom Wars.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Renaissance Kingdom Wars.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2050650,
+                      "name":  "Resident Evil 4",
+                      "file":  "Resident Evil 4 Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Resident Evil 4 Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  3764200,
+                      "name":  "Resident Evil Requiem",
+                      "file":  "Resident.Evil.Requiem.HYPERVISOR.V3-KIRIGIRI-PATCH-FIX.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Resident.Evil.Requiem.HYPERVISOR.V3-KIRIGIRI-PATCH-FIX.zip",
+                      "type":  "Bypass, Hypervisor, Bypass, Specific Version, Extra Steps"
+                  },
+                  {
+                      "appid":  222480,
+                      "name":  "Resident Evil Revelations",
+                      "file":  "RESIDENT_EVIL_REVELATIONS_SAVE_FIX_STEAM.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/RESIDENT_EVIL_REVELATIONS_SAVE_FIX_STEAM.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1196590,
+                      "name":  "Resident Evil Village",
+                      "file":  "Resident.Evil.Village.RUNE.Crack.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Resident.Evil.Village.RUNE.Crack.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2787320,
+                      "name":  "Revenge of the Savage Planet",
+                      "file":  "Revenge of the Savage Planet.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Revenge of the Savage Planet.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2290180,
+                      "name":  "Riders Republic",
+                      "file":  "Riders Republic Ubisoft Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Riders Republic Ubisoft Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  1340990,
+                      "name":  "Rise of the Ronin",
+                      "file":  "Rise Of The Ronin.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Rise Of The Ronin.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2104890,
+                      "name":  "RoadCraft",
+                      "file":  "Roadcraft.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Roadcraft.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3643170,
+                      "name":  "Roadside Research",
+                      "file":  "RoadsideResearch_Fix_Repair_Steam_Generic.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/RoadsideResearch_Fix_Repair_Steam_Generic.rar",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2703850,
+                      "name":  "Rooftops \u0026amp; Alleys: The Parkour Game",
+                      "file":  "Rooftops \u0026amp; Alleys The Parkour Game.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Rooftops \u0026amp; Alleys The Parkour Game.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2015270,
+                      "name":  "Rotwood",
+                      "file":  "Rotwood.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Rotwood.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1374490,
+                      "name":  "RuneScape: Dragonwilds",
+                      "file":  "Runescape Dragonwilds.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Runescape Dragonwilds.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3949040,
+                      "name":  "RV There Yet?",
+                      "file":  "RVThereYet_Fix_Repair_Steam_V2_Generic.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/RVThereYet_Fix_Repair_Steam_V2_Generic.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1643320,
+                      "name":  "S.T.A.L.K.E.R. 2: Heart of Chornobyl",
+                      "file":  "S.T.A.L.K.E.R. 2 Heart of Chornobyl.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/S.T.A.L.K.E.R. 2 Heart of Chornobyl.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1599660,
+                      "name":  "Sackboy™: A Big Adventure",
+                      "file":  "Sackboy Big Adventure.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sackboy Big Adventure.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  301910,
+                      "name":  "Saints Row: Gat out of Hell",
+                      "file":  "Saint Row Get Out Of Hell.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Saint Row Get Out Of Hell.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2719200,
+                      "name":  "SAMURAI WARRIORS 4 DX",
+                      "file":  "Samurai Warriors 4 DX.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Samurai Warriors 4 DX.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  526870,
+                      "name":  "Satisfactory",
+                      "file":  "Satisfactory.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Satisfactory.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3164500,
+                      "name":  "Schedule I",
+                      "file":  "Schedule 1.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Schedule 1.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  872670,
+                      "name":  "SCP: 5K",
+                      "file":  "SCP 5k.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/SCP 5k.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3111080,
+                      "name":  "Secret Agent Wizard Boy and the International Crime Syndicate",
+                      "file":  "Secret Agent Wizard Boy And The International Crime Syndicate.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Secret Agent Wizard Boy And The International Crime Syndicate.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1702010,
+                      "name":  "Sengoku Dynasty",
+                      "file":  "Sengoku Dynasty.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sengoku Dynasty.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1252680,
+                      "name":  "SENTRY",
+                      "file":  "SENTRY.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/SENTRY.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2436940,
+                      "name":  "Sephiria",
+                      "file":  "Sephiria.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sephiria.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  257420,
+                      "name":  "Serious Sam 4",
+                      "file":  "Serious Sam 4.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Serious Sam 4.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2201940,
+                      "name":  "Ship Graveyard Simulator 2",
+                      "file":  "Ship Graveyard Simulator 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ship Graveyard Simulator 2.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1266540,
+                      "name":  "Ships At Sea",
+                      "file":  "Shipts at Sea.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Shipts at Sea.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  289070,
+                      "name":  "Sid Meier’s Civilization® VI",
+                      "file":  "Sid Meiers Civilization VI.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sid Meiers Civilization VI.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1791910,
+                      "name":  "Silent Rain",
+                      "file":  "Silent Rain.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Silent Rain.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1575940,
+                      "name":  "Sins of a Solar Empire II",
+                      "file":  "Sins of a Solar Empire II.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sins of a Solar Empire II.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1548850,
+                      "name":  "Six Days in Fallujah",
+                      "file":  "Six Days in Fallujah.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Six Days in Fallujah.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2354000,
+                      "name":  "Slackers - Carts of Glory",
+                      "file":  "Slackers Carts of Glory.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Slackers Carts of Glory.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  202170,
+                      "name":  "Sleeping Dogs",
+                      "file":  "Sleeping Dogs - FitGirl.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sleeping Dogs - FitGirl.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  202170,
+                      "name":  "Sleeping Dogs",
+                      "file":  "Sleeping Dogs Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sleeping Dogs Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  307690,
+                      "name":  "Sleeping Dogs: Definitive Edition",
+                      "file":  "Sleeping Dogs Definitive Edition Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sleeping Dogs Definitive Edition Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1465360,
+                      "name":  "SnowRunner",
+                      "file":  "SnowRunner.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/SnowRunner.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1893810,
+                      "name":  "Solium Infernum",
+                      "file":  "Solium Infernum.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Solium Infernum.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2195410,
+                      "name":  "Songs of Silence",
+                      "file":  "Songs of Silence.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Songs of Silence.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  212480,
+                      "name":  "Sonic \u0026amp; All-Stars Racing Transformed Collection",
+                      "file":  "Sonic \u0026amp; All-Stars Racing Transformed Collection.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sonic \u0026amp; All-Stars Racing Transformed Collection.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  2055290,
+                      "name":  "Sonic Colors: Ultimate",
+                      "file":  "Sonic.Colors.Ultimate.Crack.Only-voices38.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Sonic.Colors.Ultimate.Crack.Only-voices38.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  637100,
+                      "name":  "Sonic Forces",
+                      "file":  "Sonic.Forces-cpy.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Sonic.Forces-cpy.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1237320,
+                      "name":  "Sonic Frontiers",
+                      "file":  "Sonic.Frontiers.Crack.Only-voices38.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Sonic.Frontiers.Crack.Only-voices38.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1326470,
+                      "name":  "Sons Of The Forest",
+                      "file":  "Sons Of The Forest.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Sons Of The Forest.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  544750,
+                      "name":  "SOULCALIBUR VI",
+                      "file":  "SOULCALIBUR VI.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/SOULCALIBUR VI.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2646460,
+                      "name":  "Soulmask",
+                      "file":  "Soul Mask.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Soul Mask.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  213670,
+                      "name":  "South Park™: The Stick of Truth™",
+                      "file":  "South_Park_-_The_Stick_of_Truth_Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/South_Park_-_The_Stick_of_Truth_Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1624060,
+                      "name":  "Space for Sale",
+                      "file":  "Space for Sale.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Space for Sale.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1732420,
+                      "name":  "Spanky!",
+                      "file":  "Spanky.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Spanky.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2620240,
+                      "name":  "Spectral Scream",
+                      "file":  "Spectral Scream.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Spectral Scream.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  231990,
+                      "name":  "Spider-Man: Shattered Dimensions",
+                      "file":  "Spider-Man Shattered Dimensions.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Spider-Man Shattered Dimensions.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1592110,
+                      "name":  "Spirit of the Island",
+                      "file":  "Spirit of the Island.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Spirit of the Island.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2001120,
+                      "name":  "Split Fiction",
+                      "file":  "Split Fiction.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Split Fiction.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  393380,
+                      "name":  "Squad",
+                      "file":  "Squad.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Squad.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2977620,
+                      "name":  "Squirreled Away",
+                      "file":  "Squirreled Away.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Squirreled Away.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  9900,
+                      "name":  "Star Trek Online",
+                      "file":  "Star Trek.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Star Trek.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1172380,
+                      "name":  "STAR WARS Jedi: Fallen Order™",
+                      "file":  "Star Wars Jedi Fallen Order.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Star Wars Jedi Fallen Order.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1774580,
+                      "name":  "STAR WARS Jedi: Survivor™",
+                      "file":  "Star Wars Jedi Survivor.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Star Wars Jedi Survivor.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1237950,
+                      "name":  "STAR WARS™ Battlefront™ II",
+                      "file":  "Star Wars Battlefront II.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Star Wars Battlefront II.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2793380,
+                      "name":  "Starground",
+                      "file":  "Starground.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Starground.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3489700,
+                      "name":  "Stellar Blade",
+                      "file":  "Stellar.Blade-voices38.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Stellar.Blade-voices38.rar",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1442430,
+                      "name":  "Storage Hunter Simulator",
+                      "file":  "StorageHunterSimulator_Fix_Repair_Steam_Generic.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/StorageHunterSimulator_Fix_Repair_Steam_Generic.rar",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3213600,
+                      "name":  "Store Wars: Multiplayer Shop Simulator",
+                      "file":  "Store Wars Multiplayer Shop Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Store Wars Multiplayer Shop Simulator.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3125250,
+                      "name":  "STORROR Parkour Pro",
+                      "file":  "STORROR Parkour Pro.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/STORROR Parkour Pro.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3075800,
+                      "name":  "Subterranauts",
+                      "file":  "Subterranauts.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Subterranauts.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2846060,
+                      "name":  "Subterror",
+                      "file":  "Subterror.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Subterror.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  315210,
+                      "name":  "Suicide Squad: Kill the Justice League",
+                      "file":  "Suicide Squad Kill The Justice League.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Suicide Squad Kill The Justice League.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2670630,
+                      "name":  "Supermarket Simulator",
+                      "file":  "Supermarket_Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Supermarket_Simulator.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1601330,
+                      "name":  "Survival Machine",
+                      "file":  "Survival Machine.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Survival Machine.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2999090,
+                      "name":  "Survivor World",
+                      "file":  "Survivor World.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Survivor World.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1763250,
+                      "name":  "SWORN",
+                      "file":  "SWORN.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/SWORN.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  286160,
+                      "name":  "Tabletop Simulator",
+                      "file":  "Tabletop Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Tabletop Simulator.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1498130,
+                      "name":  "Tank Squad",
+                      "file":  "Tank Squad.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Tank Squad.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2165470,
+                      "name":  "Taora : Survival",
+                      "file":  "Taora Survival.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Taora Survival.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  389730,
+                      "name":  "TEKKEN 7",
+                      "file":  "Tekken 7.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Tekken 7.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2510960,
+                      "name":  "Temtem: Swarm",
+                      "file":  "Temtem Swarm.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Temtem Swarm.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  105600,
+                      "name":  "Terraria",
+                      "file":  "Terraria.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Terraria.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3172770,
+                      "name":  "Terrorbytes",
+                      "file":  "Terrorbytes.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Terrorbytes.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2960770,
+                      "name":  "The Anomaly Project",
+                      "file":  "The Anomaly Project.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Anomaly Project.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2518430,
+                      "name":  "The Backrooms : Last Expedition",
+                      "file":  "The Backrooms Last Expedition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Backrooms Last Expedition.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  250900,
+                      "name":  "The Binding of Isaac: Rebirth",
+                      "file":  "The Binding of Isaac Rebirth.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Binding of Isaac Rebirth.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2189670,
+                      "name":  "The Black Pool",
+                      "file":  "The Black Pool.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Black Pool.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1281590,
+                      "name":  "The Dark Pictures Anthology: House of Ashes",
+                      "file":  "The Dark Pictures Anthology House of Ashes.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Dark Pictures Anthology House of Ashes.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1194630,
+                      "name":  "The Dark Pictures Anthology: Little Hope",
+                      "file":  "The Dark Pictures Anthology Little Hope.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Dark Pictures Anthology Little Hope.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  939850,
+                      "name":  "The Dark Pictures Anthology: Man of Medan",
+                      "file":  "The Dark Pictures Anthology Man of Medan.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Dark Pictures Anthology Man of Medan.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1567020,
+                      "name":  "The Dark Pictures Anthology: The Devil in Me",
+                      "file":  "The Dark Pictures Anthology The Devil in Me.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Dark Pictures Anthology The Devil in Me.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  242760,
+                      "name":  "The Forest",
+                      "file":  "The Forest Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Forest Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  2828860,
+                      "name":  "The Forever Winter",
+                      "file":  "The Forever Winter.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Forever Winter.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2285150,
+                      "name":  "The Front",
+                      "file":  "The Front.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Front.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3059070,
+                      "name":  "The Headliners",
+                      "file":  "The Headliners.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Headliners.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  774461,
+                      "name":  "The Jackbox Party Pack 5",
+                      "file":  "The Jackbox Party Pack 5.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Jackbox Party Pack 5.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2948640,
+                      "name":  "The Jackbox Survey Scramble",
+                      "file":  "The Jackbox Survey Scramble.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Jackbox Survey Scramble.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2757810,
+                      "name":  "The Jump Guys",
+                      "file":  "The Jump Guys.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Jump Guys.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1498570,
+                      "name":  "THE KING OF FIGHTERS XV",
+                      "file":  "The King of Fighters XV.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The King of Fighters XV.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1564600,
+                      "name":  "The Last Plague: Blight",
+                      "file":  "The Last Plague Blight.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Last Plague Blight.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1284190,
+                      "name":  "The Planet Crafter",
+                      "file":  "The Planet Crafter.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Planet Crafter.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1577120,
+                      "name":  "The Quarry",
+                      "file":  "The Quarry.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Quarry.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2904000,
+                      "name":  "The Spell Brigade",
+                      "file":  "The Spell Brigade.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/The Spell Brigade.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  1245250,
+                      "name":  "Thrive: Heavy Lies The Crown",
+                      "file":  "Thrive Heavy Lies The Crown.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Thrive Heavy Lies The Crown.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2264340,
+                      "name":  "TIEBREAK+: Official Game of the ATP and WTA",
+                      "file":  "TIEBREAK+ Official game of the ATP and WTA.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/TIEBREAK+ Official game of the ATP and WTA.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3211680,
+                      "name":  "Tobacco Shop Simulator",
+                      "file":  "Tobacco Shop Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Tobacco Shop Simulator.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2455340,
+                      "name":  "Together in Between",
+                      "file":  "Together in Between.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Together in Between.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  460930,
+                      "name":  "Tom Clancy\u0026#39;s Ghost Recon® Wildlands",
+                      "file":  "Tom Clancy\u0026#39;s Ghost Recon Wildlands.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Tom Clancy\u0026#39;s Ghost Recon Wildlands.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  594570,
+                      "name":  "Total War: WARHAMMER II",
+                      "file":  "Total War WARHAMMER II.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Total War WARHAMMER II.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2113900,
+                      "name":  "Touge Shakai",
+                      "file":  "Touge Shakai.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Touge Shakai.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2178070,
+                      "name":  "Towers of Aghasba",
+                      "file":  "Towers of Aghasba.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Towers of Aghasba.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2343920,
+                      "name":  "Trackline Express",
+                      "file":  "Trackline Express.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Trackline Express.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2546690,
+                      "name":  "Tram Simulator Urban Transit",
+                      "file":  "Tram Simulator Urban Transit.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Tram Simulator Urban Transit.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1139980,
+                      "name":  "Travellers Rest",
+                      "file":  "Travellers Rest.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Travellers Rest.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1069650,
+                      "name":  "Ultimate Admiral: Age of Sail",
+                      "file":  "Ultimate Admiral Age of Sail.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ultimate Admiral Age of Sail.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1136380,
+                      "name":  "Ultimate Fishing® Simulator 2",
+                      "file":  "Ultimate Fishing Simulator 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ultimate Fishing Simulator 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  357190,
+                      "name":  "ULTIMATE MARVEL VS. CAPCOM 3",
+                      "file":  "Ultimate Marvel Vs Capcom 3.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Ultimate Marvel Vs Capcom 3.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2076010,
+                      "name":  "UNDER NIGHT IN-BIRTH II Sys:Celes",
+                      "file":  "UNDER NIGHT IN-BIRTH II Sys Celes.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/UNDER NIGHT IN-BIRTH II Sys Celes.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3249560,
+                      "name":  "Undercover Fools",
+                      "file":  "Undercover Fools.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Undercover Fools.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3025290,
+                      "name":  "UNDERWARD",
+                      "file":  "UNDERWARD.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/UNDERWARD.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2976900,
+                      "name":  "Unpossess: Exorcism Simulator",
+                      "file":  "Unpossess Exorcism Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Unpossess Exorcism Simulator.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2211170,
+                      "name":  "Unrailed 2: Back on Track",
+                      "file":  "Unrailed 2 Back on Track.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Unrailed 2 Back on Track.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1225560,
+                      "name":  "Unravel",
+                      "file":  "Unravel.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Unravel.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1225570,
+                      "name":  "Unravel Two",
+                      "file":  "Unravel Two.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Unravel Two.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2172010,
+                      "name":  "Until Dawn™",
+                      "file":  "Until Dawn Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Until Dawn Bypass.zip",
+                      "type":  "Bypass"
+                  },
+                  {
+                      "appid":  1604030,
+                      "name":  "V Rising",
+                      "file":  "V Rising.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/V Rising.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  892970,
+                      "name":  "Valheim",
+                      "file":  "Valheim.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Valheim.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1857950,
+                      "name":  "VEIN",
+                      "file":  "VEIN_Fix_Repair_Steam_Generic.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/VEIN_Fix_Repair_Steam_Generic.rar",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3112260,
+                      "name":  "Virtua Fighter 5 R.E.V.O. World Stage",
+                      "file":  "Virtua Fighter 5 REVO.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Virtua Fighter 5 REVO.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  1159690,
+                      "name":  "Voidtrain",
+                      "file":  "Voidtrain.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Voidtrain.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1159690,
+                      "name":  "Voidtrain",
+                      "file":  "Voidtrain_Fix_Repair_Steam_Generic.rar",
+                      "url":  "https://generator.ryuu.lol/fixes/Voidtrain_Fix_Repair_Steam_Generic.rar",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  951440,
+                      "name":  "Volcanoids",
+                      "file":  "Volcanoids.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Volcanoids.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2009460,
+                      "name":  "War of Wizards",
+                      "file":  "War of Wizards.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/War of Wizards.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1361210,
+                      "name":  "Warhammer 40,000: Darktide",
+                      "file":  "Warhammer 40,000 Darktide.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Warhammer 40,000 Darktide.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3169520,
+                      "name":  "Warhammer 40,000: Space Marine - Master Crafted Edition",
+                      "file":  "Warhammer 40,000 Space Marine Master Crafted Edition.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Warhammer 40,000 Space Marine Master Crafted Edition.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2183900,
+                      "name":  "Warhammer 40,000: Space Marine 2",
+                      "file":  "Warhammer 40,000 Space Marine 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Warhammer 40,000 Space Marine 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  552500,
+                      "name":  "Warhammer: Vermintide 2",
+                      "file":  "Warhammer Vermintide 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Warhammer Vermintide 2.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  2239550,
+                      "name":  "Watch Dogs®: Legion",
+                      "file":  "Watch Dogs Legion Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Watch Dogs Legion Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  447040,
+                      "name":  "Watch_Dogs® 2",
+                      "file":  "Watch Dogs 2 UB Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Watch Dogs 2 UB Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  243470,
+                      "name":  "Watch_Dogs™",
+                      "file":  "Watch_Dogs Ubisoft Bypass.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Watch_Dogs Ubisoft Bypass.zip",
+                      "type":  "Bypass, Tested"
+                  },
+                  {
+                      "appid":  1288320,
+                      "name":  "Way of the Hunter",
+                      "file":  "Way of the Hunter.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Way of the Hunter.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  865360,
+                      "name":  "We Were Here Together",
+                      "file":  "We Were Here Together.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/We Were Here Together.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2920510,
+                      "name":  "Werewolf Party",
+                      "file":  "Werewolf Party.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Werewolf Party.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2193540,
+                      "name":  "Wizard of Legend 2",
+                      "file":  "Wizard of Legend 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Wizard of Legend 2.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1448440,
+                      "name":  "Wo Long: Fallen Dynasty",
+                      "file":  "Wo Long Fallen Dynasty.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Wo Long Fallen Dynasty.zip",
+                      "type":  "Tested"
+                  },
+                  {
+                      "appid":  1866980,
+                      "name":  "Worlds of Aria",
+                      "file":  "Worlds of Aria.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Worlds of Aria.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  217200,
+                      "name":  "Worms Armageddon",
+                      "file":  "Worms Armageddon.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Worms Armageddon.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  3533100,
+                      "name":  "Wrap House Simulator🌯",
+                      "file":  "Wrap House Simulator.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Wrap House Simulator.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1203190,
+                      "name":  "Wreckfest 2",
+                      "file":  "Wreckfest 2.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Wreckfest 2.zip",
+                      "type":  "Online, Tested"
+                  },
+                  {
+                      "appid":  1481170,
+                      "name":  "ZEPHON",
+                      "file":  "ZEPHON.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ZEPHON.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  2268560,
+                      "name":  "Zombie Survival Game Online",
+                      "file":  "Zombie Survival Game.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Zombie Survival Game.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  1801520,
+                      "name":  "Zombieville USA 3D",
+                      "file":  "Zombieville USA 3D.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Zombieville USA 3D.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  3121110,
+                      "name":  "Zort",
+                      "file":  "ZORT.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/ZORT.zip",
+                      "type":  "Online"
+                  },
+                  {
+                      "appid":  992300,
+                      "name":  "嗜血印 Bloody Spell",
+                      "file":  "Bloody Spell.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Bloody Spell.zip",
+                      "type":  ""
+                  },
+                  {
+                      "appid":  1316700,
+                      "name":  "Unknown Game",
+                      "file":  "Escape from Kyoto House.zip",
+                      "url":  "https://generator.ryuu.lol/fixes/Escape from Kyoto House.zip",
+                      "type":  ""
+                  }
+              ]
+}
