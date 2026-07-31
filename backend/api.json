@@ -14,13 +14,6 @@
             "enabled": true
         },
         {
-            "name": "SkyAPI",
-            "url": "https://raw.githubusercontent.com/skyflarefox/Skyapi/refs/heads/main/<appid>.zip",
-            "success_code": 200,
-            "unavailable_code": 404,
-            "enabled": true
-        },
-        {
             "name": "Ryuu",
             "url": "http://167.235.229.108/<appid>",
             "success_code": 200,
@@ -28,15 +21,8 @@
             "enabled": true
         },
         {
-            "name": "TwentyTwo Cloud",
-            "url": "https://api.twentytwocloud.com/download?appid=<appid>",
-            "success_code": 200,
-            "unavailable_code": 404,
-            "enabled": true
-        },
-        {
-            "name": "Sushi",
-            "url": "https://raw.githubusercontent.com/sushi-dev55-alt/sushitools-games-repo-alt/refs/heads/main/<appid>.zip",
+            "name": "SkyAPI",
+            "url": "https://raw.githubusercontent.com/skyflarefox/Skyapi/refs/heads/main/<appid>.zip",
             "success_code": 200,
             "unavailable_code": 404,
             "enabled": true
